@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  frontend:
+    user: root
+    build: .
+    command: npm run dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app:z
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - BACKEND_URL=http://todo-list
+      - BACKEND_TASK_URL=8080
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    external: true
