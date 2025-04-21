@@ -1,9 +1,6 @@
-import { env } from "process";
-
 // Configuration
-const PORT_TASKS_MICROSERVICE = env.BACKEND_TASK_URL || "8080";
-const BASE_URL = env.BACKEND_URL || "http://localhost";
-const ENDPOINT = `${BASE_URL}:${PORT_TASKS_MICROSERVICE}`;
+
+const ENDPOINT = process.env.NEXT_PUBLIC_TASK_SERVICE_URL || "http://localhost:8000";
 
 // Type definition for task
 export interface Task {
@@ -18,6 +15,7 @@ export interface Task {
  * Fetch all tasks from the API
  */
 export const getAllTasks = async (): Promise<Task[]> => {
+  console.log(ENDPOINT)
   try {
     const response = await fetch(`${ENDPOINT}/tasks`);
     

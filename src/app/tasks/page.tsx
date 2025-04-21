@@ -25,7 +25,7 @@ export default function Home() {
   };
   useEffect(() => {
     fetchTasks()
-  });
+  },[]);
   return (
     loading?
     <p>Loading</p>

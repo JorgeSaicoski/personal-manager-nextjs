@@ -12,8 +12,8 @@ services:
       - /app/node_modules
     environment:
       - NODE_ENV=development
-      - BACKEND_URL=http://todo-list
-      - BACKEND_TASK_URL=8080
+      - NEXT_PUBLIC_TASK_SERVICE_URL=http://localhost:8000
+
     networks:
       - app-network
 
