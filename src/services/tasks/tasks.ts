@@ -1,5 +1,4 @@
 // Configuration
-
 const ENDPOINT = process.env.NEXT_PUBLIC_TASK_SERVICE_URL || "http://localhost:8000";
 
 // Type definition for task
@@ -9,15 +8,21 @@ export interface Task {
   description?: string;
   status?: 'pending' | 'in-progress' | 'completed';
   dueDate?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 /**
  * Fetch all tasks from the API
  */
 export const getAllTasks = async (): Promise<Task[]> => {
-  console.log(ENDPOINT)
   try {
-    const response = await fetch(`${ENDPOINT}/tasks`);
+    const response = await fetch(`${ENDPOINT}/tasks`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
     
     if (!response.ok) {
       throw new Error(`Error fetching tasks: ${response.status}`);
@@ -26,6 +31,29 @@ export const getAllTasks = async (): Promise<Task[]> => {
     return await response.json();
   } catch (error) {
     console.error("Failed to fetch tasks:", error);
+    throw error;
+  }
+};
+
+/**
+ * Get a single task by ID
+ */
+export const getTaskById = async (id: string): Promise<Task> => {
+  try {
+    const response = await fetch(`${ENDPOINT}/task/${id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Error fetching task: ${response.status}`);
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error(`Failed to fetch task with ID ${id}:`, error);
     throw error;
   }
 };
@@ -44,7 +72,10 @@ export const createTask = async (task: Task): Promise<Task> => {
     });
     
     if (!response.ok) {
-      throw new Error(`Error creating task: ${response.status}`);
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(
+        errorData.error || `Error creating task: ${response.status}`
+      );
     }
     
     return await response.json();
@@ -54,8 +85,56 @@ export const createTask = async (task: Task): Promise<Task> => {
   }
 };
 
+/**
+ * Update an existing task
+ */
+export const updateTask = async (id: string, task: Partial<Task>): Promise<Task> => {
+  try {
+    const response = await fetch(`${ENDPOINT}/task/update/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(task),
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Error updating task: ${response.status}`);
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error(`Failed to update task with ID ${id}:`, error);
+    throw error;
+  }
+};
+
+/**
+ * Delete a task
+ */
+export const deleteTask = async (id: string): Promise<void> => {
+  try {
+    const response = await fetch(`${ENDPOINT}/task/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Error deleting task: ${response.status}`);
+    }
+  } catch (error) {
+    console.error(`Failed to delete task with ID ${id}:`, error);
+    throw error;
+  }
+};
+
 // Export an object with all functions for easier imports
 export default {
   getAllTasks,
-  createTask
+  getTaskById,
+  createTask,
+  updateTask,
+  deleteTask
 };
