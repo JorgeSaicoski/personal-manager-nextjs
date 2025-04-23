@@ -4,6 +4,7 @@ import Button from "@/components/button";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getAllTasks, Task } from "@/services/tasks/tasks";
+import Paper from "@/components/paper/paper";
 
 export default function Home() {
   const router = useRouter();
@@ -43,6 +44,7 @@ export default function Home() {
             <li key={task.id?.toString() || `task-${Math.random()}`}>
               {task.title}
               {task.status && <span>({task.status})</span>}
+              <Paper></Paper>
             </li>
           ))
         )}

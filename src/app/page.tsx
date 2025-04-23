@@ -1,7 +1,7 @@
 "use client"
 
 import Button from "@/components/button";
-import styles from "./page.module.css";
+import styles from "./page.module.scss";
 
 export default function Home() {
   const handleClick = () => {

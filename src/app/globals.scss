@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:400');
+@import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light');
+
+::selection { 
+  color: #fff;
+  background: #9FBE5A;  
+}
+
+body {
+  width: 100vw;
+  height: 100%; 
+  padding-bottom: 50px;
+  overflow-x: hidden; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to bottom, #16a085, #f4d03f) center / cover no-repeat;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}

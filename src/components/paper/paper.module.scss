@@ -1,0 +1,96 @@
+$line-height: 40px;
+
+// Form tag holds the torn paper border
+.formContact {
+  max-width: 600px;
+  margin: 0 auto;
+  border-left: 30px solid white;
+  border-image-width: 0px 0px 0px 30px;
+  transform: translateY(50px); // Reduced distance for smoother animation
+  opacity: 0;
+  animation: init 1s ease-in-out forwards;
+
+  fieldset {
+    position: relative;
+    margin: 0;
+    padding: 30px 30px $line-height 80px;
+    border: none;
+    border-radius: 0 20px 20px 0;
+    font: 24px "Shadows Into Light", cursive;
+    background: #fff linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 0) 0
+      20px / 100% $line-height;
+
+    &:after {
+      position: absolute;
+      top: 0;
+      left: 50px;
+      content: "";
+      height: 100%;
+      width: 1px;
+      border-left: double #e08183;
+    }
+  }
+
+  p {
+    margin: 0 0 $line-height 0;
+    line-height: $line-height;
+    color: #333;
+  }
+
+  span {
+    position: relative;
+    line-height: $line-height;
+  }
+
+  button {
+    margin-top: $line-height;
+    float: right;
+    border: none;
+    font-family: "Shadows Into Light", cursive;
+    color: #e08183;
+    background: transparent;
+    cursor: pointer;
+    transition: transform 0.25s ease;
+
+    &:hover {
+      transform: translateX(10px);
+    }
+  }
+}
+
+.formField {
+  display: inline;
+  color: #7db665;
+  outline: none;
+  min-width: 100px;
+  border-bottom: 1px dotted #ddd;
+  padding: 0 4px;
+
+  &:empty {
+    display: inline-block;
+    color: #ddd;
+  }
+
+  // Use a data-attr to replicate a placeholder
+  &:empty,
+  &:empty:focus {
+    &:before {
+      content: attr(data-placeholder);
+    }
+  }
+}
+
+@keyframes init {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  75% {
+    opacity: 0.9;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
