@@ -1,75 +1,98 @@
 "use client";
 
-import { useState, FormEvent, useRef, useEffect } from 'react';
+import { useState, FormEvent, useRef, useEffect } from "react";
 import styles from "./paper.module.scss";
 
-const Paper = () => {
-  const [name, setName] = useState("");
-  const [message, setMessage] = useState("");
-  const [email, setEmail] = useState("");
-  
-  const nameRef = useRef<HTMLSpanElement>(null);
-  const messageRef = useRef<HTMLSpanElement>(null);
-  const emailRef = useRef<HTMLSpanElement>(null);
+type PaperProps = {
+  title: string; // The title text content
+  text: string; // The main text content
+  detailText: string[]; // Status details to display at the bottom
+  onClick: () => void; // Function to call when save/update button is clicked
+  canWrite?: boolean; // Whether the content is editable
+  finishText?: string; // Text for the save/update button
+};
+
+const Paper = ({
+  title,
+  text,
+  detailText,
+  onClick,
+  canWrite = false,
+  finishText = "Save",
+}: PaperProps) => {
+  const [content, setContent] = useState(text);
+  const titleRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  // Update the ref content when text prop changes
+  useEffect(() => {
+    setContent(text);
+    if (contentRef.current) {
+      contentRef.current.innerText = text;
+    }
+  }, [text]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    
-    // Validate form before submission
-    if (!name.trim() || !message.trim() || !email.trim()) {
-      alert("Please fill in all fields");
-      return;
-    }
-    
-    console.log({ name, message, email });
-    // Here you would typically send the data to your server
+    onClick();
   };
 
-  // Handle contentEditable changes more reliably
-  const handleContentChange = (
-    e: React.FocusEvent<HTMLSpanElement>,
-    setter: React.Dispatch<React.SetStateAction<string>>
-  ) => {
-    const text = e.currentTarget.innerText.trim();
-    setter(text);
+  // Handle contentEditable changes
+  const handleContentChange = (e: React.FocusEvent<HTMLDivElement>) => {
+    const newText = e.currentTarget.innerText.trim();
+    setContent(newText);
   };
 
   return (
-    <div className={styles.wrapper}>      
-      <form className={styles.formContact} onSubmit={handleSubmit}>
+    <div className={styles.wrapper} onClick={onClick}>
+      <form className={styles.formPaper} onSubmit={handleSubmit}>
         <fieldset>
-          <p>Hey, Stranger!</p>
+          {/* Title area */}
           <p>
-            My name is <span 
-              ref={nameRef}
-              className={styles.formField} 
-              data-placeholder="your name" 
-              tabIndex={1} 
-              contentEditable
-              onBlur={(e) => handleContentChange(e, setName)}
-            ></span> and I'm writing to you since I'm interested in <span 
-              ref={messageRef}
-              className={styles.formField} 
-              data-placeholder="your message" 
-              tabIndex={2} 
-              contentEditable
-              onBlur={(e) => handleContentChange(e, setMessage)}
-            ></span>.
+            <span
+              ref={titleRef}
+              className={`${styles.form__field} ${
+                canWrite ? styles.editable : ""
+              }`}
+              contentEditable={canWrite}
+              suppressContentEditableWarning={true}
+              data-placeholder="Enter title..."
+            >
+              {title}
+            </span>
           </p>
+
+          {/* Main content area */}
           <p>
-            This is my <span 
-              ref={emailRef}
-              className={styles.formField} 
-              data-placeholder="email address" 
-              tabIndex={3} 
-              contentEditable
-              onBlur={(e) => handleContentChange(e, setEmail)}
-            ></span>.
+            <span
+              ref={contentRef}
+              className={`${styles.form__field} ${
+                canWrite ? styles.editable : ""
+              }`}
+              contentEditable={canWrite}
+              onBlur={canWrite ? handleContentChange : undefined}
+              suppressContentEditableWarning={true}
+              {...(canWrite
+                ? { "data-placeholder": "Write your text here..." }
+                : {})}
+            >
+              {text}
+            </span>
           </p>
-          <p>Hope to get in touch soon. Cheers!</p>
-          <button type="submit" tabIndex={4}>
-            Send message &#187;
-          </button>
+
+          {/* Status details at the bottom */}
+          {detailText.length > 0 && (
+            <p className={styles.details}>
+              {detailText.map((detail, index) => (
+                <span key={index} className={styles.detailItem}>
+                  {detail}
+                </span>
+              ))}
+            </p>
+          )}
+
+          {/* Only show button if canWrite is true */}
+          {canWrite && <button type="submit">{finishText}</button>}
         </fieldset>
       </form>
     </div>
