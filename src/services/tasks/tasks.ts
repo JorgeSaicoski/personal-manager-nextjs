@@ -3,7 +3,7 @@ const ENDPOINT = process.env.NEXT_PUBLIC_TASK_SERVICE_URL || "http://localhost:8
 
 // Type definition for task
 export interface Task {
-  id?: string;
+  ID?: string;
   title: string;
   description?: string;
   status?: 'pending' | 'in-progress' | 'completed';

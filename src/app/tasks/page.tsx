@@ -47,7 +47,7 @@ export default function Home() {
         <p>No tasks yet</p>
       ) : (
         tasks.map((task) => {
-          const taskId = task.id?.toString() || `task-${Math.random()}`;
+          const taskId = task.ID?.toString() || `task-${Math.random()}`;
           // Create a details array for the task status
           const detailText = task.status ? [`Status: ${task.status}`] : [];
           
