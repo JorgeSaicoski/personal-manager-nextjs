@@ -1,0 +1,137 @@
+@import url("https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap");
+
+$line-height: 40px;
+
+.wrapper {
+  ::selection {
+    color: #fff;
+    background: #9fbe5a;
+  }
+}
+
+// Form tag holds the torn paper border
+.formPaper {
+  max-width: 600px;
+  margin: 0 auto;
+  border-left: 15px solid white;
+  transform: translateY(0);
+  animation: init 1s ease-in-out forwards;
+
+  fieldset {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 30px 0px 0 0px;
+    border: none;
+    border-radius: 0 20px 20px 0;
+    font: 24px "Shadows Into Light", cursive;
+    background: #fff linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 0) 0
+      20px / 100% $line-height;
+  }
+
+  p {
+    margin: 0 0 0 0;
+    line-height: $line-height;
+    color: #333;
+  }
+
+  .task {
+    margin-bottom: $line-height;
+    padding: 0 10px;
+    line-height: $line-height;
+    background-color: hsl(226, 39%, 49%, 0.1);
+    &-finish {
+      background-color: hsla(130, 84%, 27%, 0.288);
+    }
+    &-progress{
+        background-color: hsla(229, 37%, 53%, 0.158);
+    }
+    &-pending{
+        background-color:hsla(59, 74%, 53%, 0.288);
+    }
+  }
+
+  input, textarea, select {
+    position: relative;
+    line-height: $line-height;
+    border: none;
+    margin: 0 10px;
+    padding: 0 4px;
+    background: none;
+    width: 500px;
+    max-width: 80dvw;
+    font-family: "Delius Swash Caps", cursive;
+    &:focus{
+      border:none;
+      outline: none;
+    }
+    
+  }
+
+  button {
+    margin-top: $line-height;
+    float: right;
+    border: solid, 2px;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 10px;
+    font-family: "Shadows Into Light", cursive;
+    font-size: 24px;
+
+    color: #31792a;
+    cursor: pointer;
+    transition: transform 0.25s ease;
+
+    &:hover {
+      transform: scale(110%);
+    }
+  }
+}
+
+.formField {
+  display: inline;
+  color: #334d96;
+  outline: none;
+
+  &:empty {
+    display: inline-block;
+    color: #ddd;
+  }
+
+  // Use a data-attr to replicate a placeholder
+  &:empty,
+  &:empty:focus {
+    &:before {
+      content: attr(data-placeholder);
+    }
+  }
+}
+
+.formFieldTitle {
+  @extend .formField;
+  font-family: "Delius Swash Caps", cursive;
+  font-size: 28px;
+  color: #2f8b1c;
+}
+
+.details {
+  font-family: "Delius Swash Caps", cursive;
+  font-size: 18px;
+  color: #e08183;
+}
+
+.detailItem {
+  display: inline-block;
+  margin-right: 100px;
+}
+
+
+
+@keyframes init {
+  75% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

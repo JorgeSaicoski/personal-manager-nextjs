@@ -4,6 +4,7 @@ import Button from "@/components/button";
 import { createTask } from "@/services/tasks/tasks";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import styles from "./../page.module.scss";
 
 export default function CreateTaskPage() {
   const router = useRouter();
@@ -44,20 +45,15 @@ export default function CreateTaskPage() {
   };
 
   return (
-    <div>
+    <div className={styles.wrapper}>
       <h1>Create New Task</h1>
 
-      {error && (
-        <div>
-          {error}
-        </div>
-      )}
+      {error && <div>{error}</div>}
 
-      <form onSubmit={handleSubmit}>
+      <form className={styles.formPaper} onSubmit={handleSubmit}>
+        <fieldset>
         <div>
-          <label htmlFor="title">
-            Title <span className="text-red-500">*</span>
-          </label>
+          <label htmlFor="title">Title</label>
           <input
             id="title"
             type="text"
@@ -68,9 +64,7 @@ export default function CreateTaskPage() {
         </div>
 
         <div>
-          <label htmlFor="description" className="block mb-2 font-medium">
-            Description
-          </label>
+          <label htmlFor="description">Description</label>
           <textarea
             id="description"
             value={description}
@@ -80,10 +74,8 @@ export default function CreateTaskPage() {
           />
         </div>
 
-        <div className="mb-6">
-          <label htmlFor="status" className="block mb-2 font-medium">
-            Status
-          </label>
+        <div>
+          <label htmlFor="status">Status</label>
           <select
             id="status"
             value={status}
@@ -99,21 +91,17 @@ export default function CreateTaskPage() {
           </select>
         </div>
 
-        <div className="flex gap-4">
-          <Button
-            text={isSubmitting ? "Creating..." : "Create Task"}
-            onClick={() => {}}
-            disabled={isSubmitting}
-          />
-          <button
-            type="button"
-            onClick={() => router.push("/tasks")}
-          >
-            Cancel
-          </button>
-        </div>
+        <Button
+          text={isSubmitting ? "Creating..." : "Create Task"}
+          onClick={() => {}}
+          disabled={isSubmitting}
+        />
+        <button type="button" onClick={() => router.push("/tasks")}>
+          Cancel
+        </button>
+        </fieldset>
       </form>
+      
     </div>
   );
 }
-
