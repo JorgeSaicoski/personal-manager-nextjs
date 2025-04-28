@@ -9,6 +9,7 @@ import styles from "./page.module.scss";
 export default function Home() {
   const router = useRouter();
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [selectTask, setSelectTasks] = useState<Task>();
   const [loading, setLoading] = useState(true);
 
   const handleClick = () => {
@@ -33,9 +34,10 @@ export default function Home() {
   }, []);
 
   const handleTaskClick = (taskId: string | number) => {
-    console.log("click");
-    console.log(taskId);
-    //router.push(`/tasks/${taskId}`);
+    const selected = tasks.find(task => task.ID?.toString() === taskId.toString());
+    if (selected) {
+      setSelectTasks(selected);
+    }
   };
 
   return loading ? (
@@ -53,7 +55,7 @@ export default function Home() {
               const detailText = task.status ? [`Status: ${task.status}`] : [];
 
               return (
-                <div
+                <div onClick={()=>{handleTaskClick(taskId)}}
                   key={taskId}
                   className={`${styles.task} ${
                     task.status === "completed"
@@ -97,6 +99,7 @@ export default function Home() {
           <Button text="Create new Task" onClick={handleClick}></Button>
         </fieldset>
       </div>
+      <p>{selectTask?.ID?.toString()}</p>
     </div>
   );
 }

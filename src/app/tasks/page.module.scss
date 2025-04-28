@@ -67,7 +67,6 @@ $line-height: 40px;
     }
     
   }
-
   button {
     margin-top: $line-height;
     float: right;
@@ -87,6 +86,12 @@ $line-height: 40px;
     }
   }
 }
+
+.editable {
+  border-bottom: 1px dashed #ccc;
+  padding: 0 4px;
+}
+
 
 .formField {
   display: inline;
@@ -110,7 +115,6 @@ $line-height: 40px;
 .formFieldTitle {
   @extend .formField;
   font-family: "Delius Swash Caps", cursive;
-  font-size: 28px;
   color: #2f8b1c;
 }
 
