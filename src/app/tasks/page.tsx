@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@/components/button";
+import Button from "@/components/Button";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getAllTasks, Task } from "@/services/tasks/tasks";

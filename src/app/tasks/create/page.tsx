@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@/components/button";
+import Button from "@/components/Button";
 import { createTask } from "@/services/tasks/tasks";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
