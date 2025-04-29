@@ -1,0 +1,93 @@
+$paper-color: #f1ede9;
+$paper-line: #94acd4;
+
+.overlay {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 1000;
+  width: 500px;
+  max-width: 85vw;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 8px 8px 8px 8px;
+  overflow: hidden;
+}
+
+.modal {
+  width: 100%;
+  padding: 4px 25px 50px 25px;
+  background: repeating-linear-gradient($paper-color, $paper-color 31px, $paper-line 31px, $paper-line 32px);
+  font-family: 'Shadows Into Light', cursive;
+  line-height: 32px;
+  outline: 0;
+  height: 250px;
+  max-height: 65vh;
+  font-size: 22px;
+  position: relative;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.closeButton {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  position: relative;
+  margin-right: 5px;
+  &:hover {
+    background-color: #c0392b;
+    transform: scale(1.1);
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.details {
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+}
+
+.notepad {
+  width: 80%;
+  max-width: 600px;
+}
+
+.top {
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(to right, #2c3e50, #4a5b76);
+  border-radius: 8px 8px 0 0;
+  color: #ffffff;
+  padding: 0 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  h2 {
+    font-family: "Shadows Into Light", cursive;
+    font-size: 25px;
+    font-weight: 500;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 80%;
+  }
+}
