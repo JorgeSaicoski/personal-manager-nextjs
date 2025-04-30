@@ -9,21 +9,24 @@ interface SelectedTaskProps {
 
 const SelectedTask = ({ task, onClose }: SelectedTaskProps) => {
   const [description, setDescription] = useState("");
-  const [status, setStatus] = useState<"pending" | "in-progress" | "completed">(
-    "pending"
-  );
+  const [status, setStatus] = useState<"pending" | "in-progress" | "completed">("pending");
   const [saved, setSaved] = useState(true);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    setVisible(false);
     if (task) {
       setDescription(task.description ? task.description : "");
       setStatus(task.status ? task.status : "pending");
+      
+      // Add a small delay before showing to make the animation visible
+      setTimeout(() => {
+        setVisible(true);
+      }, 150);
     }
   }, [task]);
 
-  const handleDescriptionChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
+  const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setDescription(e.target.value);
     setSaved(false);
   };
@@ -51,11 +54,21 @@ const SelectedTask = ({ task, onClose }: SelectedTaskProps) => {
     }
   };
 
+  const handleClose = () => {
+    // First hide with animation
+    setVisible(false);
+    
+    // Then actually close after animation completes
+    setTimeout(() => {
+      onClose();
+    }, 500);
+  };
+
   // Return null after all hooks are called
   if (!task) return null;
 
   return (
-    <div className={styles.overlay}>
+    <div className={`${styles.overlay} ${visible ? styles.visible : ''}`}>
       <div className={styles.top}>
         <h2>{task.title}</h2>
         <button
@@ -64,7 +77,7 @@ const SelectedTask = ({ task, onClose }: SelectedTaskProps) => {
         >
           {saved ? "Saved" : "Save"}
         </button>
-        <button className={styles.closeButton} onClick={onClose}>
+        <button className={styles.closeButton} onClick={handleClose}>
           ×
         </button>
       </div>

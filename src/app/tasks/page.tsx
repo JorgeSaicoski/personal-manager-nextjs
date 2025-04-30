@@ -11,6 +11,8 @@ export default function Home() {
   const router = useRouter();
   const [tasks, setTasks] = useState<Task[]>([]);
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+  const [animatingTaskId, setAnimatingTaskId] = useState<string | null>(null);
+  const [returningTaskId, setReturningTaskId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   const handleClick = () => {
@@ -35,15 +37,31 @@ export default function Home() {
   }, []);
 
   const handleTaskClick = (taskId: string | number) => {
-    const selected = tasks.find(
-      (task) => task.ID?.toString() === taskId.toString()
-    );
-    if (selected) {
-      setSelectedTask(selected);
+    setAnimatingTaskId(taskId.toString());
+    if (selectedTask?.ID){
+      setReturningTaskId(selectedTask.ID.toString());
     }
+    setTimeout(() => {
+      const selected = tasks.find(
+        (task) => task.ID?.toString() === taskId.toString()
+      );
+      if (selected) {
+        setSelectedTask(selected);
+        setAnimatingTaskId(null);
+      }
+    }, 750); 
   };
+  
   const handleCloseTask = () => {
-    setSelectedTask(null);
+    if (selectedTask && selectedTask.ID) {
+      setReturningTaskId(selectedTask.ID.toString());
+      
+      setSelectedTask(null);
+      
+      setTimeout(() => {
+        setReturningTaskId(null);
+      }, 500);
+    }
   };
 
   return loading ? (
@@ -58,26 +76,34 @@ export default function Home() {
             ) : (
               tasks.map((task) => {
                 const taskId = task.ID?.toString() || `task-${Math.random()}`;
-                // Create a details array for the task status
                 const detailText = task.status
                   ? [`Status: ${task.status}`]
                   : [];
+                
+                // Determine task classes
+                const isSelected = selectedTask && taskId === selectedTask.ID?.toString();
+                const isAnimating = animatingTaskId === taskId;
+                const isReturning = returningTaskId === taskId;
+                
+                // Skip rendering if selected and not returning
+                if (isSelected && !isReturning) {
+                  return null;
+                }
 
                 return (
                   <div
                     onClick={() => {
-                      handleTaskClick(taskId);
+                      if (!isReturning) handleTaskClick(taskId);
                     }}
                     key={taskId}
-                    className={`${styles.task} ${
-                      task.status === "completed"
-                        ? styles["task-finish"]
-                        : task.status === "in-progress"
-                        ? styles["task-progress"]
-                        : task.status === "pending"
-                        ? styles["task-pending"]
-                        : ""
-                    }`}
+                    className={`
+                      ${styles.task} 
+                      ${task.status === "completed" ? styles["task-finish"] : 
+                        task.status === "in-progress" ? styles["task-progress"] : 
+                        task.status === "pending" ? styles["task-pending"] : ""}
+                      ${isAnimating ? styles["task-selected"] : ""}
+                      ${isReturning ? styles["task-returning"] : ""}
+                    `}
                   >
                     {/* Title area */}
                     <p>

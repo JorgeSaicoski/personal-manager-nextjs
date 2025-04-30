@@ -25,6 +25,8 @@ $line-height: 40px;
     border: none;
     border-radius: 0 20px 20px 0;
     font: 24px "Shadows Into Light", cursive;
+    transition: transform 0.75s ease, opacity 0.75s ease;
+
     background: #fff linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 0) 0
       20px / 100% $line-height;
   }
@@ -40,14 +42,38 @@ $line-height: 40px;
     padding: 0 10px;
     line-height: $line-height;
     background-color: hsl(226, 39%, 49%, 0.1);
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    
     &-finish {
       background-color: hsla(130, 84%, 27%, 0.288);
     }
-    &-progress{
-        background-color: hsla(229, 37%, 53%, 0.158);
+    &-progress {
+      background-color: hsla(229, 37%, 53%, 0.158);
     }
-    &-pending{
-        background-color:hsla(59, 74%, 53%, 0.288);
+    &-pending {
+      background-color: hsla(59, 74%, 53%, 0.288);
+    }
+    
+    // Task sliding out to right
+    &-selected {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    
+    // Task returning from right
+    &-returning {
+      animation: returnFromRight 0.5s ease forwards;
+    }
+  }
+  
+  @keyframes returnFromRight {
+    0% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
     }
   }
 
