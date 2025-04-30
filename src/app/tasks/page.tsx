@@ -49,14 +49,15 @@ export default function Home() {
         setSelectedTask(selected);
         setAnimatingTaskId(null);
       }
-    }, 750); 
+    }, 500); 
   };
   
   const handleCloseTask = () => {
+    setSelectedTask(null);
     if (selectedTask && selectedTask.ID) {
       setReturningTaskId(selectedTask.ID.toString());
       
-      setSelectedTask(null);
+      
       
       setTimeout(() => {
         setReturningTaskId(null);

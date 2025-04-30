@@ -42,8 +42,8 @@ $line-height: 40px;
     padding: 0 10px;
     line-height: $line-height;
     background-color: hsl(226, 39%, 49%, 0.1);
-    transition: transform 0.5s ease, opacity 0.5s ease;
-    
+    transition: transform 1s ease, opacity 0.5s ease;
+
     &-finish {
       background-color: hsla(130, 84%, 27%, 0.288);
     }
@@ -53,19 +53,21 @@ $line-height: 40px;
     &-pending {
       background-color: hsla(59, 74%, 53%, 0.288);
     }
-    
+
     // Task sliding out to right
     &-selected {
-      transform: translateX(100%);
+      transform: translateX(-100%);
       opacity: 0;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    
+
     // Task returning from right
     &-returning {
-      animation: returnFromRight 0.5s ease forwards;
+      animation: returnFromRight 0.8s cubic-bezier(0.8, 0.6, 0.2, 1) forwards;
     }
   }
-  
+
   @keyframes returnFromRight {
     0% {
       transform: translateX(100%);
@@ -77,7 +79,9 @@ $line-height: 40px;
     }
   }
 
-  input, textarea, select {
+  input,
+  textarea,
+  select {
     position: relative;
     line-height: $line-height;
     border: none;
@@ -87,11 +91,10 @@ $line-height: 40px;
     width: 500px;
     max-width: 80dvw;
     font-family: "Delius Swash Caps", cursive;
-    &:focus{
-      border:none;
+    &:focus {
+      border: none;
       outline: none;
     }
-    
   }
   button {
     margin-top: $line-height;
@@ -117,7 +120,6 @@ $line-height: 40px;
   border-bottom: 1px dashed #ccc;
   padding: 0 4px;
 }
-
 
 .formField {
   display: inline;
@@ -154,8 +156,6 @@ $line-height: 40px;
   display: inline-block;
   margin-right: 100px;
 }
-
-
 
 @keyframes init {
   75% {

@@ -22,7 +22,7 @@ const SelectedTask = ({ task, onClose }: SelectedTaskProps) => {
       // Add a small delay before showing to make the animation visible
       setTimeout(() => {
         setVisible(true);
-      }, 150);
+      }, 500);
     }
   }, [task]);
 
@@ -61,7 +61,7 @@ const SelectedTask = ({ task, onClose }: SelectedTaskProps) => {
     // Then actually close after animation completes
     setTimeout(() => {
       onClose();
-    }, 500);
+    }, 400);
   };
 
   // Return null after all hooks are called
