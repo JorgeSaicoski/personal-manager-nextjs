@@ -30,9 +30,53 @@ $paper-line: #94acd4;
   font-size: 22px;
   position: relative;
   max-height: 60vh;
-  overflow-y: auto;
-}
+  overflow: hidden;
 
+  input, textarea, select {
+    position: relative;
+    line-height: 32px;
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 22px;
+    border: none;
+    margin: 0 10px;
+    padding: 0 4px;
+    background: none;
+    width: 100%;
+    &:focus{
+      border:none;
+      outline: none;
+    }
+    
+  }
+  textarea{
+    height: 140px;
+  }
+}
+.saveButton {
+  background-color: #e67e22;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 5px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin-right: 5px;
+  
+  &:hover {
+    background-color: #d35400;
+    transform: scale(1.05);
+  }
+  
+  &:active {
+    transform: scale(0.95);
+  }
+  
+  &.saved {
+    background-color: #27ae60;
+  }
+}
 .closeButton {
   background-color: #e74c3c;
   color: white;
@@ -71,7 +115,7 @@ $paper-line: #94acd4;
 
 .top {
   width: 100%;
-  height: 60px;
+  min-height: 60px;
   background: linear-gradient(to right, #2c3e50, #4a5b76);
   border-radius: 8px 8px 0 0;
   color: #ffffff;
@@ -87,7 +131,7 @@ $paper-line: #94acd4;
     margin: 0;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
-    max-width: 80%;
+    width: 80%;
   }
 }
+
