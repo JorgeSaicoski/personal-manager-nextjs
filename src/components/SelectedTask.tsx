@@ -5,9 +5,10 @@ import { useEffect, useState } from "react";
 interface SelectedTaskProps {
   task: Task | null;
   onClose: () => void;
+  onSave: (task: Task) => void;
 }
 
-const SelectedTask = ({ task, onClose }: SelectedTaskProps) => {
+const SelectedTask = ({ task, onClose, onSave }: SelectedTaskProps) => {
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState<"pending" | "in-progress" | "completed">("pending");
   const [saved, setSaved] = useState(true);
@@ -47,6 +48,12 @@ const SelectedTask = ({ task, onClose }: SelectedTaskProps) => {
         description: description,
         status: status,
       });
+      const updatedTask = {
+        ...task,
+        description,
+        status
+      };
+      onSave(updatedTask)
     } catch (err) {
       console.error("Error updating task:", err);
     } finally {

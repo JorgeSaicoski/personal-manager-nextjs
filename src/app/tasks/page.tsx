@@ -37,11 +37,13 @@ export default function Home() {
   }, []);
 
   const handleTaskClick = (taskId: string | number) => {
+    console.log(taskId)
     setAnimatingTaskId(taskId.toString());
-    if (selectedTask?.ID){
+    if (selectedTask?.ID) {
       setReturningTaskId(selectedTask.ID.toString());
     }
     setTimeout(() => {
+      setReturningTaskId(null)
       const selected = tasks.find(
         (task) => task.ID?.toString() === taskId.toString()
       );
@@ -49,21 +51,25 @@ export default function Home() {
         setSelectedTask(selected);
         setAnimatingTaskId(null);
       }
-    }, 500); 
+    }, 500);
   };
-  
+
   const handleCloseTask = () => {
     setSelectedTask(null);
     if (selectedTask && selectedTask.ID) {
       setReturningTaskId(selectedTask.ID.toString());
-      
-      
-      
+
       setTimeout(() => {
         setReturningTaskId(null);
       }, 500);
     }
   };
+  const saveTask = (updatedTask: Task) => {
+    console.log("Saving task:", updatedTask);
+    setTasks(tasks.map((task: Task) => 
+      task.ID === updatedTask.ID ? updatedTask : task
+    ));
+  }
 
   return loading ? (
     <p>Loading</p>
@@ -80,12 +86,13 @@ export default function Home() {
                 const detailText = task.status
                   ? [`Status: ${task.status}`]
                   : [];
-                
+
                 // Determine task classes
-                const isSelected = selectedTask && taskId === selectedTask.ID?.toString();
+                const isSelected =
+                  selectedTask && taskId === selectedTask.ID?.toString();
                 const isAnimating = animatingTaskId === taskId;
                 const isReturning = returningTaskId === taskId;
-                
+
                 // Skip rendering if selected and not returning
                 if (isSelected && !isReturning) {
                   return null;
@@ -94,14 +101,20 @@ export default function Home() {
                 return (
                   <div
                     onClick={() => {
-                      if (!isReturning) handleTaskClick(taskId);
+                      handleTaskClick(taskId);
                     }}
                     key={taskId}
                     className={`
                       ${styles.task} 
-                      ${task.status === "completed" ? styles["task-finish"] : 
-                        task.status === "in-progress" ? styles["task-progress"] : 
-                        task.status === "pending" ? styles["task-pending"] : ""}
+                      ${
+                        task.status === "completed"
+                          ? styles["task-finish"]
+                          : task.status === "in-progress"
+                          ? styles["task-progress"]
+                          : task.status === "pending"
+                          ? styles["task-pending"]
+                          : ""
+                      }
                       ${isAnimating ? styles["task-selected"] : ""}
                       ${isReturning ? styles["task-returning"] : ""}
                     `}
@@ -141,7 +154,7 @@ export default function Home() {
           </fieldset>
         </div>
       </div>
-      <SelectedTask task={selectedTask} onClose={handleCloseTask} />
+      <SelectedTask task={selectedTask} onClose={handleCloseTask} onSave={saveTask} />
     </>
   );
 }
