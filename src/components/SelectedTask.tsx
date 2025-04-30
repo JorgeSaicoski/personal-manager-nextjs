@@ -1,4 +1,4 @@
-import { Task } from "@/services/tasks/tasks";
+import { Task, updateTask } from "@/services/tasks/tasks";
 import styles from "./styles/SelectedTask.module.scss";
 import { useEffect, useState } from "react";
 
@@ -8,26 +8,51 @@ interface SelectedTaskProps {
 }
 
 const SelectedTask = ({ task, onClose }: SelectedTaskProps) => {
-  if (!task) return null;
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState<"pending" | "in-progress" | "completed">(
     "pending"
   );
   const [saved, setSaved] = useState(true);
+
   useEffect(() => {
-    setDescription(task.description ? task.description : "");
-    setStatus(task.status ? task.status : "pending");
+    if (task) {
+      setDescription(task.description ? task.description : "");
+      setStatus(task.status ? task.status : "pending");
+    }
   }, [task]);
-  
-  const handleDescriptionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+
+  const handleDescriptionChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
     setDescription(e.target.value);
     setSaved(false);
   };
-  
+
   const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setStatus(e.target.value as "pending" | "in-progress" | "completed");
     setSaved(false);
   };
+
+  const handleSave = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (!task || !task.ID) {
+      console.error("Cannot save: task is null");
+      return;
+    }
+    try {
+      await updateTask(task.ID.toString(), {
+        description: description,
+        status: status,
+      });
+    } catch (err) {
+      console.error("Error updating task:", err);
+    } finally {
+      setSaved(true);
+    }
+  };
+
+  // Return null after all hooks are called
+  if (!task) return null;
 
   return (
     <div className={styles.overlay}>
@@ -35,7 +60,7 @@ const SelectedTask = ({ task, onClose }: SelectedTaskProps) => {
         <h2>{task.title}</h2>
         <button
           className={`${styles.saveButton} ${saved ? styles.saved : ""}`}
-          onClick={() => setSaved(true)}
+          onClick={(e) => handleSave(e)}
         >
           {saved ? "Saved" : "Save"}
         </button>
@@ -56,11 +81,7 @@ const SelectedTask = ({ task, onClose }: SelectedTaskProps) => {
           <select
             id="status"
             value={status}
-            onChange={(e) =>
-              handleStatusChange(
-                e
-              )
-            }
+            onChange={(e) => handleStatusChange(e)}
           >
             <option value="pending">Pending</option>
             <option value="in-progress">In Progress</option>

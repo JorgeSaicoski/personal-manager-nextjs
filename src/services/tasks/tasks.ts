@@ -89,6 +89,7 @@ export const createTask = async (task: Task): Promise<Task> => {
  * Update an existing task
  */
 export const updateTask = async (id: string, task: Partial<Task>): Promise<Task> => {
+  console.log(task)
   try {
     const response = await fetch(`${ENDPOINT}/task/update/${id}`, {
       method: 'PATCH',
