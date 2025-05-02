@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getAllTasks, Task } from "@/services/tasks/tasks";
 import styles from "./page.module.scss";
-import SelectedTask from "@/components/SelectedTask";
+import SelectedTask from "@/components/tasks/SelectedTask";
 
 export default function Home() {
   const router = useRouter();
