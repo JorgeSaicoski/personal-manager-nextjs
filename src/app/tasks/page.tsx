@@ -1,23 +1,15 @@
 "use client";
 
-import Button from "@/components/Button";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getAllTasks, Task } from "@/services/tasks/tasks";
 import styles from "./page.module.scss";
 import SelectedTask from "@/components/tasks/SelectedTask";
+import TasksList from "@/components/tasks/TasksList";
 
 export default function Home() {
-  const router = useRouter();
   const [tasks, setTasks] = useState<Task[]>([]);
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
-  const [animatingTaskId, setAnimatingTaskId] = useState<string | null>(null);
-  const [returningTaskId, setReturningTaskId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-
-  const handleClick = () => {
-    router.push("/tasks/create");
-  };
 
   const fetchTasks = async () => {
     try {
@@ -36,125 +28,52 @@ export default function Home() {
     fetchTasks();
   }, []);
 
-  const handleTaskClick = (taskId: string | number) => {
-    console.log(taskId)
-    setAnimatingTaskId(taskId.toString());
-    if (selectedTask?.ID) {
-      setReturningTaskId(selectedTask.ID.toString());
+  const handleTaskClick = (taskId: string) => {
+    const selected = tasks.find(
+      (task) => task.ID?.toString() === taskId.toString()
+    );
+    if (selected) {
+      setSelectedTask(selected);
     }
-    setTimeout(() => {
-      setReturningTaskId(null)
-      const selected = tasks.find(
-        (task) => task.ID?.toString() === taskId.toString()
-      );
-      if (selected) {
-        setSelectedTask(selected);
-        setAnimatingTaskId(null);
-      }
-    }, 500);
   };
 
   const handleCloseTask = () => {
     setSelectedTask(null);
-    if (selectedTask && selectedTask.ID) {
-      setReturningTaskId(selectedTask.ID.toString());
-
-      setTimeout(() => {
-        setReturningTaskId(null);
-      }, 500);
-    }
   };
+
   const saveTask = (updatedTask: Task) => {
     console.log("Saving task:", updatedTask);
-    setTasks(tasks.map((task: Task) => 
-      task.ID === updatedTask.ID ? updatedTask : task
-    ));
-  }
+    setTasks(
+      tasks.map((task: Task) =>
+        task.ID === updatedTask.ID ? updatedTask : task
+      )
+    );
+  };
 
   return loading ? (
     <p>Loading</p>
   ) : (
     <>
+      <div>
+        <p>Here will be the nav bar</p>
+      </div>
       <div className={styles.wrapper}>
+        <div>
+          <p>OR here will be the nav bar</p>
+        </div>
         <div className={styles.formPaper}>
-          <fieldset>
-            {tasks.length === 0 ? (
-              <p>No tasks yet</p>
-            ) : (
-              tasks.map((task) => {
-                const taskId = task.ID?.toString() || `task-${Math.random()}`;
-                const detailText = task.status
-                  ? [`Status: ${task.status}`]
-                  : [];
-
-                // Determine task classes
-                const isSelected =
-                  selectedTask && taskId === selectedTask.ID?.toString();
-                const isAnimating = animatingTaskId === taskId;
-                const isReturning = returningTaskId === taskId;
-
-                // Skip rendering if selected and not returning
-                if (isSelected && !isReturning) {
-                  return null;
-                }
-
-                return (
-                  <div
-                    onClick={() => {
-                      handleTaskClick(taskId);
-                    }}
-                    key={taskId}
-                    className={`
-                      ${styles.task} 
-                      ${
-                        task.status === "completed"
-                          ? styles["task-finish"]
-                          : task.status === "in-progress"
-                          ? styles["task-progress"]
-                          : task.status === "pending"
-                          ? styles["task-pending"]
-                          : ""
-                      }
-                      ${isAnimating ? styles["task-selected"] : ""}
-                      ${isReturning ? styles["task-returning"] : ""}
-                    `}
-                  >
-                    {/* Title area */}
-                    <p>
-                      <span
-                        className={styles.formFieldTitle}
-                        suppressContentEditableWarning={true}
-                      >
-                        {task.title}
-                      </span>
-                    </p>
-
-                    {/* Main content area */}
-                    <p>
-                      <span className={styles.formField}>
-                        {task.description}
-                      </span>
-                    </p>
-
-                    {/* Status details at the bottom */}
-                    {detailText.length > 0 && (
-                      <p className={styles.details}>
-                        {detailText.map((detail, index) => (
-                          <span key={index} className={styles.detailItem}>
-                            {detail}
-                          </span>
-                        ))}
-                      </p>
-                    )}
-                  </div>
-                );
-              })
-            )}
-            <Button text="Create new Task" onClick={handleClick}></Button>
-          </fieldset>
+          <TasksList
+            tasks={tasks}
+            selectedTask={selectedTask}
+            onTaskClick={handleTaskClick}
+          />
         </div>
       </div>
-      <SelectedTask task={selectedTask} onClose={handleCloseTask} onSave={saveTask} />
+      <SelectedTask
+        task={selectedTask}
+        onClose={handleCloseTask}
+        onSave={saveTask}
+      />
     </>
   );
 }
