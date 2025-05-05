@@ -36,6 +36,53 @@ export const getAllTasks = async (): Promise<Task[]> => {
 };
 
 /**
+ * Fetch completed tasks from the API
+ */
+export const getCompletedTasks = async (page:number, pageSize:number): Promise<Task[]> =>  {
+  try {
+    const response = await fetch(`${ENDPOINT}/task/completed?page=${page}&pageSize=${pageSize}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Error fetching tasks: ${response.status}`);
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error("Failed to fetch tasks:", error);
+    throw error;
+  }
+
+}
+
+/**
+ * Fetch not completed tasks from the API
+ */
+export const getNonCompletedTasks = async (page:number, pageSize:number): Promise<Task[]> =>  {
+  try {
+    const response = await fetch(`${ENDPOINT}/task/active?page=${page}&pageSize=${pageSize}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Error fetching tasks: ${response.status}`);
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error("Failed to fetch tasks:", error);
+    throw error;
+  }
+
+}
+/**
  * Get a single task by ID
  */
 export const getTaskById = async (id: string): Promise<Task> => {

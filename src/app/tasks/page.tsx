@@ -5,6 +5,7 @@ import { getAllTasks, Task } from "@/services/tasks/tasks";
 import styles from "./page.module.scss";
 import SelectedTask from "@/components/tasks/SelectedTask";
 import TasksList from "@/components/tasks/TasksList";
+import PaginationControls from "@/components/tasks/PaginationControls";
 
 export default function Home() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -41,6 +42,8 @@ export default function Home() {
     setSelectedTask(null);
   };
 
+  const handleChangePage = () => {};
+
   const saveTask = (updatedTask: Task) => {
     console.log("Saving task:", updatedTask);
     setTasks(
@@ -58,9 +61,9 @@ export default function Home() {
         <p>Here will be the nav bar</p>
       </div>
       <div className={styles.wrapper}>
-        <div>
-          <p>OR here will be the nav bar</p>
-        </div>
+        <PaginationControls
+          totalPages={6}
+        ></PaginationControls>
         <div className={styles.formPaper}>
           <TasksList
             tasks={tasks}
