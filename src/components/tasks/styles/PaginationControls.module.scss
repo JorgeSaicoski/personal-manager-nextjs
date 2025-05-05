@@ -15,7 +15,7 @@
   padding: 20px 0;
   font-size: 0;
   z-index: 6;
-  margin: 50px 0;
+  margin: 10px;
   animation: cdp-in 500ms ease both;
 }
 
@@ -29,21 +29,34 @@
   height: 38px;
   min-width: 38px;
   border-radius: 38px;
-  border: 2px solid #fff;
+  border: 2px solid #2d9b29;
   line-height: 38px;
   padding: 0 16px;
   margin: 0 12px 6px;
-  color: #fff;
+  color: #282a91;
   font-weight: 700;
   letter-spacing: 0.03em;
+  background-color: azure;
+}
+.dots{
+  font-size: 14px;
+  text-decoration: none;
   display: inline-block;
+  height: 38px;
+  min-width: 38px;
+  line-height: 38px;
+  padding: 0 16px;
+  margin: 0;
+  color: #2fe217;
+  font-weight: 700;
+  letter-spacing: 1em;
 }
 
 .active{
-  background-color: #000;
+  background-color: #2d9b29;
 }
 
 .elem:hover {
-  background-color: #000;
-  color: #fff;
+  background-color: #2d9b29;
+  color: #282a91;
 }

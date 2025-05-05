@@ -53,7 +53,7 @@ export default function PaginationControls({
   
     // Show ellipsis if needed after first page
     if (currentPage > 3) {
-      elements.push(<span key="ellipsis1" className={styles.elem}>...</span>);
+      elements.push(<span key="ellipsis1" className={styles.dots}>...</span>);
     }
   
     // Show pages around current page
@@ -73,7 +73,7 @@ export default function PaginationControls({
   
     // Show ellipsis if needed before last page
     if (currentPage < totalPages - 2) {
-      elements.push(<span key="ellipsis2" className={styles.elem}>...</span>);
+      elements.push(<span key="ellipsis2" className={styles.dots}>...</span>);
     }
   
     // Always show last page if there is more than one page
