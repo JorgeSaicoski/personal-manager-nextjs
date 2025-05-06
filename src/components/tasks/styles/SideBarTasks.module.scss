@@ -1,0 +1,32 @@
+.sideBar{
+    height: auto;
+    max-width: 250px;
+    margin: 0 10px;
+    padding-top: 100px;
+    animation: init 1s ease-in-out 1s forwards;
+    div{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+        border-radius: 20px 0 0 20px;
+        width: 100%;
+        transform: translateX(20px);
+        button{
+            width: 100%;
+            margin: 15% 25px 15% 15px;
+            font: 24px "Shadows Into Light", cursive;
+            padding: 5% 20px;
+            border: none;
+        }
+    }
+    .todo{
+        background-color: rgb(214, 226, 40);
+    }
+    .completed{
+        background-color: rgb(71, 226, 40);
+    }
+    .delete{
+        background-color: rgb(226, 40, 40);
+    }
+}

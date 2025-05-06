@@ -9,6 +9,14 @@ $line-height: 40px;
   }
 }
 
+.page{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  justify-items: center;
+  height: auto;
+}
+
 // Form tag holds the torn paper border
 .formPaper {
   max-width: 600px;

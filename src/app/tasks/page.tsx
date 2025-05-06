@@ -6,6 +6,7 @@ import styles from "./page.module.scss";
 import SelectedTask from "@/components/tasks/SelectedTask";
 import TasksList from "@/components/tasks/TasksList";
 import PaginationControls from "@/components/tasks/PaginationControls";
+import SideBarTasks from "@/components/tasks/SideBar";
 
 export default function Home() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -56,10 +57,8 @@ export default function Home() {
   return loading ? (
     <p>Loading</p>
   ) : (
-    <>
-      <div>
-        <p>Here will be the nav bar</p>
-      </div>
+    <div className={styles.page}>
+      <SideBarTasks onClick={handleChangePage}></SideBarTasks>
       <div className={styles.wrapper}>
         <PaginationControls
           totalPages={6}
@@ -77,6 +76,6 @@ export default function Home() {
         onClose={handleCloseTask}
         onSave={saveTask}
       />
-    </>
+    </div>
   );
 }
