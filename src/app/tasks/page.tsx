@@ -1,24 +1,64 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { getAllTasks, Task } from "@/services/tasks/tasks";
+import { Suspense, useEffect, useState } from "react";
+import {
+  getAllTasks,
+  getNonCompletedTasks,
+  getCompletedTasks,
+  Task,
+} from "@/services/tasks/tasks";
 import styles from "./page.module.scss";
 import SelectedTask from "@/components/tasks/SelectedTask";
 import TasksList from "@/components/tasks/TasksList";
 import PaginationControls from "@/components/tasks/PaginationControls";
 import SideBarTasks from "@/components/tasks/SideBar";
+import { useSearchParams } from "next/navigation";
+
 
 export default function Home() {
+  return (
+    <Suspense fallback={<p>Loading...</p>}>
+      <TasksContent />
+    </Suspense>
+  );
+}
+
+function TasksContent() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
   const [loading, setLoading] = useState(true);
+  const [viewMode, setViewMode] = useState<"todo" | "completed">("todo");
+  const [totalPages, setTotalPages] = useState(5);
+  const searchParams = useSearchParams();
+
+  const currentPage = searchParams.get("page")
+    ? parseInt(searchParams.get("page") as string, 10)
+    : 1;
+  const pageSize = 10;
 
   const fetchTasks = async () => {
     try {
       setLoading(true);
-      const tasksData = await getAllTasks();
-      console.log(tasksData);
-      setTasks(tasksData);
+      let paginationData;
+
+      if (viewMode === "todo") {
+        paginationData = await getNonCompletedTasks(currentPage, pageSize);
+      } else if (viewMode === "completed") {
+        paginationData = await getCompletedTasks(currentPage, pageSize);
+      }
+
+      if (paginationData){
+        if ( paginationData.tasks) {
+          const tasksArray = Array.isArray(paginationData.tasks) ? paginationData.tasks : [];
+          setTasks(tasksArray);
+        } else {
+          setTasks([]);
+        }
+        if (paginationData.totalPages){
+          setTotalPages(paginationData.totalPages)
+        }
+      }
+        
     } catch (err) {
       console.log(err);
     } finally {
@@ -28,7 +68,11 @@ export default function Home() {
 
   useEffect(() => {
     fetchTasks();
-  }, []);
+  }, [currentPage, viewMode]);
+
+  const handleViewModeChange = (mode: "todo" | "completed") => {
+    setViewMode(mode);
+  };
 
   const handleTaskClick = (taskId: string) => {
     const selected = tasks.find(
@@ -43,8 +87,6 @@ export default function Home() {
     setSelectedTask(null);
   };
 
-  const handleChangePage = () => {};
-
   const saveTask = (updatedTask: Task) => {
     console.log("Saving task:", updatedTask);
     setTasks(
@@ -58,14 +100,14 @@ export default function Home() {
     <p>Loading</p>
   ) : (
     <div className={styles.page}>
-      <SideBarTasks onClick={handleChangePage}></SideBarTasks>
+      <SideBarTasks
+        onClick={(mode) => handleViewModeChange(mode as "todo" | "completed")}
+      />
       <div className={styles.wrapper}>
-        <PaginationControls
-          totalPages={6}
-        ></PaginationControls>
+        <PaginationControls totalPages={totalPages} />
         <div className={styles.formPaper}>
           <TasksList
-            tasks={tasks}
+            tasks={tasks || []}
             selectedTask={selectedTask}
             onTaskClick={handleTaskClick}
           />

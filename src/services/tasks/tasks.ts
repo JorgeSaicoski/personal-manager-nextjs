@@ -12,6 +12,14 @@ export interface Task {
   updatedAt?: string;
 }
 
+export interface PaginatedTasksResponse {
+  tasks: Task[];
+  page: number;
+  pageSize: number;
+  totalPages: number;
+  total: number;
+}
+
 /**
  * Fetch all tasks from the API
  */
@@ -38,9 +46,9 @@ export const getAllTasks = async (): Promise<Task[]> => {
 /**
  * Fetch completed tasks from the API
  */
-export const getCompletedTasks = async (page:number, pageSize:number): Promise<Task[]> =>  {
+export const getCompletedTasks = async (page:number, pageSize:number): Promise<PaginatedTasksResponse> =>  {
   try {
-    const response = await fetch(`${ENDPOINT}/task/completed?page=${page}&pageSize=${pageSize}`, {
+    const response = await fetch(`${ENDPOINT}/tasks/completed?page=${page}&pageSize=${pageSize}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -62,9 +70,9 @@ export const getCompletedTasks = async (page:number, pageSize:number): Promise<T
 /**
  * Fetch not completed tasks from the API
  */
-export const getNonCompletedTasks = async (page:number, pageSize:number): Promise<Task[]> =>  {
+export const getNonCompletedTasks = async (page:number, pageSize:number): Promise<PaginatedTasksResponse> =>  {
   try {
-    const response = await fetch(`${ENDPOINT}/task/active?page=${page}&pageSize=${pageSize}`, {
+    const response = await fetch(`${ENDPOINT}/tasks/active?page=${page}&pageSize=${pageSize}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -87,7 +95,7 @@ export const getNonCompletedTasks = async (page:number, pageSize:number): Promis
  */
 export const getTaskById = async (id: string): Promise<Task> => {
   try {
-    const response = await fetch(`${ENDPOINT}/task/${id}`, {
+    const response = await fetch(`${ENDPOINT}/tasks/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -110,7 +118,7 @@ export const getTaskById = async (id: string): Promise<Task> => {
  */
 export const createTask = async (task: Task): Promise<Task> => {
   try {
-    const response = await fetch(`${ENDPOINT}/task`, {
+    const response = await fetch(`${ENDPOINT}/tasks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -136,9 +144,8 @@ export const createTask = async (task: Task): Promise<Task> => {
  * Update an existing task
  */
 export const updateTask = async (id: string, task: Partial<Task>): Promise<Task> => {
-  console.log(task)
   try {
-    const response = await fetch(`${ENDPOINT}/task/update/${id}`, {
+    const response = await fetch(`${ENDPOINT}/tasks/update/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -162,7 +169,7 @@ export const updateTask = async (id: string, task: Partial<Task>): Promise<Task>
  */
 export const deleteTask = async (id: string): Promise<void> => {
   try {
-    const response = await fetch(`${ENDPOINT}/task/${id}`, {
+    const response = await fetch(`${ENDPOINT}/tasks/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
