@@ -4,10 +4,12 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 interface PaginationControlsProps {
   totalPages: number;
+  currentMode: 'todo' | 'completed'
 }
 
 export default function PaginationControls({
   totalPages,
+  currentMode
 }: PaginationControlsProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -16,8 +18,12 @@ export default function PaginationControls({
   useEffect(() => {
     const pageParam = searchParams.get("page");
     const page = pageParam ? parseInt(pageParam, 10) : 1;
-    setCurrentPage(page);
-  }, [searchParams]);
+    if (page > totalPages){
+      goToPage(totalPages.toString())
+    } else{
+      setCurrentPage(page);
+    }
+  }, [searchParams, currentMode]);
 
   const goToPage = (newPage: string) => {
     const params = new URLSearchParams(searchParams);

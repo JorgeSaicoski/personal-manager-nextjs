@@ -31,6 +31,10 @@ $line-height: 40px;
   &-returning {
     animation: returnFromRight 0.5s cubic-bezier(1, 0.6, 0.2, 0.1) forwards;
   }
+  &:hover{
+    cursor: pointer;
+    background-color: hsla(231, 47%, 36%, 0.733);
+  }
 }
 
 @keyframes returnFromRight {

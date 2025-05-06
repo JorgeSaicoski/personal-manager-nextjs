@@ -34,7 +34,7 @@ function TasksContent() {
   const currentPage = searchParams.get("page")
     ? parseInt(searchParams.get("page") as string, 10)
     : 1;
-  const pageSize = 10;
+  const pageSize = 5;
 
   const fetchTasks = async () => {
     try {
@@ -56,6 +56,8 @@ function TasksContent() {
         }
         if (paginationData.totalPages){
           setTotalPages(paginationData.totalPages)
+        }else{
+          setTotalPages(1)
         }
       }
         
@@ -104,7 +106,7 @@ function TasksContent() {
         onClick={(mode) => handleViewModeChange(mode as "todo" | "completed")}
       />
       <div className={styles.wrapper}>
-        <PaginationControls totalPages={totalPages} />
+        <PaginationControls currentMode={viewMode} totalPages={totalPages} />
         <div className={styles.formPaper}>
           <TasksList
             tasks={tasks || []}
