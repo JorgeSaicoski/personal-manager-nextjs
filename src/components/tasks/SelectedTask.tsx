@@ -23,7 +23,7 @@ const SelectedTask = ({ task, onClose, onSave }: SelectedTaskProps) => {
       // Add a small delay before showing to make the animation visible
       setTimeout(() => {
         setVisible(true);
-      }, 500);
+      }, 250);
     }
   }, [task]);
 

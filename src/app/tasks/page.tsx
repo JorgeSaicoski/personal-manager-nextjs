@@ -123,14 +123,22 @@ function TasksContent() {
   };
 
   const saveTask = (updatedTask: Task) => {
-    console.log("Saving task:", updatedTask);
-    setTasks(
-      tasks.map((task: Task) =>
-        task.ID === updatedTask.ID ? updatedTask : task
-      )
-    );
+    // Check if the task should be removed from the current view
+    if (viewMode === "completed" && updatedTask.status !== "completed") {
+      // Remove task from the list if it's no longer completed
+      setTasks(tasks.filter(task => task.ID !== updatedTask.ID));
+    } else if (viewMode === "todo" && updatedTask.status === "completed") {
+      // Remove task from the list if it's now completed but we're in todo mode
+      setTasks(tasks.filter(task => task.ID !== updatedTask.ID));
+    } else {
+      // Update the task in the current list
+      setTasks(
+        tasks.map((task: Task) =>
+          task.ID === updatedTask.ID ? updatedTask : task
+        )
+      );
+    }
   };
-
   const handleDeleteSelected = () => {
     if (selectedTasksForDelete.length > 0) {
       setShowDeleteConfirmation(true);
