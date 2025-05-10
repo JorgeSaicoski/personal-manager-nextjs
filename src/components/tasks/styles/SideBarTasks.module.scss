@@ -18,15 +18,36 @@
             font: 24px "Shadows Into Light", cursive;
             padding: 5% 20px;
             border: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            
+            &:hover {
+                transform: scale(1.05);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+            
+            &.active {
+                transform: scale(1.1);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                font-weight: bold;
+            }
         }
     }
     .todo{
         background-color: rgb(214, 226, 40);
+        &.active {
+            background-color: rgb(235, 247, 78);
+        }
     }
     .completed{
         background-color: rgb(71, 226, 40);
+        &.active {
+            background-color: rgb(91, 247, 59);
+        }
     }
     .delete{
         background-color: rgb(226, 40, 40);
+        &.active {
+            background-color: rgb(247, 78, 78);
+        }
     }
 }

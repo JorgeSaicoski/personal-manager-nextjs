@@ -8,9 +8,19 @@ interface TasksListProps {
   tasks: Task[];
   selectedTask: Task | null;
   onTaskClick: (taskId: string) => void;
+  isDeleteMode: boolean;
+  selectedTasksForDelete: Task[];
+  onTaskSelectForDelete: (task: Task) => void;
 }
 
-const TasksList = ({ tasks, selectedTask, onTaskClick }: TasksListProps) => {
+const TasksList = ({
+  tasks,
+  selectedTask,
+  onTaskClick,
+  isDeleteMode,
+  selectedTasksForDelete,
+  onTaskSelectForDelete,
+}: TasksListProps) => {
   const router = useRouter();
   const [animatingTaskId, setAnimatingTaskId] = useState<string | null>(null);
   const [returningTaskId, setReturningTaskId] = useState<string | null>(null);
@@ -19,15 +29,21 @@ const TasksList = ({ tasks, selectedTask, onTaskClick }: TasksListProps) => {
     router.push("/tasks/create");
   };
 
-  const handleTaskClick = (taskId: string | number) => {
-    setAnimatingTaskId(taskId.toString());
+  const handleTaskClick = (task: Task) => {
+    if (isDeleteMode) {
+      onTaskSelectForDelete(task);
+      return;
+    }
+
+    const taskId = task.ID?.toString() || "";
+    setAnimatingTaskId(taskId);
 
     setTimeout(() => {
       if (selectedTask?.ID) {
         setReturningTaskId(selectedTask.ID.toString());
       }
 
-      onTaskClick(taskId.toString());
+      onTaskClick(taskId);
       setAnimatingTaskId(null);
     }, 500);
   };
@@ -40,6 +56,11 @@ const TasksList = ({ tasks, selectedTask, onTaskClick }: TasksListProps) => {
       }, 1000);
     }
   }, [selectedTask, returningTaskId]);
+
+  // Check if a task is selected for deletion
+  const isTaskSelectedForDelete = (task: Task) => {
+    return selectedTasksForDelete.some((t) => t.ID === task.ID);
+  };
 
   return (
     <fieldset>
@@ -55,16 +76,17 @@ const TasksList = ({ tasks, selectedTask, onTaskClick }: TasksListProps) => {
             selectedTask && taskId === selectedTask.ID?.toString();
           const isAnimating = animatingTaskId === taskId;
           const isReturning = returningTaskId === taskId;
+          const isSelectedForDelete = isTaskSelectedForDelete(task);
 
           // Skip rendering if selected and not returning
-          if (isSelected && !isReturning) {
+          if (isSelected && !isReturning && !isDeleteMode) {
             return null;
           }
 
           return (
             <div
               onClick={() => {
-                handleTaskClick(taskId);
+                handleTaskClick(task);
               }}
               key={taskId}
               className={`
@@ -80,6 +102,11 @@ const TasksList = ({ tasks, selectedTask, onTaskClick }: TasksListProps) => {
                 }
                 ${isAnimating ? styles["task-selected"] : ""}
                 ${isReturning ? styles["task-returning"] : ""}
+                ${
+                  isDeleteMode && isSelectedForDelete
+                    ? styles["task-selected-for-delete"]
+                    : ""
+                }
               `}
             >
               {/* Title area */}
@@ -107,11 +134,22 @@ const TasksList = ({ tasks, selectedTask, onTaskClick }: TasksListProps) => {
                   ))}
                 </p>
               )}
+              {/* Checkbox for delete mode */}
+              {isDeleteMode && (
+                <span className={styles.checkbox}>
+                  <input
+                    type="checkbox"
+                    checked={isSelectedForDelete}
+                    onChange={() => {}} 
+                    onClick={(e) => e.stopPropagation()}
+                  />
+                </span>
+              )}
             </div>
           );
         })
       )}
-      <Button text="Create new Task" onClick={handleClick}></Button>
+      {!isDeleteMode && <Button text="Create new Task" onClick={handleClick} />}
     </fieldset>
   );
 };

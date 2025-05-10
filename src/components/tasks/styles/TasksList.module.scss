@@ -8,6 +8,7 @@ $line-height: 40px;
   line-height: $line-height;
   background-color: hsl(226, 39%, 49%, 0.1);
   transition: transform 1s ease, opacity 0.5s ease;
+  position: relative; // Added for checkbox positioning
 
   &-finish {
     background-color: hsla(130, 84%, 27%, 0.288);
@@ -25,18 +26,150 @@ $line-height: 40px;
     opacity: 0;
     transition: transform 0.5s cubic-bezier(0.1, 0.2, 0.6, 1),
       opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    @import url("https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap");
+
+    $line-height: 40px;
+
+    .task {
+      margin-bottom: $line-height;
+      padding: 0 10px;
+      line-height: $line-height;
+      background-color: hsl(226, 39%, 49%, 0.1);
+      transition: transform 1s ease, opacity 0.5s ease;
+
+      &-finish {
+        background-color: hsla(130, 84%, 27%, 0.288);
+      }
+      &-progress {
+        background-color: hsla(229, 37%, 53%, 0.158);
+      }
+      &-pending {
+        background-color: hsla(59, 74%, 53%, 0.288);
+      }
+
+      // Task sliding out to right
+      &-selected {
+        transform: translateX(-100%);
+        opacity: 0;
+        transition: transform 0.5s cubic-bezier(0.1, 0.2, 0.6, 1),
+          opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      // Task returning from right
+      &-returning {
+        animation: returnFromRight 0.5s cubic-bezier(1, 0.6, 0.2, 0.1) forwards;
+      }
+      &:hover {
+        cursor: pointer;
+        background-color: hsla(231, 47%, 36%, 0.733);
+      }
+    }
+
+    @keyframes returnFromRight {
+      0% {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .formField {
+      display: inline;
+      color: #334d96;
+      outline: none;
+
+      &:empty {
+        display: inline-block;
+        color: #ddd;
+      }
+
+      // Use a data-attr to replicate a placeholder
+      &:empty,
+      &:empty:focus {
+        &:before {
+          content: attr(data-placeholder);
+        }
+      }
+    }
+
+    .formFieldTitle {
+      @extend .formField;
+      font-family: "Delius Swash Caps", cursive;
+      color: #2f8b1c;
+    }
+
+    .details {
+      font-family: "Delius Swash Caps", cursive;
+      font-size: 18px;
+      color: #e08183;
+    }
+
+    .detailItem {
+      display: inline-block;
+      margin-right: 100px;
+    }
+  }
+
+  // Task selected for deletion
+  &-selected-for-delete {
+    background-color: hsla(0, 74%, 53%, 0.2);
+    border-left: 4px solid #e74c3c;
   }
 
   // Task returning from right
   &-returning {
     animation: returnFromRight 0.5s cubic-bezier(1, 0.6, 0.2, 0.1) forwards;
   }
-  &:hover{
+  &:hover {
     cursor: pointer;
     background-color: hsla(231, 47%, 36%, 0.733);
   }
 }
 
+.checkbox {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  
+  input[type="checkbox"] {
+    appearance: none;
+    transform: translateX(200%);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 175px;
+    height: 22px;
+    border-radius: 0;
+    background-color: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.5s ease;
+
+    &:checked {
+      background-color: #2f8b1c;
+      border-color: #2f8b1c;
+      position: relative;
+      transform: translateX(85%);
+      
+      &::after {
+        content: '✓ to delete';
+        position: absolute;
+        color: white;
+        font-size: 16px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+    
+    &:hover {
+      cursor:default;
+    }
+  }
+}
 @keyframes returnFromRight {
   0% {
     transform: translateX(100%);
