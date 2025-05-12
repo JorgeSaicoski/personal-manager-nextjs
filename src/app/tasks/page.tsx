@@ -51,7 +51,7 @@ function TasksContent() {
         paginationData = await getCompletedTasks(currentPage, pageSize);
       } else if (viewMode === "delete") {
         // In delete mode, fetch all tasks or keep the current filter based on user preference
-        paginationData = await getNonCompletedTasks(currentPage, pageSize);
+        paginationData = await getAllTasks(currentPage, pageSize);
       }
 
       if (paginationData){

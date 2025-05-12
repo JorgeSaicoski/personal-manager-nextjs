@@ -46,8 +46,6 @@ export default function CreateTaskPage() {
 
   return (
     <div className={styles.wrapper}>
-      <h1>Create New Task</h1>
-
       {error && <div>{error}</div>}
 
       <form className={styles.formPaper} onSubmit={handleSubmit}>

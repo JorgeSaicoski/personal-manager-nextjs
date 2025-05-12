@@ -23,9 +23,9 @@ export interface PaginatedTasksResponse {
 /**
  * Fetch all tasks from the API
  */
-export const getAllTasks = async (): Promise<Task[]> => {
+export const getAllTasks = async (page:number, pageSize:number): Promise<PaginatedTasksResponse> =>  {
   try {
-    const response = await fetch(`${ENDPOINT}/tasks`, {
+    const response = await fetch(`${ENDPOINT}/tasks?page=${page}&pageSize=${pageSize}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -41,7 +41,8 @@ export const getAllTasks = async (): Promise<Task[]> => {
     console.error("Failed to fetch tasks:", error);
     throw error;
   }
-};
+
+}
 
 /**
  * Fetch completed tasks from the API
