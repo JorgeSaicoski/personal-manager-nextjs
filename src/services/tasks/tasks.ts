@@ -1,12 +1,13 @@
 // Configuration
-const ENDPOINT = process.env.NEXT_PUBLIC_TASK_SERVICE_URL || "http://localhost:8000";
+const ENDPOINT =
+  process.env.NEXT_PUBLIC_TASK_SERVICE_URL || "http://localhost:8000";
 
 // Type definition for task
 export interface Task {
   ID?: string;
   title: string;
   description?: string;
-  status?: 'pending' | 'in-progress' | 'completed';
+  status?: "pending" | "in-progress" | "completed";
   dueDate?: string;
   createdAt?: string;
   updatedAt?: string;
@@ -23,90 +24,105 @@ export interface PaginatedTasksResponse {
 /**
  * Fetch all tasks from the API
  */
-export const getAllTasks = async (page:number, pageSize:number): Promise<PaginatedTasksResponse> =>  {
+export const getAllTasks = async (
+  page: number,
+  pageSize: number
+): Promise<PaginatedTasksResponse> => {
   try {
-    const response = await fetch(`${ENDPOINT}/tasks?page=${page}&pageSize=${pageSize}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    
+    const response = await fetch(
+      `${ENDPOINT}/tasks?page=${page}&pageSize=${pageSize}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
     if (!response.ok) {
       throw new Error(`Error fetching tasks: ${response.status}`);
     }
-    
+
     return await response.json();
   } catch (error) {
     console.error("Failed to fetch tasks:", error);
     throw error;
   }
-
-}
+};
 
 /**
  * Fetch completed tasks from the API
  */
-export const getCompletedTasks = async (page:number, pageSize:number): Promise<PaginatedTasksResponse> =>  {
+export const getCompletedTasks = async (
+  page: number,
+  pageSize: number
+): Promise<PaginatedTasksResponse> => {
   try {
-    const response = await fetch(`${ENDPOINT}/tasks/completed?page=${page}&pageSize=${pageSize}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    
+    const response = await fetch(
+      `${ENDPOINT}/tasks/completed?page=${page}&pageSize=${pageSize}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
     if (!response.ok) {
       throw new Error(`Error fetching tasks: ${response.status}`);
     }
-    
+
     return await response.json();
   } catch (error) {
     console.error("Failed to fetch tasks:", error);
     throw error;
   }
-
-}
+};
 
 /**
  * Fetch not completed tasks from the API
  */
-export const getNonCompletedTasks = async (page:number, pageSize:number): Promise<PaginatedTasksResponse> =>  {
+export const getNonCompletedTasks = async (
+  page: number,
+  pageSize: number
+): Promise<PaginatedTasksResponse> => {
   try {
-    const response = await fetch(`${ENDPOINT}/tasks/active?page=${page}&pageSize=${pageSize}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    
+    const response = await fetch(
+      `${ENDPOINT}/tasks/active?page=${page}&pageSize=${pageSize}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
     if (!response.ok) {
       throw new Error(`Error fetching tasks: ${response.status}`);
     }
-    
+
     return await response.json();
   } catch (error) {
     console.error("Failed to fetch tasks:", error);
     throw error;
   }
-
-}
+};
 /**
  * Get a single task by ID
  */
 export const getTaskById = async (id: string): Promise<Task> => {
   try {
     const response = await fetch(`${ENDPOINT}/tasks/${id}`, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
-    
+
     if (!response.ok) {
       throw new Error(`Error fetching task: ${response.status}`);
     }
-    
+
     return await response.json();
   } catch (error) {
     console.error(`Failed to fetch task with ID ${id}:`, error);
@@ -120,20 +136,20 @@ export const getTaskById = async (id: string): Promise<Task> => {
 export const createTask = async (task: Task): Promise<Task> => {
   try {
     const response = await fetch(`${ENDPOINT}/tasks`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(task),
     });
-    
+
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
       throw new Error(
         errorData.error || `Error creating task: ${response.status}`
       );
     }
-    
+
     return await response.json();
   } catch (error) {
     console.error("Failed to create task:", error);
@@ -144,20 +160,23 @@ export const createTask = async (task: Task): Promise<Task> => {
 /**
  * Update an existing task
  */
-export const updateTask = async (id: string, task: Partial<Task>): Promise<Task> => {
+export const updateTask = async (
+  id: string,
+  task: Partial<Task>
+): Promise<Task> => {
   try {
     const response = await fetch(`${ENDPOINT}/tasks/update/${id}`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(task),
     });
-    
+
     if (!response.ok) {
       throw new Error(`Error updating task: ${response.status}`);
     }
-    
+
     return await response.json();
   } catch (error) {
     console.error(`Failed to update task with ID ${id}:`, error);
@@ -165,32 +184,68 @@ export const updateTask = async (id: string, task: Partial<Task>): Promise<Task>
   }
 };
 
+// src/services/tasks/tasks.ts - Add these new functions
+
 /**
- * Delete a task
+ * Delete multiple tasks by IDs
  */
-export const deleteTask = async (id: string): Promise<void> => {
+export const deleteSelectedTasks = async (taskIds: string[]): Promise<void> => {
   try {
-    const response = await fetch(`${ENDPOINT}/tasks/${id}`, {
-      method: 'DELETE',
+    const response = await fetch(`${ENDPOINT}/tasks/delete-selected`, {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
+      body: JSON.stringify(taskIds),
     });
-    
+
     if (!response.ok) {
-      throw new Error(`Error deleting task: ${response.status}`);
+      throw new Error(`Error deleting tasks: ${response.status}`);
     }
   } catch (error) {
-    console.error(`Failed to delete task with ID ${id}:`, error);
+    console.error(`Failed to delete selected tasks:`, error);
     throw error;
   }
 };
 
-// Export an object with all functions for easier imports
-export default {
-  getAllTasks,
-  getTaskById,
-  createTask,
-  updateTask,
-  deleteTask
+/**
+ * Delete all completed tasks
+ */
+export const deleteAllCompletedTasks = async (): Promise<void> => {
+  try {
+    const response = await fetch(`${ENDPOINT}/tasks/delete-completed`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error deleting completed tasks: ${response.status}`);
+    }
+  } catch (error) {
+    console.error("Failed to delete completed tasks:", error);
+    throw error;
+  }
+};
+
+/**
+ * Delete all non-completed tasks
+ */
+export const deleteAllNonCompletedTasks = async (): Promise<void> => {
+  try {
+    const response = await fetch(`${ENDPOINT}/tasks/delete-non-completed`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error deleting non-completed tasks: ${response.status}`);
+    }
+  } catch (error) {
+    console.error("Failed to delete non-completed tasks:", error);
+    throw error;
+  }
 };

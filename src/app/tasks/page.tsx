@@ -6,7 +6,7 @@ import {
   getNonCompletedTasks,
   getCompletedTasks,
   Task,
-  deleteTask
+  deleteSelectedTasks
 } from "@/services/tasks/tasks";
 import styles from "./page.module.scss";
 import SelectedTask from "@/components/tasks/SelectedTask";
@@ -148,14 +148,10 @@ function TasksContent() {
   const confirmDelete = async () => {
     try {
       setLoading(true);
-      // Delete all selected tasks
-      await Promise.all(
-        selectedTasksForDelete.map(async (task) => {
-          if (task.ID) {
-            await deleteTask(task.ID.toString());
-          }
-        })
-      );
+      // Extract the IDs from selectedTasksForDelete
+      const taskIds = selectedTasksForDelete.map(task => task.ID?.toString() || "");
+      // Delete all selected tasks with one API call
+      await deleteSelectedTasks(taskIds);
       
       // Refresh the task list
       await fetchTasks();
