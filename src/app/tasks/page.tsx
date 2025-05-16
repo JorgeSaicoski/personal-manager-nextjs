@@ -6,7 +6,9 @@ import {
   getNonCompletedTasks,
   getCompletedTasks,
   Task,
-  deleteSelectedTasks
+  deleteSelectedTasks,
+  deleteAllCompletedTasks,
+  deleteAllNonCompletedTasks,
 } from "@/services/tasks/tasks";
 import styles from "./page.module.scss";
 import SelectedTask from "@/components/tasks/SelectedTask";
@@ -29,8 +31,12 @@ function TasksContent() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
   const [loading, setLoading] = useState(true);
-  const [viewMode, setViewMode] = useState<"todo" | "completed" | "delete">("todo");
-  const [selectedTasksForDelete, setSelectedTasksForDelete] = useState<Task[]>([]);
+  const [viewMode, setViewMode] = useState<"todo" | "completed" | "delete">(
+    "todo"
+  );
+  const [selectedTasksForDelete, setSelectedTasksForDelete] = useState<Task[]>(
+    []
+  );
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [totalPages, setTotalPages] = useState(5);
   const searchParams = useSearchParams();
@@ -54,17 +60,19 @@ function TasksContent() {
         paginationData = await getAllTasks(currentPage, pageSize);
       }
 
-      if (paginationData){
+      if (paginationData) {
         if (paginationData.tasks) {
-          const tasksArray = Array.isArray(paginationData.tasks) ? paginationData.tasks : [];
+          const tasksArray = Array.isArray(paginationData.tasks)
+            ? paginationData.tasks
+            : [];
           setTasks(tasksArray);
         } else {
           setTasks([]);
         }
-        if (paginationData.totalPages){
-          setTotalPages(paginationData.totalPages)
+        if (paginationData.totalPages) {
+          setTotalPages(paginationData.totalPages);
         } else {
-          setTotalPages(1)
+          setTotalPages(1);
         }
       }
     } catch (err) {
@@ -76,7 +84,7 @@ function TasksContent() {
 
   useEffect(() => {
     fetchTasks();
-    
+
     // Reset selected tasks when view mode changes
     if (viewMode !== "delete") {
       setSelectedTasksForDelete([]);
@@ -94,7 +102,7 @@ function TasksContent() {
   const handleTaskClick = (taskId: string) => {
     // Don't show task details in delete mode
     if (viewMode === "delete") return;
-    
+
     const selected = tasks.find(
       (task) => task.ID?.toString() === taskId.toString()
     );
@@ -104,13 +112,13 @@ function TasksContent() {
   };
 
   const handleTaskSelectForDelete = (task: Task) => {
-    setSelectedTasksForDelete(prev => {
+    setSelectedTasksForDelete((prev) => {
       // Check if this task is already selected
-      const isSelected = prev.some(t => t.ID === task.ID);
-      
+      const isSelected = prev.some((t) => t.ID === task.ID);
+
       if (isSelected) {
         // If selected, remove it from the array
-        return prev.filter(t => t.ID !== task.ID);
+        return prev.filter((t) => t.ID !== task.ID);
       } else {
         // If not selected, add it to the array
         return [...prev, task];
@@ -126,10 +134,10 @@ function TasksContent() {
     // Check if the task should be removed from the current view
     if (viewMode === "completed" && updatedTask.status !== "completed") {
       // Remove task from the list if it's no longer completed
-      setTasks(tasks.filter(task => task.ID !== updatedTask.ID));
+      setTasks(tasks.filter((task) => task.ID !== updatedTask.ID));
     } else if (viewMode === "todo" && updatedTask.status === "completed") {
       // Remove task from the list if it's now completed but we're in todo mode
-      setTasks(tasks.filter(task => task.ID !== updatedTask.ID));
+      setTasks(tasks.filter((task) => task.ID !== updatedTask.ID));
     } else {
       // Update the task in the current list
       setTasks(
@@ -144,18 +152,50 @@ function TasksContent() {
       setShowDeleteConfirmation(true);
     }
   };
+  const handleClearCompleted = async () => {
+    if (window.confirm("Are you sure you want to delete all completed tasks?")) {
+      try {
+        setLoading(true);
+        await deleteAllCompletedTasks();
+        await fetchTasks();
+      } catch (error) {
+        console.error("Error deleting completed tasks:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+  
+  const handleDeleteAllNonCompleted = async () => {
+    if (window.confirm("WARNING: This will delete ALL of your active tasks. This action cannot be undone. Are you absolutely sure?")) {
+      // Double confirmation for destructive action
+      if (window.confirm("Final confirmation: Delete all non-completed tasks?")) {
+        try {
+          setLoading(true);
+          await deleteAllNonCompletedTasks();
+          await fetchTasks();
+        } catch (error) {
+          console.error("Error deleting non-completed tasks:", error);
+        } finally {
+          setLoading(false);
+        }
+      }
+    }
+  };
 
   const confirmDelete = async () => {
     try {
       setLoading(true);
       // Extract the IDs from selectedTasksForDelete
-      const taskIds = selectedTasksForDelete.map(task => task.ID?.toString() || "");
+      const taskIds = selectedTasksForDelete.map(
+        (task) => task.ID?.toString() || ""
+      );
       // Delete all selected tasks with one API call
       await deleteSelectedTasks(taskIds);
-      
+
       // Refresh the task list
       await fetchTasks();
-      
+
       // Reset the state
       setSelectedTasksForDelete([]);
       setShowDeleteConfirmation(false);
@@ -175,25 +215,27 @@ function TasksContent() {
   ) : (
     <div className={styles.page}>
       <SideBarTasks
-        onClick={(mode) => handleViewModeChange(mode as "todo" | "completed" | "delete")}
+        onClick={(mode) =>
+          handleViewModeChange(mode as "todo" | "completed" | "delete")
+        }
         activeMode={viewMode}
       />
       <div className={styles.wrapper}>
         {viewMode !== "delete" && (
           <PaginationControls currentMode={viewMode} totalPages={totalPages} />
         )}
-        
+
         {viewMode === "delete" && (
           <div className={styles.deleteControls}>
             <span>{selectedTasksForDelete.length} tasks selected</span>
-            <Button 
-              text="Delete Selected" 
-              onClick={handleDeleteSelected} 
+            <Button
+              text="Delete Selected"
+              onClick={handleDeleteSelected}
               disabled={selectedTasksForDelete.length === 0}
             />
           </div>
         )}
-        
+
         <div className={styles.formPaper}>
           <TasksList
             tasks={tasks || []}
@@ -205,7 +247,22 @@ function TasksContent() {
           />
         </div>
       </div>
-      
+      {viewMode === "completed" && tasks.length > 0 && (
+        <div className={styles.clearAllButton}>
+          <Button text="Clear All Completed" onClick={handleClearCompleted} />
+        </div>
+      )}
+      {viewMode === "todo" && (
+        <div className={styles.advancedOptions}>
+          <details>
+            <summary>Advanced Options</summary>
+            <Button
+              text="Delete All Tasks"
+              onClick={handleDeleteAllNonCompleted}
+            />
+          </details>
+        </div>
+      )}
       {selectedTask && (
         <SelectedTask
           task={selectedTask}
@@ -213,7 +270,6 @@ function TasksContent() {
           onSave={saveTask}
         />
       )}
-      
       {showDeleteConfirmation && (
         <DeleteConfirmation
           selectedTasks={selectedTasksForDelete}
