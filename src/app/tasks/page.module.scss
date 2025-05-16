@@ -204,6 +204,96 @@ $line-height: 40px;
   margin-right: 100px;
 }
 
+.dangerZoneContainer {
+  position: absolute;
+  top: 20px;
+  right: 20%;
+  z-index: 10;
+  width: 250px;
+
+  transition: 1s;
+}
+
+.dangerZoneToggle {
+  background-color: transparent;
+  color: #e74c3c;
+  border: 2px dashed #e74c3c;
+  border-radius: 15px;
+  font-family: "Shadows Into Light", cursive;
+  font-size: 18px;
+  padding: 8px 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background-color: rgba(231, 76, 60, 0.1);
+    transform: scale(1.05);
+  }
+}
+
+.dangerZonePanel {
+  margin: 15px 0;
+  text-align: right;
+  margin-top: 10px;
+  background: rgb(243, 243, 104);
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  width: 250px;
+  
+  p {
+    font-family: "Shadows Into Light", cursive;
+    color: #e74c3c;
+    margin-bottom: 15px;
+    font-size:24px;
+    text-align: center;
+  }
+  
+  button {
+    display: block;
+    width: 100%;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 15px;
+    font-family: "Shadows Into Light", cursive;
+    font-size: 18px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background-color: #c0392b;
+      transform: scale(1.05);
+    }
+  }
+}
+
+.clearCompletedContainer {
+  margin: 15px 0;
+  text-align: right;
+  
+  button {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-family: "Shadows Into Light", cursive;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+    
+    &:hover {
+      background-color: #2ecc71;
+      transform: scale(1.05);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    }
+  }
+}
+
 @keyframes init {
   75% {
     transform: translateY(-20px);

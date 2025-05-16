@@ -40,6 +40,7 @@ function TasksContent() {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [totalPages, setTotalPages] = useState(5);
   const searchParams = useSearchParams();
+  const [showDangerZone, setShowDangerZone] = useState(false);
 
   const currentPage = searchParams.get("page")
     ? parseInt(searchParams.get("page") as string, 10)
@@ -153,36 +154,36 @@ function TasksContent() {
     }
   };
   const handleClearCompleted = async () => {
-    if (window.confirm("Are you sure you want to delete all completed tasks?")) {
+    if (window.confirm("Are you sure you want to clear all completed tasks?")) {
       try {
         setLoading(true);
         await deleteAllCompletedTasks();
         await fetchTasks();
       } catch (error) {
-        console.error("Error deleting completed tasks:", error);
+        console.error("Error clearing completed tasks:", error);
       } finally {
         setLoading(false);
       }
     }
   };
-  
+
   const handleDeleteAllNonCompleted = async () => {
-    if (window.confirm("WARNING: This will delete ALL of your active tasks. This action cannot be undone. Are you absolutely sure?")) {
-      // Double confirmation for destructive action
-      if (window.confirm("Final confirmation: Delete all non-completed tasks?")) {
-        try {
-          setLoading(true);
-          await deleteAllNonCompletedTasks();
-          await fetchTasks();
-        } catch (error) {
-          console.error("Error deleting non-completed tasks:", error);
-        } finally {
-          setLoading(false);
-        }
+    if (
+      window.confirm(
+        "⚠️ WARNING: This will delete ALL of your tasks. This action cannot be undone."
+      )
+    ) {
+      try {
+        setLoading(true);
+        await deleteAllNonCompletedTasks();
+        await fetchTasks();
+      } catch (error) {
+        console.error("Error deleting all tasks:", error);
+      } finally {
+        setLoading(false);
       }
     }
   };
-
   const confirmDelete = async () => {
     try {
       setLoading(true);
@@ -247,20 +248,29 @@ function TasksContent() {
           />
         </div>
       </div>
-      {viewMode === "completed" && tasks.length > 0 && (
-        <div className={styles.clearAllButton}>
-          <Button text="Clear All Completed" onClick={handleClearCompleted} />
+      {viewMode === "todo" && (
+        <div className={styles.dangerZoneContainer}>
+          <button
+            className={styles.dangerZoneToggle}
+            onClick={() => setShowDangerZone(!showDangerZone)}
+          >
+            Delete All Non Completed
+          </button>
+
+          {showDangerZone && (
+            <div className={styles.dangerZonePanel}>
+              <p>These actions cannot be undone</p>
+              <Button
+                text="Delete All Tasks"
+                onClick={handleDeleteAllNonCompleted}
+              />
+            </div>
+          )}
         </div>
       )}
-      {viewMode === "todo" && (
-        <div className={styles.advancedOptions}>
-          <details>
-            <summary>Advanced Options</summary>
-            <Button
-              text="Delete All Tasks"
-              onClick={handleDeleteAllNonCompleted}
-            />
-          </details>
+      {viewMode === "completed" && tasks.length > 0 && (
+        <div className={styles.clearCompletedContainer}>
+          <Button text="Clear Completed Tasks" onClick={handleClearCompleted} />
         </div>
       )}
       {selectedTask && (
