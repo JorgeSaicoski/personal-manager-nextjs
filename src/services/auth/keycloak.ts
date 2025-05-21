@@ -4,7 +4,7 @@ import Keycloak from "keycloak-js";
 const keycloakConfig = {
   url: process.env.NEXT_PUBLIC_KEYCLOAK_URL || "http://localhost:8080",
   realm: process.env.NEXT_PUBLIC_KEYCLOAK_REALM || "master",
-  clientId: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_ID || "todo-app",
+  clientId: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_ID || "frontend-app",
 };
 
 // Initialize Keycloak instance
@@ -12,23 +12,20 @@ const keycloakInstance = new Keycloak(keycloakConfig);
 
 // Function to initialize Keycloak
 const initKeycloak = () => {
+  const silentCheckUrl = window.location.origin + '/silent-check-sso.html';
+  
+  console.log('Silent check SSO URL:', silentCheckUrl);
+  
   return keycloakInstance
     .init({
       onLoad: "check-sso",
-      silentCheckSsoRedirectUri: 
-        typeof window !== "undefined" 
-          ? `${window.location.origin}/silent-check-sso.html` 
-          : undefined,
+      silentCheckSsoRedirectUri: silentCheckUrl,
       checkLoginIframe: false,
+      enableLogging: true,
     })
     .then((authenticated) => {
-      if (authenticated) {
-        console.log("User is authenticated");
-        return true;
-      } else {
-        console.log("User is not authenticated");
-        return false;
-      }
+      console.log("Keycloak initialized, authenticated:", authenticated);
+      return authenticated;
     })
     .catch((error) => {
       console.error("Failed to initialize Keycloak", error);
