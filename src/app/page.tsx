@@ -14,7 +14,6 @@ export default function Home() {
   
   return (
     <div className={styles.page}>
-      <Navbar />
       <main className={styles.main}>
         <Button text="Click me" onClick={handleClick}></Button>
       </main>

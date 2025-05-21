@@ -8,7 +8,7 @@ const Navbar = () => {
 
   return (
     <div className={styles.navbar}>
-      <div className={styles.title}>Task Manager</div>
+      <div className={styles.title}>Sarkis.dev</div>
       <div className={styles.authSection}>
         {loading ? (
           <div className={styles.loading}>Loading...</div>
