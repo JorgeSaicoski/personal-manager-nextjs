@@ -18,12 +18,15 @@ import SideBarTasks from "@/components/tasks/SideBar";
 import DeleteConfirmation from "@/components/tasks/DeleteConfirmation";
 import { useSearchParams } from "next/navigation";
 import Button from "@/components/Button";
+import AuthRoutes from "@/components/protected-routes/AuthRoutes";
 
-export default function Home() {
+export default function Tasks() {
   return (
-    <Suspense fallback={<p>Loading...</p>}>
-      <TasksContent />
-    </Suspense>
+    <AuthRoutes>
+      <Suspense fallback={<p>Loading...</p>}>
+        <TasksContent />
+      </Suspense>
+    </AuthRoutes>
   );
 }
 
