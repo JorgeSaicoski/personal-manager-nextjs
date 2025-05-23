@@ -5,15 +5,13 @@ services:
     user: root
     build: .
     command: npm run dev
-    ports:
-      - "3000:3000"
     volumes:
       - .:/app:z
       - /app/node_modules
     environment:
       - NODE_ENV=development
-      - NEXT_PUBLIC_TASK_SERVICE_URL=http://todo-list:8000
-      - NEXT_PUBLIC_KEYCLOAK_URL=http://localhost:8080
+      - NEXT_PUBLIC_TASK_SERVICE_URL=/api  
+      - NEXT_PUBLIC_KEYCLOAK_URL=/api/auth  
       - NEXT_PUBLIC_KEYCLOAK_REALM=master
       - NEXT_PUBLIC_KEYCLOAK_CLIENT_ID=frontend-app
 
