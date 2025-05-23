@@ -50,6 +50,8 @@ export const getAllTasks = async (
   page: number,
   pageSize: number
 ): Promise<PaginatedTasksResponse> => {
+  console.log("getAllTasks")
+  console.log(getHeaders())
   try {
     const response = await fetch(
       `${ENDPOINT}/tasks?page=${page}&pageSize=${pageSize}`,
@@ -60,6 +62,7 @@ export const getAllTasks = async (
     );
 
     if (!response.ok) {
+      console.log(response)
       throw new Error(`Error fetching tasks: ${response.status}`);
     }
 
