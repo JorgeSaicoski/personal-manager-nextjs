@@ -62,6 +62,23 @@
   }
 }
 
+.accountButton {
+  background-color: #4a6f82;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-family: 'Shadows Into Light', cursive;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background-color: #5a7a8f;
+    transform: scale(1.05);
+  }
+}
+
 .loading {
   font-family: 'Delius Swash Caps', cursive;
   font-size: 16px;
