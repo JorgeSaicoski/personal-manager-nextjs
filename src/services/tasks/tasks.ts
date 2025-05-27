@@ -62,8 +62,7 @@ export const getAllTasks = async (
     );
 
     if (!response.ok) {
-      console.log(response)
-      throw new Error(`Error fetching tasks: ${response.status}`);
+        throw new Error(`Error fetching tasks: ${response.status}`);
     }
 
     return await response.json();
@@ -88,7 +87,6 @@ export const getCompletedTasks = async (
         headers: getHeaders(),
       }
     );
-
     if (!response.ok) {
       throw new Error(`Error fetching tasks: ${response.status}`);
     }
