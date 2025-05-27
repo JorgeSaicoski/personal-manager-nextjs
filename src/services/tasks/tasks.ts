@@ -42,6 +42,21 @@ const getHeaders = (): Record<string, string> => {
   return headers;
 };
 
+// Helper function to handle auth errors
+const handleAuthError = (response: Response) => {
+  if (response.status === 401 || response.status === 403) {
+    console.error('Authentication error, redirecting to login...');
+    if (typeof window !== 'undefined') {
+      try {
+        const { login } = require('@/services/auth/keycloak');
+        login();
+      } catch (error) {
+        console.error('Error redirecting to login:', error);
+        window.location.href = '/';
+      }
+    }
+  }
+};
 
 /**
  * Fetch all tasks from the API
@@ -50,8 +65,6 @@ export const getAllTasks = async (
   page: number,
   pageSize: number
 ): Promise<PaginatedTasksResponse> => {
-  console.log("getAllTasks")
-  console.log(getHeaders())
   try {
     const response = await fetch(
       `${ENDPOINT}/tasks?page=${page}&pageSize=${pageSize}`,
@@ -62,7 +75,8 @@ export const getAllTasks = async (
     );
 
     if (!response.ok) {
-        throw new Error(`Error fetching tasks: ${response.status}`);
+      handleAuthError(response);
+      throw new Error(`Error fetching tasks: ${response.status}`);
     }
 
     return await response.json();
@@ -87,7 +101,9 @@ export const getCompletedTasks = async (
         headers: getHeaders(),
       }
     );
+
     if (!response.ok) {
+      handleAuthError(response);
       throw new Error(`Error fetching tasks: ${response.status}`);
     }
 
@@ -115,6 +131,7 @@ export const getNonCompletedTasks = async (
     );
 
     if (!response.ok) {
+      handleAuthError(response);
       throw new Error(`Error fetching tasks: ${response.status}`);
     }
 
@@ -124,6 +141,7 @@ export const getNonCompletedTasks = async (
     throw error;
   }
 };
+
 /**
  * Get a single task by ID
  */
@@ -135,6 +153,7 @@ export const getTaskById = async (id: string): Promise<Task> => {
     });
 
     if (!response.ok) {
+      handleAuthError(response);
       throw new Error(`Error fetching task: ${response.status}`);
     }
 
@@ -157,6 +176,7 @@ export const createTask = async (task: Task): Promise<Task> => {
     });
 
     if (!response.ok) {
+      handleAuthError(response);
       const errorData = await response.json().catch(() => ({}));
       throw new Error(
         errorData.error || `Error creating task: ${response.status}`
@@ -185,6 +205,7 @@ export const updateTask = async (
     });
 
     if (!response.ok) {
+      handleAuthError(response);
       throw new Error(`Error updating task: ${response.status}`);
     }
 
@@ -194,8 +215,6 @@ export const updateTask = async (
     throw error;
   }
 };
-
-// src/services/tasks/tasks.ts - Add these new functions
 
 /**
  * Delete multiple tasks by IDs
@@ -209,6 +228,7 @@ export const deleteSelectedTasks = async (taskIds: string[]): Promise<void> => {
     });
 
     if (!response.ok) {
+      handleAuthError(response);
       throw new Error(`Error deleting tasks: ${response.status}`);
     }
   } catch (error) {
@@ -228,6 +248,7 @@ export const deleteAllCompletedTasks = async (): Promise<void> => {
     });
 
     if (!response.ok) {
+      handleAuthError(response);
       throw new Error(`Error deleting completed tasks: ${response.status}`);
     }
   } catch (error) {
@@ -247,6 +268,7 @@ export const deleteAllNonCompletedTasks = async (): Promise<void> => {
     });
 
     if (!response.ok) {
+      handleAuthError(response);
       throw new Error(`Error deleting non-completed tasks: ${response.status}`);
     }
   } catch (error) {

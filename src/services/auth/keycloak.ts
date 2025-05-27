@@ -38,9 +38,11 @@ const login = () => {
   keycloakInstance.login();
 };
 
-// Logout function
+// Logout function - Fixed to properly redirect
 const logout = () => {
-  keycloakInstance.logout();
+  keycloakInstance.logout({
+    redirectUri: window.location.origin
+  });
 };
 
 // Get user profile
