@@ -1,0 +1,306 @@
+// Color Variables
+$primary-green: #05493b;
+$secondary-green: #183619;
+$accent-green: #9FBE5A;
+$light-green: #b5d772;
+$dark-green: #2f4f2f;
+
+$primary-text: #ffffff;
+$secondary-text: #e0e0e0;
+$muted-text: #b0b0b0;
+$dark-text: #333333;
+
+$paper-color: #f8f8f8;
+$card-shadow: rgba(0, 0, 0, 0.15);
+$hover-shadow: rgba(0, 0, 0, 0.25);
+
+// Spacing Variables
+$section-padding: 80px;
+$card-padding: 30px;
+$element-margin: 20px;
+
+.page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, $primary-green 0%, $secondary-green 100%);
+  color: $primary-text;
+  overflow-x: hidden;
+}
+
+.hero {
+  text-align: center;
+  padding: $section-padding 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .title {
+    font-family: 'Delius Swash Caps', cursive;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: $element-margin;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    color: $accent-green;
+  }
+
+  .subtitle {
+    font-family: 'Delius Swash Caps', cursive;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    margin-bottom: $element-margin * 2;
+    color: $secondary-text;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.4;
+  }
+
+  .cta {
+    margin-top: $element-margin * 2;
+    
+    button {
+      background: linear-gradient(45deg, $accent-green, $light-green);
+      color: $dark-text;
+      border: none;
+      border-radius: 30px;
+      padding: 15px 40px;
+      font-family: 'Delius Swash Caps', cursive;
+      font-size: 1.5rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px $card-shadow;
+      
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px $hover-shadow;
+        background: linear-gradient(45deg, $light-green, $accent-green);
+      }
+      
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
+}
+
+.features {
+  background: $paper-color;
+  color: $dark-text;
+  padding: $section-padding 20px;
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .sectionTitle {
+    font-family: 'Delius Swash Caps', cursive;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: $element-margin * 3;
+    color: $primary-green;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: $element-margin * 1.5;
+    margin-bottom: $element-margin * 2;
+  }
+  
+  .card {
+    background: white;
+    padding: $card-padding;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px $card-shadow;
+    transition: all 0.3s ease;
+    border-left: 5px solid $accent-green;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px $hover-shadow;
+    }
+    
+    .cardIcon {
+      font-size: 3rem;
+      margin-bottom: $element-margin;
+      color: $accent-green;
+    }
+    
+    .cardTitle {
+      font-family: 'Delius Swash Caps', cursive;
+      font-size: 1.5rem;
+      margin-bottom: $element-margin;
+      color: $primary-green;
+    }
+    
+    .cardText {
+      font-family: 'Delius Swash Caps', cursive;
+      font-size: 1.1rem;
+      line-height: 1.5;
+      color: $dark-text;
+    }
+  }
+}
+
+.technology {
+  background: linear-gradient(135deg, $accent-green 0%, $light-green 100%);
+  color: $dark-text;
+  padding: $section-padding 20px;
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .sectionTitle {
+    font-family: 'Delius Swash Caps', cursive;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: $element-margin * 3;
+    color: $primary-green;
+  }
+  
+  .techGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: $element-margin * 1.5;
+  }
+  
+  .techCard {
+    background: white;
+    padding: $card-padding;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px $card-shadow;
+    transition: all 0.3s ease;
+    border-top: 5px solid $primary-green;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px $hover-shadow;
+    }
+    
+    .techIcon {
+      font-size: 3rem;
+      margin-bottom: $element-margin;
+      color: $primary-green;
+    }
+    
+    .techTitle {
+      font-family: 'Delius Swash Caps', cursive;
+      font-size: 1.5rem;
+      margin-bottom: $element-margin;
+      color: $primary-green;
+    }
+    
+    .techText {
+      font-family: 'Delius Swash Caps', cursive;
+      font-size: 1.1rem;
+      line-height: 1.5;
+      color: $dark-text;
+    }
+  }
+}
+
+.about {
+  padding: $section-padding 20px;
+  background: linear-gradient(135deg, $dark-green 0%, $primary-green 100%);
+  
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .sectionTitle {
+    font-family: 'Delius Swash Caps', cursive;
+    font-size: 2.5rem;
+    margin-bottom: $element-margin * 2;
+    color: $accent-green;
+  }
+  
+  .aboutText {
+    font-family: 'Delius Swash Caps', cursive;
+    font-size: 1.3rem;
+    line-height: 1.6;
+    color: $secondary-text;
+    margin-bottom: $element-margin * 2;
+    
+    p {
+      margin-bottom: $element-margin;
+    }
+    
+    .highlight {
+      color: $accent-green;
+      font-weight: 600;
+    }
+  }
+  
+  .values {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: $element-margin;
+    margin-top: $element-margin * 2;
+    
+    .value {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      
+      .valueTitle {
+        font-family: 'Delius Swash Caps', cursive;
+        font-size: 1.2rem;
+        color: $accent-green;
+        margin-bottom: 10px;
+      }
+      
+      .valueText {
+        font-family: 'Delius Swash Caps', cursive;
+        font-size: 1rem;
+        color: $secondary-text;
+      }
+    }
+  }
+}
+
+.footer {
+  background: $secondary-green;
+  padding: 40px 20px;
+  text-align: center;
+  
+  .footerText {
+    font-family: 'Delius Swash Caps', cursive;
+    font-size: 1.1rem;
+    color: $muted-text;
+    
+    .brand {
+      color: $accent-green;
+      font-weight: 600;
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .hero {
+    padding: 60px 20px;
+    
+    .title {
+      font-size: 2.5rem;
+    }
+    
+    .subtitle {
+      font-size: 1.2rem;
+    }
+  }
+  
+  .features, .about, .technology {
+    padding: 60px 20px;
+  }
+  
+  .features .grid, .technology .techGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .about .values {
+    grid-template-columns: 1fr;
+  }
+}

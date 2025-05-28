@@ -4,7 +4,7 @@ import { useAuth } from "@/context/AuthContext";
 import styles from "./styles/Navbar.module.scss";
 
 const Navbar = () => {
-  const { authenticated, loading, fullName, login, logout } = useAuth();
+  const { authenticated, loading, fullName, username, login, logout } = useAuth();
 
   const handleManageAccount = () => {
     const keycloakUrl = process.env.NEXT_PUBLIC_KEYCLOAK_URL || "http://localhost:8080";
@@ -23,7 +23,7 @@ const Navbar = () => {
           <>
             <div className={styles.userInfo}>
               <span className={styles.welcome}>Welcome, </span>
-              <span className={styles.username}>{fullName}</span>
+              <span className={styles.username}>{fullName?fullName:username}</span>
             </div>
             <button className={styles.accountButton} onClick={handleManageAccount}>
               Manage Account

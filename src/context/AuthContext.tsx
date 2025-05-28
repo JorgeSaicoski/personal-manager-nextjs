@@ -12,7 +12,8 @@ import {
   isAuthenticated,
   login,
   logout,
-  getFullName, 
+  getFullName,
+  getUsername, 
   keycloakInstance
 } from "@/services/auth/keycloak";
 
@@ -21,6 +22,7 @@ interface AuthContextType {
   authenticated: boolean;
   loading: boolean;
   fullName: string;
+  username: string;
   login: () => void;
   logout: () => void;
 }
@@ -30,6 +32,7 @@ const AuthContext = createContext<AuthContextType>({
   authenticated: false,
   loading: true,
   fullName: "",
+  username: "",
   login: () => {},
   logout: () => {},
 });
@@ -42,6 +45,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [authenticated, setAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const [fullName, setFullName] = useState("");
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
     const initAuth = async () => {
@@ -51,6 +55,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         if (isAuthenticated()) {
           setAuthenticated(true);
           setFullName(getFullName());
+          setUsername(getUsername());
           
           // Set up token refresh and expiration handling
           keycloakInstance.onTokenExpired = () => {
@@ -68,6 +73,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 // Token refresh failed, redirect to login
                 setAuthenticated(false);
                 setFullName("");
+                setUsername("");
                 login();
               });
           };
@@ -77,6 +83,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             console.log('Authentication successful');
             setAuthenticated(true);
             setFullName(getFullName());
+            setUsername(getUsername());
           };
 
           // Set up auth error callback
@@ -84,6 +91,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             console.error('Authentication error:', error);
             setAuthenticated(false);
             setFullName("");
+            setUsername("");
           };
 
           // Set up auth logout callback
@@ -91,12 +99,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             console.log('User logged out');
             setAuthenticated(false);
             setFullName("");
+            setUsername("");
           };
         }
       } catch (error) {
         console.error("Auth initialization error", error);
         setAuthenticated(false);
         setFullName("");
+        setUsername("");
       } finally {
         setLoading(false);
       }
@@ -117,6 +127,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     authenticated,
     loading,
     fullName,
+    username,
     login,
     logout: () => {
       console.log('Logging out...');
