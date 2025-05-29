@@ -1,6 +1,22 @@
 @font-face {
-  font-family: 'Delius Swash Caps';
+  font-family: 'Delius Swash Caps'; 
   src: url('/fonts/DeliusSwashCaps-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Patrick Hand SC'; 
+  src: url('/fonts/PatrickHandSC-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Shadows Into Light'; 
+  src: url('/fonts/ShadowsIntoLight-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -28,10 +44,16 @@ body {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  
   font-family: 'Delius Swash Caps', cursive;
 }
 
-button, a{
+h1,h2,h3,h4,h5 {
+  font-family: 'Patrick Hand SC', cursive;
+}
+
+button, a {
+  font-family: 'Shadows Into Light', cursive;
   &:hover {
     cursor: pointer;
   }

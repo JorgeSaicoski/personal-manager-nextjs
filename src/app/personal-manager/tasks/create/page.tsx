@@ -94,7 +94,7 @@ export default function CreateTaskPage() {
           onClick={() => {}}
           disabled={isSubmitting}
         />
-        <button type="button" onClick={() => router.push("/tasks")}>
+        <button type="button" onClick={() => router.push("/personal-manager/tasks")}>
           Cancel
         </button>
         </fieldset>
