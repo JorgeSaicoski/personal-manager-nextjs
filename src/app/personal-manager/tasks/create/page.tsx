@@ -35,7 +35,7 @@ export default function CreateTaskPage() {
       });
 
       // Redirect to tasks list page after successful creation
-      router.push("/tasks");
+      router.push("/personal-manager/tasks");
     } catch (err) {
       console.error("Error creating task:", err);
       setError("Failed to create task. Please try again.");

@@ -26,7 +26,7 @@ const TasksList = ({
   const [returningTaskId, setReturningTaskId] = useState<string | null>(null);
 
   const handleClick = () => {
-    router.push("/tasks/create");
+    router.push("/personal-manager/tasks/create");
   };
 
   const handleTaskClick = (task: Task) => {
