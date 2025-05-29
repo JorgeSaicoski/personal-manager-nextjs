@@ -15,6 +15,36 @@
   height: 60px;
 }
 
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  
+  span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background-color: #9FBE5A;
+    transition: all 0.3s ease;
+  }
+  
+  &:hover span {
+    background-color: #b5d772;
+  }
+}
+
 .title {
   font-family: 'Delius Swash Caps', cursive;
   font-size: 28px;
@@ -26,6 +56,7 @@
   display: flex;
   align-items: center;
   gap: 15px;
+  position: relative;
 }
 
 .userInfo {
@@ -86,6 +117,76 @@
   animation: pulse 1.5s infinite;
 }
 
+// Mobile styles
+.mobileAuth {
+  position: relative;
+}
+
+.mobileMenuButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: white;
+  font-family: 'Delius Swash Caps', cursive;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 20px;
+  transition: background-color 0.3s ease;
+  
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .username {
+    font-size: 16px;
+    font-weight: 600;
+    color: #9FBE5A;
+  }
+  
+  .menuIcon {
+    font-size: 12px;
+    color: #9FBE5A;
+    transition: transform 0.3s ease;
+  }
+}
+
+.mobileDropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: rgba(25, 50, 40, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  min-width: 160px;
+  margin-top: 8px;
+  overflow: hidden;
+  
+  button {
+    display: block;
+    width: 100%;
+    padding: 12px 16px;
+    background: none;
+    border: none;
+    color: white;
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.3s ease;
+    
+    &:hover {
+      background-color: rgba(159, 190, 90, 0.2);
+    }
+    
+    &:first-child {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
 @keyframes pulse {
   0% {
     opacity: 0.6;
@@ -95,5 +196,29 @@
   }
   100% {
     opacity: 0.6;
+  }
+}
+
+// Mobile responsive adjustments
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px 15px;
+  }
+  
+  .title {
+    font-size: 24px;
+  }
+  
+  .userInfo {
+    display: none; // Hide desktop user info on mobile
+  }
+  
+  .accountButton {
+    display: none; // Hide desktop account button on mobile
+  }
+  
+  .authButton {
+    font-size: 16px;
+    padding: 6px 12px;
   }
 }
