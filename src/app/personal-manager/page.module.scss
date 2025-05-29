@@ -1,0 +1,89 @@
+.welcomeContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px;
+}
+
+.welcomeContent {
+  text-align: center;
+  max-width: 800px;
+  
+  h1 {
+    font-family: "Delius Swash Caps", cursive;
+    font-size: 3rem;
+    color: #9FBE5A;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  p {
+    font-family: "Delius Swash Caps", cursive;
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: 40px;
+  }
+}
+
+.serviceCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  
+  &:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.cardIcon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.card h3 {
+  font-family: "Delius Swash Caps", cursive;
+  font-size: 1.5rem;
+  color: #9FBE5A;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-family: "Shadows Into Light", cursive;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .welcomeContainer {
+    padding: 20px;
+  }
+  
+  .welcomeContent h1 {
+    font-size: 2.5rem;
+  }
+  
+  .welcomeContent p {
+    font-size: 1.3rem;
+  }
+  
+  .serviceCards {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}

@@ -1,0 +1,109 @@
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.sidebar {
+  width: 280px;
+  min-width: 280px;
+  background: linear-gradient(to bottom, #2c3e50, #34495e);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+.header {
+  padding: 30px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  
+  h2 {
+    font-family: "Delius Swash Caps", cursive;
+    font-size: 28px;
+    color: #9FBE5A;
+    margin: 0;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.navigation {
+  flex: 1;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 25px;
+  background: none;
+  border: none;
+  color: white;
+  font-family: "Shadows Into Light", cursive;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  border-left: 4px solid transparent;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-left-color: #9FBE5A;
+    transform: translateX(5px);
+  }
+  
+  &.active {
+    background: rgba(159, 190, 90, 0.2);
+    border-left-color: #9FBE5A;
+    color: #9FBE5A;
+    font-weight: bold;
+    
+    .icon {
+      transform: scale(1.2);
+    }
+  }
+}
+
+.icon {
+  font-size: 24px;
+  transition: transform 0.3s ease;
+  min-width: 30px;
+}
+
+.label {
+  flex: 1;
+}
+
+.content {
+  flex: 1;
+  background: linear-gradient(to bottom, #05493b, #183619);
+  overflow-y: auto;
+  position: relative;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .sidebar {
+    width: 240px;
+    min-width: 240px;
+  }
+  
+  .header h2 {
+    font-size: 24px;
+  }
+  
+  .navItem {
+    padding: 12px 20px;
+    font-size: 18px;
+  }
+  
+  .icon {
+    font-size: 20px;
+  }
+}
