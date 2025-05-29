@@ -7,7 +7,7 @@ export default function Home() {
   const router = useRouter();
 
   const handleGetStarted = () => {
-    router.push("/tasks");
+    router.push("/personal-manager");
   };
 
   return (
@@ -123,7 +123,7 @@ export default function Home() {
                 maintainable, and performant user interfaces.
               </p>
             </div>
-            
+
             <div className={styles.techCard}>
               <div className={styles.techIcon}>🌐</div>
               <h3 className={styles.techTitle}>NGINX Gateway</h3>
