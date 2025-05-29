@@ -17,7 +17,6 @@ import {
   keycloakInstance
 } from "@/services/auth/keycloak";
 
-// Simple auth context
 interface AuthContextType {
   authenticated: boolean;
   loading: boolean;
@@ -27,7 +26,6 @@ interface AuthContextType {
   logout: () => void;
 }
 
-// Create context with default values
 const AuthContext = createContext<AuthContextType>({
   authenticated: false,
   loading: true,
@@ -37,10 +35,8 @@ const AuthContext = createContext<AuthContextType>({
   logout: () => {},
 });
 
-// Hook to use the auth context
 export const useAuth = () => useContext(AuthContext);
 
-// Provider component
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [authenticated, setAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -50,14 +46,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const initAuth = async () => {
       try {
-        await initKeycloak();
+        const authenticated = await initKeycloak();
         
-        if (isAuthenticated()) {
+        if (authenticated) {
           setAuthenticated(true);
           setFullName(getFullName());
           setUsername(getUsername());
           
-          // Set up token refresh and expiration handling
           keycloakInstance.onTokenExpired = () => {
             console.log('Token expired, attempting refresh...');
             keycloakInstance.updateToken(30)
@@ -70,7 +65,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
               })
               .catch((error) => {
                 console.error('Failed to refresh token:', error);
-                // Token refresh failed, redirect to login
                 setAuthenticated(false);
                 setFullName("");
                 setUsername("");
@@ -78,7 +72,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
               });
           };
 
-          // Set up auth success callback
           keycloakInstance.onAuthSuccess = () => {
             console.log('Authentication successful');
             setAuthenticated(true);
@@ -86,7 +79,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             setUsername(getUsername());
           };
 
-          // Set up auth error callback
           keycloakInstance.onAuthError = (error) => {
             console.error('Authentication error:', error);
             setAuthenticated(false);
@@ -94,7 +86,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             setUsername("");
           };
 
-          // Set up auth logout callback
           keycloakInstance.onAuthLogout = () => {
             console.log('User logged out');
             setAuthenticated(false);
@@ -115,7 +106,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     initAuth();
 
     return () => {
-      // Clean up event handlers
       keycloakInstance.onTokenExpired = undefined;
       keycloakInstance.onAuthSuccess = undefined;
       keycloakInstance.onAuthError = undefined;

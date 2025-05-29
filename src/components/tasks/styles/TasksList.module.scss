@@ -97,12 +97,10 @@ $line-height: 40px;
 
     .formFieldTitle {
       @extend .formField;
-      font-family: "Delius Swash Caps", cursive;
       color: #2f8b1c;
     }
 
     .details {
-      font-family: "Delius Swash Caps", cursive;
       font-size: 18px;
       color: #e08183;
     }
@@ -202,12 +200,10 @@ $line-height: 40px;
 
 .formFieldTitle {
   @extend .formField;
-  font-family: "Delius Swash Caps", cursive;
   color: #2f8b1c;
 }
 
 .details {
-  font-family: "Delius Swash Caps", cursive;
   font-size: 18px;
   color: #e08183;
 }

@@ -12,16 +12,15 @@ const keycloakInstance = new Keycloak(keycloakConfig);
 
 // Function to initialize Keycloak
 const initKeycloak = () => {
-  const silentCheckUrl = window.location.origin + '/silent-check-sso.html';
-  
-  console.log('Silent check SSO URL:', silentCheckUrl);
-  
+  const silentCheckUrl = window.location.origin + "/silent-check-sso.html";
+
+  console.log("Silent check SSO URL:", silentCheckUrl);
+
   return keycloakInstance
     .init({
-      onLoad: "check-sso",
-      silentCheckSsoRedirectUri: silentCheckUrl,
+      onLoad: "login-required", // Only for protected pages
       checkLoginIframe: false,
-      enableLogging: true,
+      enableLogging: false, // Disable in production
     })
     .then((authenticated) => {
       console.log("Keycloak initialized, authenticated:", authenticated);
@@ -41,7 +40,7 @@ const login = () => {
 // Logout function - Fixed to properly redirect
 const logout = () => {
   keycloakInstance.logout({
-    redirectUri: window.location.origin
+    redirectUri: window.location.origin,
   });
 };
 
@@ -52,12 +51,12 @@ const getUserProfile = () => {
 
 // Get username
 const getUsername = () => {
-  return keycloakInstance.tokenParsed?.preferred_username || '';
+  return keycloakInstance.tokenParsed?.preferred_username || "";
 };
 
 // Get user's full name
 const getFullName = () => {
-  return keycloakInstance.tokenParsed?.name || '';
+  return keycloakInstance.tokenParsed?.name || "";
 };
 
 // Check if user has a specific role

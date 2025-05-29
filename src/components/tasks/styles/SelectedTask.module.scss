@@ -33,7 +33,6 @@ $paper-line: #94acd4;
   width: 100%;
   padding: 4px 25px 50px 25px;
   background: repeating-linear-gradient($paper-color, $paper-color 31px, $paper-line 31px, $paper-line 32px);
-  font-family: 'Shadows Into Light', cursive;
   line-height: 32px;
   outline: 0;
   height: 250px;
@@ -46,7 +45,6 @@ $paper-line: #94acd4;
   input, textarea, select {
     position: relative;
     line-height: 32px;
-    font-family: 'Shadows Into Light', cursive;
     font-size: 22px;
     border: none;
     margin: 0 10px;
@@ -136,7 +134,6 @@ $paper-line: #94acd4;
   justify-content: space-between;
   align-items: center;
   h2 {
-    font-family: "Shadows Into Light", cursive;
     font-size: 25px;
     font-weight: 500;
     margin: 0;
