@@ -1,7 +1,8 @@
 "use client";
 
+import Navbar from "@/components/Navbar";
 import PersonalManagerSidebar from "@/components/personal-manager/Sidebar";
-import AuthRoutes from "@/components/protected-routes/AuthRoutes";
+import { AuthProvider } from "@/context/AuthContext";
 
 export default function PersonalManagerLayout({
   children,
@@ -9,10 +10,10 @@ export default function PersonalManagerLayout({
   children: React.ReactNode;
 }) {
   return (
-    <AuthRoutes>
-      <PersonalManagerSidebar>
-        {children}
-      </PersonalManagerSidebar>
-    </AuthRoutes>
+    <AuthProvider>
+      <Navbar />
+
+      <PersonalManagerSidebar>{children}</PersonalManagerSidebar>
+    </AuthProvider>
   );
 }

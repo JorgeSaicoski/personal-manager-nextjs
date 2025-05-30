@@ -50,56 +50,58 @@ export default function CreateTaskPage() {
 
       <form className={styles.formPaper} onSubmit={handleSubmit}>
         <fieldset>
-        <div>
-          <label htmlFor="title">Title</label>
-          <input
-            id="title"
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="Task title"
-          />
-        </div>
+          <div>
+            <label htmlFor="title">Title</label>
+            <input
+              id="title"
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Task title"
+            />
+          </div>
 
-        <div>
-          <label htmlFor="description">Description</label>
-          <textarea
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            rows={3}
-            placeholder="Task description (optional)"
-          />
-        </div>
+          <div>
+            <label htmlFor="description">Description</label>
+            <textarea
+              id="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              rows={3}
+              placeholder="Task description (optional)"
+            />
+          </div>
 
-        <div>
-          <label htmlFor="status">Status</label>
-          <select
-            id="status"
-            value={status}
-            onChange={(e) =>
-              setStatus(
-                e.target.value as "pending" | "in-progress" | "completed"
-              )
-            }
+          <div>
+            <label htmlFor="status">Status</label>
+            <select
+              id="status"
+              value={status}
+              onChange={(e) =>
+                setStatus(
+                  e.target.value as "pending" | "in-progress" | "completed"
+                )
+              }
+            >
+              <option value="pending">Pending</option>
+              <option value="in-progress">In Progress</option>
+              <option value="completed">Completed</option>
+            </select>
+          </div>
+
+          <Button
+            text={isSubmitting ? "Creating..." : "Create Task"}
+            onClick={() => {}}
+            disabled={isSubmitting}
+          />
+          <button
+            type="button"
+            onClick={() => router.push("/personal-manager/tasks")}
           >
-            <option value="pending">Pending</option>
-            <option value="in-progress">In Progress</option>
-            <option value="completed">Completed</option>
-          </select>
-        </div>
-
-        <Button
-          text={isSubmitting ? "Creating..." : "Create Task"}
-          onClick={() => {}}
-          disabled={isSubmitting}
-        />
-        <button type="button" onClick={() => router.push("/personal-manager/tasks")}>
-          Cancel
-        </button>
+            Cancel
+          </button>
         </fieldset>
       </form>
-      
     </div>
   );
 }
