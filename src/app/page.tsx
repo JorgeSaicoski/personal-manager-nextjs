@@ -54,6 +54,26 @@ export default function Home() {
       performanceTitle: "Golang Performance",
       performanceText:
         "Go backend = lower resource usage, higher speed, lower server costs. Maximum efficiency.",
+      whatThisMeansTitle: "What This Means for You",
+      whatThisMeansSubtitle: "Simple explanations of our technical approach",
+      openSourceMeaning: "You own your code completely",
+      openSourceExplanation:
+        "No vendor lock-in. You can modify, extend, or hire any developer to work on your software. Complete ownership and freedom.",
+      customSoftwareMeaning: "Built exactly for your business needs",
+      customSoftwareExplanation:
+        "No paying for features you don't use. No workarounds. Software that fits your workflow like a glove.",
+      microservicesMeaning: "If one part breaks, everything else keeps working",
+      microservicesExplanation:
+        "Your business keeps running even if one component has issues. Updates happen without downtime. Maximum reliability.",
+      containersMeaning: "Runs the same everywhere",
+      containersExplanation:
+        "Works identically on your laptop, your server, or the cloud. Easy to move, backup, and scale up when you grow.",
+      keycloakMeaning: "Enterprise-level security you control",
+      keycloakExplanation:
+        "Bank-level authentication system. Your employees log in once and access everything. You control all security settings.",
+      golangMeaning: "Lower costs, higher performance",
+      golangExplanation:
+        "Uses less server resources than other technologies. Your software runs faster and costs less to operate long-term.",
       valuesTitle: "Our Values",
       absoluteTransparencyTitle: "🎯 Absolute Transparency",
       absoluteTransparencyText:
@@ -131,6 +151,28 @@ export default function Home() {
       performanceTitle: "Performance Golang",
       performanceText:
         "Backend em Go = menor uso de recursos, maior velocidade, menores custos de servidor. Eficiência máxima.",
+      whatThisMeansTitle: "O Que Isso Significa para Você",
+      whatThisMeansSubtitle: "Explicações simples da nossa abordagem técnica",
+      openSourceMeaning: "Você é dono do seu código completamente",
+      openSourceExplanation:
+        "Sem dependência de fornecedor. Você pode modificar, estender ou contratar qualquer desenvolvedor para trabalhar no seu software. Propriedade e liberdade completas.",
+      customSoftwareMeaning:
+        "Construído exatamente para as necessidades do seu negócio",
+      customSoftwareExplanation:
+        "Não paga por recursos que não usa. Sem gambiarras. Software que se encaixa no seu fluxo de trabalho como uma luva.",
+      microservicesMeaning:
+        "Se uma parte quebra, todo o resto continua funcionando",
+      microservicesExplanation:
+        "Seu negócio continua rodando mesmo se um componente tiver problemas. Atualizações acontecem sem parar o sistema. Máxima confiabilidade.",
+      containersMeaning: "Roda igual em qualquer lugar",
+      containersExplanation:
+        "Funciona identicamente no seu notebook, no seu servidor ou na nuvem. Fácil de mover, fazer backup e escalar quando você crescer.",
+      keycloakMeaning: "Segurança nível enterprise que você controla",
+      keycloakExplanation:
+        "Sistema de autenticação nível bancário. Seus funcionários fazem login uma vez e acessam tudo. Você controla todas as configurações de segurança.",
+      golangMeaning: "Menores custos, maior performance",
+      golangExplanation:
+        "Usa menos recursos do servidor que outras tecnologias. Seu software roda mais rápido e custa menos para operar a longo prazo.",
       valuesTitle: "Nossos Valores",
       absoluteTransparencyTitle: "🎯 Transparência Absoluta",
       absoluteTransparencyText:
@@ -328,6 +370,82 @@ export default function Home() {
             <div className={styles.techCard}>
               <h4>{t.giteaTitle}</h4>
               <p>{t.giteaText}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* What This Means for You Section */}
+      <section className={styles.whatThisMeans}>
+        <div className={styles.container}>
+          <h2 className={styles.sectionTitle}>{t.whatThisMeansTitle}</h2>
+          <p className={styles.sectionSubtitle}>{t.whatThisMeansSubtitle}</p>
+
+          <div className={styles.explanationsGrid}>
+            <div className={styles.explanationCard}>
+              <div className={styles.technicalTerm}>
+                <span className={styles.termIcon}>🔓</span>
+                <h4>100% Open Source</h4>
+              </div>
+              <div className={styles.businessMeaning}>
+                <h5>{t.openSourceMeaning}</h5>
+                <p>{t.openSourceExplanation}</p>
+              </div>
+            </div>
+
+            <div className={styles.explanationCard}>
+              <div className={styles.technicalTerm}>
+                <span className={styles.termIcon}>🏢</span>
+                <h4>Custom Software</h4>
+              </div>
+              <div className={styles.businessMeaning}>
+                <h5>{t.customSoftwareMeaning}</h5>
+                <p>{t.customSoftwareExplanation}</p>
+              </div>
+            </div>
+
+            <div className={styles.explanationCard}>
+              <div className={styles.technicalTerm}>
+                <span className={styles.termIcon}>🔧</span>
+                <h4>Microservices</h4>
+              </div>
+              <div className={styles.businessMeaning}>
+                <h5>{t.microservicesMeaning}</h5>
+                <p>{t.microservicesExplanation}</p>
+              </div>
+            </div>
+
+            <div className={styles.explanationCard}>
+              <div className={styles.technicalTerm}>
+                <span className={styles.termIcon}>🐳</span>
+                <h4>Containers & Docker</h4>
+              </div>
+              <div className={styles.businessMeaning}>
+                <h5>{t.containersMeaning}</h5>
+                <p>{t.containersExplanation}</p>
+              </div>
+            </div>
+
+            <div className={styles.explanationCard}>
+              <div className={styles.technicalTerm}>
+                <span className={styles.termIcon}>🔐</span>
+                <h4>Keycloak SSO</h4>
+              </div>
+              <div className={styles.businessMeaning}>
+                <h5>{t.keycloakMeaning}</h5>
+                <p>{t.keycloakExplanation}</p>
+              </div>
+            </div>
+
+            <div className={styles.explanationCard}>
+              <div className={styles.technicalTerm}>
+                <span className={styles.termIcon}>🚀</span>
+                <h4>Golang Performance</h4>
+              </div>
+              <div className={styles.businessMeaning}>
+                <h5>{t.golangMeaning}</h5>
+                <p>{t.golangExplanation}</p>
+              </div>
             </div>
           </div>
         </div>

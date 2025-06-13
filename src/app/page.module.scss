@@ -1,9 +1,10 @@
-// Color Variables
+// Color Variables - Updated to match logo
 $primary-green: #05493b;
 $secondary-green: #183619;
-$accent-green: #9FBE5A;
+$accent-green: #9fbe5a;
 $light-green: #b5d772;
 $dark-green: #2f4f2f;
+$logo-teal: #3cbccf; // New color from your logo
 
 $primary-text: #ffffff;
 $secondary-text: #e0e0e0;
@@ -31,8 +32,8 @@ $element-margin: 20px;
   position: fixed;
   top: 80px;
   right: 20px;
-  background: rgba(159, 190, 90, 0.9);
-  color: $dark-text;
+  background: rgba(60, 188, 207, 0.9); // Using logo teal
+  color: white;
   border: none;
   border-radius: 25px;
   padding: 10px 20px;
@@ -43,9 +44,9 @@ $element-margin: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   z-index: 1000;
   backdrop-filter: blur(10px);
-  
+
   &:hover {
-    background: rgba(181, 215, 114, 0.95);
+    background: rgba(60, 188, 207, 1);
     transform: scale(1.05);
   }
 }
@@ -55,16 +56,42 @@ $element-margin: 20px;
   padding: $section-padding 20px;
   max-width: 1200px;
   margin: 0 auto;
+  position: relative;
+
+  // Logo container
+  .logoContainer {
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .logoImage {
+      width: 300px;
+      height: auto;
+      max-width: 80vw;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
 
   .title {
     font-size: clamp(2.5rem, 5vw, 4rem);
     margin-bottom: $element-margin;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    color: $accent-green;
+    color: $logo-teal; // Updated to match logo
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 15px;
+
+    // Hide text when logo is present
+    &.withLogo {
+      display: none;
+    }
   }
 
   .birdEmoji {
@@ -84,9 +111,9 @@ $element-margin: 20px;
 
   .cta {
     margin-top: $element-margin * 2;
-    
+
     button {
-      background: linear-gradient(45deg, #e74c3c, #c0392b);
+      background: linear-gradient(45deg, $logo-teal, darken($logo-teal, 10%));
       color: white;
       border: none;
       border-radius: 30px;
@@ -96,13 +123,13 @@ $element-margin: 20px;
       cursor: pointer;
       transition: all 0.3s ease;
       box-shadow: 0 5px 15px $card-shadow;
-      
+
       &:hover {
         transform: translateY(-3px);
         box-shadow: 0 8px 25px $hover-shadow;
-        background: linear-gradient(45deg, #c0392b, #e74c3c);
+        background: linear-gradient(45deg, darken($logo-teal, 5%), $logo-teal);
       }
-      
+
       &:active {
         transform: translateY(0);
       }
@@ -111,8 +138,13 @@ $element-margin: 20px;
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .container {
@@ -125,47 +157,47 @@ $element-margin: 20px;
   background: white;
   color: $dark-text;
   padding: $section-padding 20px;
-  
+
   .sectionTitle {
     font-size: 2.5rem;
     text-align: center;
     margin-bottom: $element-margin;
     color: $primary-green;
   }
-  
+
   .sectionSubtitle {
     text-align: center;
     font-size: 1.2rem;
     color: #7f8c8d;
     margin-bottom: $element-margin * 3;
   }
-  
+
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: $element-margin * 1.5;
     margin-bottom: $element-margin * 2;
   }
-  
+
   .benefitCard {
     background: white;
     padding: $card-padding;
     border-radius: 10px;
     box-shadow: 0 4px 15px $card-shadow;
     transition: all 0.3s ease;
-    border-left: 4px solid #e74c3c;
-    
+    border-left: 4px solid $logo-teal; // Updated accent color
+
     &:hover {
       transform: translateY(-5px);
       box-shadow: 0 8px 25px $hover-shadow;
     }
-    
+
     h3 {
       font-size: 1.5rem;
       margin-bottom: $element-margin;
-      color: #e74c3c;
+      color: $logo-teal; // Updated accent color
     }
-    
+
     p {
       font-size: 1.1rem;
       line-height: 1.5;
@@ -178,28 +210,28 @@ $element-margin: 20px;
   background: #ecf0f1;
   color: $dark-text;
   padding: $section-padding 20px;
-  
+
   .sectionTitle {
     font-size: 2.5rem;
     text-align: center;
     margin-bottom: $element-margin;
     color: $primary-green;
   }
-  
+
   .sectionSubtitle {
     text-align: center;
     font-size: 1.2rem;
     color: #7f8c8d;
     margin-bottom: $element-margin * 3;
   }
-  
+
   .featuresGrid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: $element-margin * 1.5;
     margin-bottom: $element-margin * 2;
   }
-  
+
   .featureCard {
     background: white;
     padding: $card-padding;
@@ -207,23 +239,25 @@ $element-margin: 20px;
     box-shadow: 0 4px 15px $card-shadow;
     text-align: center;
     transition: all 0.3s ease;
-    
+    border-top: 3px solid $logo-teal; // Added logo color accent
+
     &:hover {
       transform: translateY(-5px);
       box-shadow: 0 8px 25px $hover-shadow;
+      border-top-color: darken($logo-teal, 10%);
     }
-    
+
     .featureIcon {
       font-size: 3rem;
       margin-bottom: $element-margin;
     }
-    
+
     h3 {
       color: $primary-green;
       margin-bottom: $element-margin;
       font-size: 1.4rem;
     }
-    
+
     p {
       font-size: 1.1rem;
       line-height: 1.5;
@@ -231,36 +265,139 @@ $element-margin: 20px;
     }
   }
 }
+.whatThisMeans {
+  background: white;
+  color: $dark-text;
+  padding: $section-padding 20px;
+  border-top: 3px solid $logo-teal;
+
+  .sectionTitle {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: $element-margin;
+    color: $primary-green;
+  }
+
+  .sectionSubtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    margin-bottom: $element-margin * 3;
+    font-style: italic;
+  }
+
+  .explanationsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: $element-margin * 2;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .explanationCard {
+    background: #f8f9fa;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border-left: 4px solid $logo-teal;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+      border-left-color: darken($logo-teal, 10%);
+    }
+  }
+
+  .technicalTerm {
+    background: linear-gradient(
+      135deg,
+      lighten($logo-teal, 45%) 0%,
+      lighten($logo-teal, 40%) 100%
+    );
+    padding: 1.5rem;
+    border-bottom: 2px solid rgba(60, 188, 207, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .termIcon {
+      font-size: 2rem;
+      background: $logo-teal;
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(60, 188, 207, 0.3);
+    }
+
+    h4 {
+      font-size: 1.3rem;
+      color: $primary-green;
+      margin: 0;
+      font-weight: 600;
+    }
+  }
+
+  .businessMeaning {
+    padding: 1.5rem;
+
+    h5 {
+      font-size: 1.2rem;
+      color: $logo-teal;
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #555;
+      margin: 0;
+    }
+  }
+}
 
 .values {
   background: white;
   padding: $section-padding 20px;
-  
+
   .sectionTitle {
     font-size: 2.5rem;
     text-align: center;
     margin-bottom: $element-margin * 3;
     color: $primary-green;
   }
-  
+
   .valuesGrid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: $element-margin * 1.5;
   }
-  
+
   .valueCard {
     padding: $card-padding;
-    border-left: 4px solid #27ae60;
+    border-left: 4px solid $logo-teal; // Updated to logo color
     background: #f8f9fa;
     border-radius: 5px;
-    
+    transition: all 0.3s ease;
+
+    &:hover {
+      border-left-color: darken($logo-teal, 10%);
+      background: lighten($logo-teal, 45%);
+    }
+
     h3 {
-      color: #27ae60;
+      color: $logo-teal; // Updated to logo color
       margin-bottom: $element-margin;
       font-size: 1.4rem;
     }
-    
+
     p {
       font-size: 1.1rem;
       line-height: 1.5;
@@ -273,38 +410,40 @@ $element-margin: 20px;
   background: $primary-green;
   color: white;
   padding: $section-padding 20px;
-  
+
   .sectionTitle {
     font-size: 2.5rem;
     text-align: center;
     margin-bottom: $element-margin * 3;
     color: white;
   }
-  
+
   .techGrid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: $element-margin * 1.5;
   }
-  
+
   .techCard {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(60, 188, 207, 0.1); // Using logo teal with transparency
     padding: 1.5rem;
     border-radius: 10px;
     text-align: center;
     transition: all 0.3s ease;
-    
+    border: 1px solid rgba(60, 188, 207, 0.3);
+
     &:hover {
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(60, 188, 207, 0.2);
       transform: translateY(-5px);
+      border-color: $logo-teal;
     }
-    
+
     h4 {
-      color: $accent-green;
+      color: $logo-teal; // Updated to logo color
       margin-bottom: $element-margin;
       font-size: 1.3rem;
     }
-    
+
     p {
       font-size: 1rem;
       line-height: 1.5;
@@ -314,16 +453,17 @@ $element-margin: 20px;
 }
 
 .finalCta {
-  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  background: linear-gradient(135deg, $logo-teal, darken($logo-teal, 15%));
   color: white;
   padding: $section-padding 20px;
   text-align: center;
-  
+
   h2 {
     font-size: 2.5rem;
     margin-bottom: $element-margin;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
   }
-  
+
   p {
     font-size: 1.2rem;
     margin-bottom: $element-margin * 2;
@@ -331,10 +471,10 @@ $element-margin: 20px;
     margin-left: auto;
     margin-right: auto;
   }
-  
+
   .ctaButton {
-    background: #e74c3c;
-    color: white;
+    background: white;
+    color: $logo-teal;
     border: none;
     border-radius: 30px;
     padding: 15px 40px;
@@ -344,14 +484,14 @@ $element-margin: 20px;
     transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     margin-bottom: $element-margin;
-    
+
     &:hover {
-      background: #c0392b;
+      background: lighten($logo-teal, 45%);
       transform: translateY(-3px);
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
     }
   }
-  
+
   .ctaSubtext {
     font-size: 1rem;
     opacity: 0.9;
@@ -364,13 +504,13 @@ $element-margin: 20px;
   color: white;
   padding: 2rem 20px;
   text-align: center;
-  
+
   .footerText {
     font-size: 1.1rem;
     color: $muted-text;
     margin-bottom: 0.5rem;
   }
-  
+
   .footerSubtext {
     font-size: 1rem;
     opacity: 0.8;
@@ -389,38 +529,61 @@ $element-margin: 20px;
 
   .hero {
     padding: 60px 20px;
-    
+
+    .logoContainer .logoImage {
+      width: 250px;
+    }
+
     .title {
       font-size: 2.5rem;
       flex-direction: column;
       gap: 10px;
     }
-    
+
     .subtitle {
       font-size: 1.2rem;
     }
   }
-  
-  .benefits, .solution, .values, .technology {
+
+  .benefits,
+  .solution,
+  .values,
+  .technology {
     padding: 60px 20px;
   }
-  
-  .benefits .grid, 
-  .solution .featuresGrid, 
-  .values .valuesGrid, 
+
+  .benefits .grid,
+  .solution .featuresGrid,
+  .values .valuesGrid,
   .technology .techGrid {
     grid-template-columns: 1fr;
   }
-  
+
   .sectionTitle {
     font-size: 2rem !important;
   }
-  
+
   .finalCta {
     padding: 60px 20px;
-    
+
     h2 {
       font-size: 2rem;
     }
+  }
+  .benefits,
+  .solution,
+  .whatThisMeans,
+  .values,
+  .technology {
+    padding: 60px 20px;
+  }
+
+  .whatThisMeans .explanationsGrid {
+    grid-template-columns: 1fr;
+    gap: $element-margin * 1.5;
+  }
+
+  .whatThisMeans .explanationCard {
+    min-width: auto;
   }
 }
