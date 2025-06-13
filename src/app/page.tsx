@@ -2,81 +2,293 @@
 
 import styles from "./page.module.scss";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function Home() {
   const router = useRouter();
+  const [isPortuguese, setIsPortuguese] = useState(false);
 
   const handleGetStarted = () => {
     router.push("/personal-manager");
   };
 
+  const toggleLanguage = () => {
+    setIsPortuguese(!isPortuguese);
+  };
+
+  const content = {
+    en: {
+      birdEmoji: "🐦",
+      title: "Sarkis.dev",
+      tagline: "Like the Southern Lapwing, protecting your digital offspring",
+      ctaButton: "Access Personal Manager Free",
+      benefitsTitle: "Smart Technology for Your Business",
+      benefitsSubtitle:
+        "We develop efficient solutions that grow with your business",
+      economyTitle: "💰 Smart Economy",
+      economyText:
+        "We analyze your real needs and develop solutions with the best cost-benefit. Every dollar invested generates value.",
+      flexibilityTitle: "🔧 Total Flexibility",
+      flexibilityText:
+        "Custom software for your business. Changed your mind? Want new functionality? We adapt quickly.",
+      controlTitle: "🎯 Complete Control",
+      controlText:
+        "You have full access to the code and can decide how and where to host. Your company, your rules, your decisions.",
+      solutionTitle: "Our Solution: Real Digital Independence",
+      solutionSubtitle: "Custom software, open source and with fair costs",
+      personalManagerTitle: "Personal Manager Free",
+      personalManagerText:
+        "Complete control of your life: finances, tasks, studies, calendar. Completely free for personal use.",
+      corporateTitle: "Custom Corporate Software",
+      corporateText:
+        "We develop exactly what your company needs. No unnecessary features, focus on what generates value.",
+      hostingTitle: "Efficient Hosting",
+      hostingText:
+        "Local deployment or economic providers (Hetzner, DigitalOcean). We choose the best option for your budget.",
+      openSourceTitle: "100% Open Source",
+      openSourceText:
+        "All code is yours. Complete access via self-hosted Gitea. Want to modify? Want to hire another developer? No problem.",
+      transparencyTitle: "Total Transparency",
+      transparencyText:
+        "Employees know exactly what data is collected and can deny access. Privacy always respected.",
+      performanceTitle: "Golang Performance",
+      performanceText:
+        "Go backend = lower resource usage, higher speed, lower server costs. Maximum efficiency.",
+      valuesTitle: "Our Values",
+      absoluteTransparencyTitle: "🎯 Absolute Transparency",
+      absoluteTransparencyText:
+        "You know exactly how your software works, how much it costs and where your data is. No fine print, no tricks.",
+      smartEconomyTitle: "💰 Smart Economy",
+      smartEconomyText:
+        "We analyze each case individually to find the most efficient solution. Conscious investment in technology.",
+      openSourceFirstTitle: "🌱 Open Source First",
+      openSourceFirstText:
+        "We believe in free software. We use open technologies and make our code available. Knowledge should be shared.",
+      digitalProtectionTitle: "🛡️ Digital Protection",
+      digitalProtectionText:
+        "Like the Southern Lapwing protects its offspring, we protect your data, your money and your technological independence.",
+      techStackTitle: "Technology Stack",
+      golangTitle: "🚀 Golang Backend",
+      golangText:
+        "Maximum performance, low resource consumption, minimal server costs.",
+      keycloakTitle: "🔐 Keycloak SSO",
+      keycloakText:
+        "Enterprise authentication, self-hosted, no third-party dependencies.",
+      containersTitle: "🐳 Containers",
+      containersText:
+        "Docker/Podman for consistent deployment in any environment.",
+      reactTitle: "⚛️ React/Next.js",
+      reactText: "Modern frontend, TypeScript, responsive and fast interfaces.",
+      nginxTitle: "🌐 NGINX Gateway",
+      nginxText:
+        "Efficient reverse proxy, automatic SSL, load balancing across microservices.",
+      giteaTitle: "📁 Gitea Self-Hosted",
+      giteaText:
+        "Your code, your server, your control. Independent Git hosting.",
+      finalCtaTitle: "Ready for Your Digital Independence?",
+      finalCtaText:
+        "Start free with our Personal Manager and discover what it's like to have complete control of your technology.",
+      finalCtaButton: "Test Personal Manager Free",
+      finalCtaSubtext: "100% free • Open Source • Immediate browser access",
+      footerText: "© 2024 Sarkis.dev - Protecting your digital offspring",
+      footerSubtext: "Developed in Uruguay 🇺🇾 • Gaucho Heart 💙",
+    },
+    pt: {
+      birdEmoji: "🐦",
+      title: "Sarkis.dev",
+      tagline: "Como o quero-quero, protegemos suas crias digitais",
+      ctaButton: "Acesse Personal Manager Grátis",
+      benefitsTitle: "Tecnologia Inteligente para sua Empresa",
+      benefitsSubtitle:
+        "Desenvolvemos soluções eficientes que crescem com seu negócio",
+      economyTitle: "💰 Economia Inteligente",
+      economyText:
+        "Analisamos sua necessidade real e desenvolvemos soluções com o melhor custo-benefício. Cada real investido gera valor.",
+      flexibilityTitle: "🔧 Flexibilidade Total",
+      flexibilityText:
+        "Software feito sob medida para seu negócio. Mudou de ideia? Quer nova funcionalidade? Adaptamos rapidamente.",
+      controlTitle: "🎯 Controle Completo",
+      controlText:
+        "Você tem acesso total ao código e pode decidir como e onde hospedar. Sua empresa, suas regras, suas decisões.",
+      solutionTitle: "Nossa Solução: Independência Digital Real",
+      solutionSubtitle:
+        "Software personalizado, open source e com custos justos",
+      personalManagerTitle: "Personal Manager Gratuito",
+      personalManagerText:
+        "Controle total da sua vida: finanças, tarefas, estudos, calendário. Completamente grátis para uso pessoal.",
+      corporateTitle: "Software Corporativo Sob Medida",
+      corporateText:
+        "Desenvolvemos exatamente o que sua empresa precisa. Sem funcionalidades desnecessárias, foco no que gera valor.",
+      hostingTitle: "Hospedagem Eficiente",
+      hostingText:
+        "Deploy local ou em provedores econômicos (Hetzner, DigitalOcean). Escolhemos a melhor opção para seu orçamento.",
+      openSourceTitle: "100% Open Source",
+      openSourceText:
+        "Todo código é seu. Acesso completo via Gitea self-hosted. Quer modificar? Quer contratar outro desenvolvedor? Sem problemas.",
+      transparencyTitle: "Transparência Total",
+      transparencyText:
+        "Funcionários sabem exatamente quais dados são coletados e podem negar acesso. Privacidade respeitada sempre.",
+      performanceTitle: "Performance Golang",
+      performanceText:
+        "Backend em Go = menor uso de recursos, maior velocidade, menores custos de servidor. Eficiência máxima.",
+      valuesTitle: "Nossos Valores",
+      absoluteTransparencyTitle: "🎯 Transparência Absoluta",
+      absoluteTransparencyText:
+        "Você sabe exatamente como seu software funciona, quanto custa e onde seus dados estão. Sem letras miúdas, sem pegadinhas.",
+      smartEconomyTitle: "💰 Economia Inteligente",
+      smartEconomyText:
+        "Analisamos cada caso individualmente para encontrar a solução mais eficiente. Investimento consciente em tecnologia.",
+      openSourceFirstTitle: "🌱 Open Source First",
+      openSourceFirstText:
+        "Acreditamos em software livre. Usamos tecnologias abertas e disponibilizamos nosso código. Conhecimento deve ser compartilhado.",
+      digitalProtectionTitle: "🛡️ Proteção Digital",
+      digitalProtectionText:
+        "Como o quero-quero protege suas crias, protegemos seus dados, seu dinheiro e sua independência tecnológica.",
+      techStackTitle: "Stack Tecnológico",
+      golangTitle: "🚀 Golang Backend",
+      golangText:
+        "Performance máxima, baixo consumo de recursos, custos mínimos de servidor.",
+      keycloakTitle: "🔐 Keycloak SSO",
+      keycloakText:
+        "Autenticação enterprise, self-hosted, sem dependência de terceiros.",
+      containersTitle: "🐳 Containers",
+      containersText:
+        "Docker/Podman para deploy consistente em qualquer ambiente.",
+      reactTitle: "⚛️ React/Next.js",
+      reactText:
+        "Frontend moderno, TypeScript, interfaces responsivas e rápidas.",
+      nginxTitle: "🌐 NGINX Gateway",
+      nginxText: "Proxy reverso eficiente, SSL automático, load balancing.",
+      giteaTitle: "📁 Gitea Self-Hosted",
+      giteaText:
+        "Seu código, seu servidor, seu controle. Git hosting independente.",
+      finalCtaTitle: "Pronto para sua Independência Digital?",
+      finalCtaText:
+        "Comece gratuitamente com nosso Personal Manager e descubra como é ter controle total da sua tecnologia.",
+      finalCtaButton: "Teste Personal Manager Grátis",
+      finalCtaSubtext:
+        "100% gratuito • Open Source • Acesso imediato no navegador",
+      footerText: "© 2024 Sarkis.dev - Protegendo suas crias digitais",
+      footerSubtext: "Desenvolvido no Uruguai 🇺🇾 • Coração Gaúcho 💙",
+    },
+  };
+
+  const t = content[isPortuguese ? "pt" : "en"];
+
   return (
     <div className={styles.page}>
+      {/* Language Toggle */}
+      <button className={styles.languageToggle} onClick={toggleLanguage}>
+        {isPortuguese ? "🇺🇸 English" : "🇧🇷 Português"}
+      </button>
+
       {/* Hero Section */}
       <section className={styles.hero}>
-        <h1 className={styles.title}>Sarkis.dev</h1>
-        <p className={styles.subtitle}>
-          Smart Development & Deployment Solutions for Small and Medium
-          Companies
-        </p>
+        <h1 className={styles.title}>
+          <span className={styles.birdEmoji}>{t.birdEmoji}</span>
+          {t.title}
+        </h1>
+        <p className={styles.subtitle}>{t.tagline}</p>
         <div className={styles.cta}>
-          <button onClick={handleGetStarted}>
-            Get Started with Personal Manager
-          </button>
+          <button onClick={handleGetStarted}>{t.ctaButton}</button>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className={styles.features}>
+      {/* Benefits Section */}
+      <section className={styles.benefits}>
         <div className={styles.container}>
-          <h2 className={styles.sectionTitle}>Personal Manager Features</h2>
+          <h2 className={styles.sectionTitle}>{t.benefitsTitle}</h2>
+          <p className={styles.sectionSubtitle}>{t.benefitsSubtitle}</p>
+
           <div className={styles.grid}>
-            <div className={styles.card}>
-              <div className={styles.cardIcon}>📋</div>
-              <h3 className={styles.cardTitle}>Task Management</h3>
-              <p className={styles.cardText}>
-                Organize your work efficiently with our intuitive task
-                management system. Track progress, set priorities, and never
-                miss a deadline.
-              </p>
+            <div className={styles.benefitCard}>
+              <h3>{t.economyTitle}</h3>
+              <p>{t.economyText}</p>
             </div>
 
-            <div className={styles.card}>
-              <div className={styles.cardIcon}>📚</div>
-              <h3 className={styles.cardTitle}>Study Organization</h3>
-              <p className={styles.cardText}>
-                Plan your learning journey with structured study schedules,
-                progress tracking, and goal management for continuous
-                improvement.
-              </p>
+            <div className={styles.benefitCard}>
+              <h3>{t.flexibilityTitle}</h3>
+              <p>{t.flexibilityText}</p>
             </div>
 
-            <div className={styles.card}>
-              <div className={styles.cardIcon}>💰</div>
-              <h3 className={styles.cardTitle}>Finance Tracking</h3>
-              <p className={styles.cardText}>
-                Keep your personal and business finances organized with expense
-                tracking, budget planning, and financial insights.
-              </p>
+            <div className={styles.benefitCard}>
+              <h3>{t.controlTitle}</h3>
+              <p>{t.controlText}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Solution Section */}
+      <section className={styles.solution}>
+        <div className={styles.container}>
+          <h2 className={styles.sectionTitle}>{t.solutionTitle}</h2>
+          <p className={styles.sectionSubtitle}>{t.solutionSubtitle}</p>
+
+          <div className={styles.featuresGrid}>
+            <div className={styles.featureCard}>
+              <div className={styles.featureIcon}>📊</div>
+              <h3>{t.personalManagerTitle}</h3>
+              <p>{t.personalManagerText}</p>
             </div>
 
-            <div className={styles.card}>
-              <div className={styles.cardIcon}>📅</div>
-              <h3 className={styles.cardTitle}>Calendar Integration</h3>
-              <p className={styles.cardText}>
-                Sync all your activities in one place. Manage appointments,
-                deadlines, and events with our comprehensive calendar system.
-              </p>
+            <div className={styles.featureCard}>
+              <div className={styles.featureIcon}>🏢</div>
+              <h3>{t.corporateTitle}</h3>
+              <p>{t.corporateText}</p>
             </div>
 
-            <div className={styles.card}>
-              <div className={styles.cardIcon}>🔐</div>
-              <h3 className={styles.cardTitle}>Enterprise Security</h3>
-              <p className={styles.cardText}>
-                Built with Keycloak SSO for enterprise-grade authentication.
-                Secure user management, role-based access, and seamless login
-                experience.
-              </p>
+            <div className={styles.featureCard}>
+              <div className={styles.featureIcon}>💾</div>
+              <h3>{t.hostingTitle}</h3>
+              <p>{t.hostingText}</p>
+            </div>
+
+            <div className={styles.featureCard}>
+              <div className={styles.featureIcon}>🔓</div>
+              <h3>{t.openSourceTitle}</h3>
+              <p>{t.openSourceText}</p>
+            </div>
+
+            <div className={styles.featureCard}>
+              <div className={styles.featureIcon}>🛡️</div>
+              <h3>{t.transparencyTitle}</h3>
+              <p>{t.transparencyText}</p>
+            </div>
+
+            <div className={styles.featureCard}>
+              <div className={styles.featureIcon}>⚡</div>
+              <h3>{t.performanceTitle}</h3>
+              <p>{t.performanceText}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Values Section */}
+      <section className={styles.values}>
+        <div className={styles.container}>
+          <h2 className={styles.sectionTitle}>{t.valuesTitle}</h2>
+
+          <div className={styles.valuesGrid}>
+            <div className={styles.valueCard}>
+              <h3>{t.absoluteTransparencyTitle}</h3>
+              <p>{t.absoluteTransparencyText}</p>
+            </div>
+
+            <div className={styles.valueCard}>
+              <h3>{t.smartEconomyTitle}</h3>
+              <p>{t.smartEconomyText}</p>
+            </div>
+
+            <div className={styles.valueCard}>
+              <h3>{t.openSourceFirstTitle}</h3>
+              <p>{t.openSourceFirstText}</p>
+            </div>
+
+            <div className={styles.valueCard}>
+              <h3>{t.digitalProtectionTitle}</h3>
+              <p>{t.digitalProtectionText}</p>
             </div>
           </div>
         </div>
@@ -85,128 +297,58 @@ export default function Home() {
       {/* Technology Section */}
       <section className={styles.technology}>
         <div className={styles.container}>
-          <h2 className={styles.sectionTitle}>Our Technology Stack</h2>
+          <h2 className={styles.sectionTitle}>{t.techStackTitle}</h2>
+
           <div className={styles.techGrid}>
             <div className={styles.techCard}>
-              <div className={styles.techIcon}>⚡</div>
-              <h3 className={styles.techTitle}>Golang Backend</h3>
-              <p className={styles.techText}>
-                High-performance, efficient backend services that reduce server
-                costs and provide lightning-fast response times.
-              </p>
+              <h4>{t.golangTitle}</h4>
+              <p>{t.golangText}</p>
             </div>
 
             <div className={styles.techCard}>
-              <div className={styles.techIcon}>🔐</div>
-              <h3 className={styles.techTitle}>Keycloak SSO</h3>
-              <p className={styles.techText}>
-                Enterprise-grade authentication and authorization. Single
-                sign-on, user federation, and identity management for secure
-                applications.
-              </p>
+              <h4>{t.keycloakTitle}</h4>
+              <p>{t.keycloakText}</p>
             </div>
 
             <div className={styles.techCard}>
-              <div className={styles.techIcon}>🐳</div>
-              <h3 className={styles.techTitle}>Container Deployment</h3>
-              <p className={styles.techText}>
-                Docker/Podman containerization for consistent deployments across
-                development, staging, and production environments.
-              </p>
+              <h4>{t.containersTitle}</h4>
+              <p>{t.containersText}</p>
             </div>
 
             <div className={styles.techCard}>
-              <div className={styles.techIcon}>🚀</div>
-              <h3 className={styles.techTitle}>Modern Frontend</h3>
-              <p className={styles.techText}>
-                React/Next.js applications with TypeScript for type-safe,
-                maintainable, and performant user interfaces.
-              </p>
+              <h4>{t.reactTitle}</h4>
+              <p>{t.reactText}</p>
             </div>
 
             <div className={styles.techCard}>
-              <div className={styles.techIcon}>🌐</div>
-              <h3 className={styles.techTitle}>NGINX Gateway</h3>
-              <p className={styles.techText}>
-                High-performance reverse proxy and API gateway for efficient
-                request routing, load balancing, and SSL termination across
-                microservices.
-              </p>
+              <h4>{t.nginxTitle}</h4>
+              <p>{t.nginxText}</p>
+            </div>
+
+            <div className={styles.techCard}>
+              <h4>{t.giteaTitle}</h4>
+              <p>{t.giteaText}</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section className={styles.about}>
+      {/* Final CTA Section */}
+      <section className={styles.finalCta}>
         <div className={styles.container}>
-          <h2 className={styles.sectionTitle}>About Sarkis.dev</h2>
-          <div className={styles.aboutText}>
-            <p>
-              We specialize in{" "}
-              <span className={styles.highlight}>
-                development and deployment solutions
-              </span>
-              tailored for small and medium companies. Our mission is to provide
-              efficient, cost-effective technology solutions that scale with
-              your business.
-            </p>
-
-            <p>
-              We believe that{" "}
-              <span className={styles.highlight}>
-                serverless isn't made for every company
-              </span>
-              . High costs can burden growing businesses, so we focus on local
-              deployments for internal software and VM/dedicated server rentals
-              with providers like Hetzner and DigitalOcean for public-facing
-              applications.
-            </p>
-
-            <p>
-              Using{" "}
-              <span className={styles.highlight}>
-                Golang for backend development
-              </span>
-              , we deliver high-performance applications that reduce operational
-              costs while maintaining reliability and scalability.
-            </p>
-          </div>
-
-          <div className={styles.values}>
-            <div className={styles.value}>
-              <h4 className={styles.valueTitle}>Open Source First</h4>
-              <p className={styles.valueText}>
-                We work with open source technologies and only close software
-                when companies require specific security measures.
-              </p>
-            </div>
-
-            <div className={styles.value}>
-              <h4 className={styles.valueTitle}>Cost Optimization</h4>
-              <p className={styles.valueText}>
-                We study each case individually to provide the best approach
-                with minimal costs for maximum efficiency.
-              </p>
-            </div>
-
-            <div className={styles.value}>
-              <h4 className={styles.valueTitle}>Performance Focus</h4>
-              <p className={styles.valueText}>
-                High-performance solutions built with modern technologies like
-                Go to ensure your applications run smoothly.
-              </p>
-            </div>
-          </div>
+          <h2>{t.finalCtaTitle}</h2>
+          <p>{t.finalCtaText}</p>
+          <button className={styles.ctaButton} onClick={handleGetStarted}>
+            {t.finalCtaButton}
+          </button>
+          <p className={styles.ctaSubtext}>{t.finalCtaSubtext}</p>
         </div>
       </section>
 
       {/* Footer */}
       <footer className={styles.footer}>
-        <div className={styles.footerText}>
-          Built with ❤️ by <span className={styles.brand}>Sarkis.dev</span> -
-          Smart solutions for growing companies
-        </div>
+        <div className={styles.footerText}>{t.footerText}</div>
+        <div className={styles.footerSubtext}>{t.footerSubtext}</div>
       </footer>
     </div>
   );

@@ -24,6 +24,30 @@ $element-margin: 20px;
   background: linear-gradient(135deg, $primary-green 0%, $secondary-green 100%);
   color: $primary-text;
   overflow-x: hidden;
+  position: relative;
+}
+
+.languageToggle {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  background: rgba(159, 190, 90, 0.9);
+  color: $dark-text;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  
+  &:hover {
+    background: rgba(181, 215, 114, 0.95);
+    transform: scale(1.05);
+  }
 }
 
 .hero {
@@ -37,6 +61,15 @@ $element-margin: 20px;
     margin-bottom: $element-margin;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     color: $accent-green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .birdEmoji {
+    font-size: 1.2em;
+    animation: float 3s ease-in-out infinite;
   }
 
   .subtitle {
@@ -53,8 +86,8 @@ $element-margin: 20px;
     margin-top: $element-margin * 2;
     
     button {
-      background: linear-gradient(45deg, $accent-green, $light-green);
-      color: $dark-text;
+      background: linear-gradient(45deg, #e74c3c, #c0392b);
+      color: white;
       border: none;
       border-radius: 30px;
       padding: 15px 40px;
@@ -67,7 +100,7 @@ $element-margin: 20px;
       &:hover {
         transform: translateY(-3px);
         box-shadow: 0 8px 25px $hover-shadow;
-        background: linear-gradient(45deg, $light-green, $accent-green);
+        background: linear-gradient(45deg, #c0392b, #e74c3c);
       }
       
       &:active {
@@ -77,15 +110,131 @@ $element-margin: 20px;
   }
 }
 
-.features {
-  background: $paper-color;
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.benefits {
+  background: white;
   color: $dark-text;
   padding: $section-padding 20px;
   
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
+  .sectionTitle {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: $element-margin;
+    color: $primary-green;
   }
+  
+  .sectionSubtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    margin-bottom: $element-margin * 3;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: $element-margin * 1.5;
+    margin-bottom: $element-margin * 2;
+  }
+  
+  .benefitCard {
+    background: white;
+    padding: $card-padding;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px $card-shadow;
+    transition: all 0.3s ease;
+    border-left: 4px solid #e74c3c;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px $hover-shadow;
+    }
+    
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: $element-margin;
+      color: #e74c3c;
+    }
+    
+    p {
+      font-size: 1.1rem;
+      line-height: 1.5;
+      color: $dark-text;
+    }
+  }
+}
+
+.solution {
+  background: #ecf0f1;
+  color: $dark-text;
+  padding: $section-padding 20px;
+  
+  .sectionTitle {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: $element-margin;
+    color: $primary-green;
+  }
+  
+  .sectionSubtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    margin-bottom: $element-margin * 3;
+  }
+  
+  .featuresGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: $element-margin * 1.5;
+    margin-bottom: $element-margin * 2;
+  }
+  
+  .featureCard {
+    background: white;
+    padding: $card-padding;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px $card-shadow;
+    text-align: center;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px $hover-shadow;
+    }
+    
+    .featureIcon {
+      font-size: 3rem;
+      margin-bottom: $element-margin;
+    }
+    
+    h3 {
+      color: $primary-green;
+      margin-bottom: $element-margin;
+      font-size: 1.4rem;
+    }
+    
+    p {
+      font-size: 1.1rem;
+      line-height: 1.5;
+      color: $dark-text;
+    }
+  }
+}
+
+.values {
+  background: white;
+  padding: $section-padding 20px;
   
   .sectionTitle {
     font-size: 2.5rem;
@@ -94,39 +243,25 @@ $element-margin: 20px;
     color: $primary-green;
   }
   
-  .grid {
+  .valuesGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: $element-margin * 1.5;
-    margin-bottom: $element-margin * 2;
   }
   
-  .card {
-    background: white;
+  .valueCard {
     padding: $card-padding;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px $card-shadow;
-    transition: all 0.3s ease;
-    border-left: 5px solid $accent-green;
+    border-left: 4px solid #27ae60;
+    background: #f8f9fa;
+    border-radius: 5px;
     
-    &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px $hover-shadow;
-    }
-    
-    .cardIcon {
-      font-size: 3rem;
+    h3 {
+      color: #27ae60;
       margin-bottom: $element-margin;
-      color: $accent-green;
+      font-size: 1.4rem;
     }
     
-    .cardTitle {
-      font-size: 1.5rem;
-      margin-bottom: $element-margin;
-      color: $primary-green;
-    }
-    
-    .cardText {
+    p {
       font-size: 1.1rem;
       line-height: 1.5;
       color: $dark-text;
@@ -135,142 +270,130 @@ $element-margin: 20px;
 }
 
 .technology {
-  background: linear-gradient(135deg, $accent-green 0%, $light-green 100%);
-  color: $dark-text;
+  background: $primary-green;
+  color: white;
   padding: $section-padding 20px;
-  
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
   
   .sectionTitle {
     font-size: 2.5rem;
     text-align: center;
     margin-bottom: $element-margin * 3;
-    color: $primary-green;
+    color: white;
   }
   
   .techGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: $element-margin * 1.5;
   }
   
   .techCard {
-    background: white;
-    padding: $card-padding;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px $card-shadow;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
     transition: all 0.3s ease;
-    border-top: 5px solid $primary-green;
     
     &:hover {
+      background: rgba(255, 255, 255, 0.15);
       transform: translateY(-5px);
-      box-shadow: 0 10px 30px $hover-shadow;
     }
     
-    .techIcon {
-      font-size: 3rem;
+    h4 {
+      color: $accent-green;
       margin-bottom: $element-margin;
-      color: $primary-green;
+      font-size: 1.3rem;
     }
     
-    .techTitle {
-      font-size: 1.5rem;
-      margin-bottom: $element-margin;
-      color: $primary-green;
-    }
-    
-    .techText {
-      font-size: 1.1rem;
+    p {
+      font-size: 1rem;
       line-height: 1.5;
-      color: $dark-text;
+      color: rgba(255, 255, 255, 0.9);
     }
   }
 }
 
-.about {
+.finalCta {
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  color: white;
   padding: $section-padding 20px;
-  background: linear-gradient(135deg, $dark-green 0%, $primary-green 100%);
+  text-align: center;
   
-  .container {
-    max-width: 1000px;
-    margin: 0 auto;
-    text-align: center;
-  }
-  
-  .sectionTitle {
+  h2 {
     font-size: 2.5rem;
-    margin-bottom: $element-margin * 2;
-    color: $accent-green;
+    margin-bottom: $element-margin;
   }
   
-  .aboutText {
+  p {
+    font-size: 1.2rem;
+    margin-bottom: $element-margin * 2;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .ctaButton {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 15px 40px;
     font-size: 1.3rem;
-    line-height: 1.6;
-    color: $secondary-text;
-    margin-bottom: $element-margin * 2;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    margin-bottom: $element-margin;
     
-    p {
-      margin-bottom: $element-margin;
-    }
-    
-    .highlight {
-      color: $accent-green;
-      font-weight: 600;
+    &:hover {
+      background: #c0392b;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
     }
   }
   
-  .values {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: $element-margin;
-    margin-top: $element-margin * 2;
-    
-    .value {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 20px;
-      border-radius: 10px;
-      backdrop-filter: blur(10px);
-      
-      .valueTitle {
-        font-size: 1.2rem;
-        color: $accent-green;
-        margin-bottom: 10px;
-      }
-      
-      .valueText {
-        font-size: 1rem;
-        color: $secondary-text;
-      }
-    }
+  .ctaSubtext {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin: 0;
   }
 }
 
 .footer {
-  background: $secondary-green;
-  padding: 40px 20px;
+  background: #34495e;
+  color: white;
+  padding: 2rem 20px;
   text-align: center;
   
   .footerText {
     font-size: 1.1rem;
     color: $muted-text;
-    
-    .brand {
-      color: $accent-green;
-      font-weight: 600;
-    }
+    margin-bottom: 0.5rem;
+  }
+  
+  .footerSubtext {
+    font-size: 1rem;
+    opacity: 0.8;
+    color: rgba(255, 255, 255, 0.7);
   }
 }
 
 // Responsive Design
 @media (max-width: 768px) {
+  .languageToggle {
+    top: 70px;
+    right: 15px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+
   .hero {
     padding: 60px 20px;
     
     .title {
       font-size: 2.5rem;
+      flex-direction: column;
+      gap: 10px;
     }
     
     .subtitle {
@@ -278,15 +401,26 @@ $element-margin: 20px;
     }
   }
   
-  .features, .about, .technology {
+  .benefits, .solution, .values, .technology {
     padding: 60px 20px;
   }
   
-  .features .grid, .technology .techGrid {
+  .benefits .grid, 
+  .solution .featuresGrid, 
+  .values .valuesGrid, 
+  .technology .techGrid {
     grid-template-columns: 1fr;
   }
   
-  .about .values {
-    grid-template-columns: 1fr;
+  .sectionTitle {
+    font-size: 2rem !important;
+  }
+  
+  .finalCta {
+    padding: 60px 20px;
+    
+    h2 {
+      font-size: 2rem;
+    }
   }
 }
