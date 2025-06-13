@@ -12,101 +12,46 @@ export default function Home() {
     router.push("/personal-manager");
   };
 
+  const handleViewServices = () => {
+    router.push("/services");
+  };
+
   const toggleLanguage = () => {
     setIsPortuguese(!isPortuguese);
   };
 
+  /**
+   * Content translations for the homepage
+   * Organized by sections for better maintainability
+   */
   const content = {
     en: {
+      // === HEADER SECTION ===
       birdEmoji: "🐦",
       title: "Sarkis.dev",
       tagline: "Like the Southern Lapwing, protecting your digital offspring",
+
+      // === MAIN CTA BUTTONS ===
       ctaButton: "Access Personal Manager Free",
+
+      // === BENEFITS SECTION ===
       benefitsTitle: "Smart Technology for Your Business",
       benefitsSubtitle:
         "We develop efficient solutions that grow with your business",
+
       economyTitle: "💰 Smart Economy",
       economyText:
         "We analyze your real needs and develop solutions with the best cost-benefit. Every dollar invested generates value.",
+
       flexibilityTitle: "🔧 Total Flexibility",
       flexibilityText:
         "Custom software for your business. Changed your mind? Want new functionality? We adapt quickly.",
+
       controlTitle: "🎯 Complete Control",
       controlText:
         "You have full access to the code and can decide how and where to host. Your company, your rules, your decisions.",
-      corporateTitle: "Custom Corporate Software",
-      corporateText:
-        "We develop exactly what your company needs. No unnecessary features, focus on what generates value.",
-      hostingTitle: "Efficient Hosting",
-      hostingText:
-        "Local deployment or economic providers (Hetzner, DigitalOcean). We choose the best option for your budget.",
-      openSourceTitle: "100% Open Source",
-      openSourceText:
-        "All code is yours. Complete access via self-hosted Gitea. Want to modify? Want to hire another developer? No problem.",
-      transparencyTitle: "Total Transparency",
-      transparencyText:
-        "Employees know exactly what data is collected and can deny access. Privacy always respected.",
-      performanceTitle: "Golang Performance",
-      performanceText:
-        "Go backend = lower resource usage, higher speed, lower server costs. Maximum efficiency.",
-      whatThisMeansTitle: "What This Means for You",
-      whatThisMeansSubtitle: "Simple explanations of our technical approach",
-      openSourceMeaning: "You own your code completely",
-      openSourceExplanation:
-        "No vendor lock-in. You can modify, extend, or hire any developer to work on your software. Complete ownership and freedom.",
-      customSoftwareMeaning: "Built exactly for your business needs",
-      customSoftwareExplanation:
-        "No paying for features you don't use. No workarounds. Software that fits your workflow like a glove.",
-      microservicesMeaning: "If one part breaks, everything else keeps working",
-      microservicesExplanation:
-        "Your business keeps running even if one component has issues. Updates happen without downtime. Maximum reliability.",
-      containersMeaning: "Runs the same everywhere",
-      containersExplanation:
-        "Works identically on your laptop, your server, or the cloud. Easy to move, backup, and scale up when you grow.",
-      keycloakMeaning: "Enterprise-level security you control",
-      keycloakExplanation:
-        "Bank-level authentication system. Your employees log in once and access everything. You control all security settings.",
-      golangMeaning: "Lower costs, higher performance",
-      golangExplanation:
-        "Uses less server resources than other technologies. Your software runs faster and costs less to operate long-term.",
-      valuesTitle: "Our Values",
-      absoluteTransparencyTitle: "🎯 Absolute Transparency",
-      absoluteTransparencyText:
-        "You know exactly how your software works, how much it costs and where your data is. No fine print, no tricks.",
-      smartEconomyTitle: "💰 Smart Economy",
-      smartEconomyText:
-        "We analyze each case individually to find the most efficient solution. Conscious investment in technology.",
-      openSourceFirstTitle: "🌱 Open Source First",
-      openSourceFirstText:
-        "We believe in free software. We use open technologies and make our code available. Knowledge should be shared.",
-      digitalProtectionTitle: "🛡️ Digital Protection",
-      digitalProtectionText:
-        "Like the Southern Lapwing protects its offspring, we protect your data, your money and your technological independence.",
-      techStackTitle: "Technology Stack",
-      golangTitle: "🚀 Golang Backend",
-      golangText:
-        "Maximum performance, low resource consumption, minimal server costs.",
-      keycloakTitle: "🔐 Keycloak SSO",
-      keycloakText:
-        "Enterprise authentication, self-hosted, no third-party dependencies.",
-      containersTitle: "🐳 Containers",
-      containersText:
-        "Docker/Podman for consistent deployment in any environment.",
-      reactTitle: "⚛️ React/Next.js",
-      reactText: "Modern frontend, TypeScript, responsive and fast interfaces.",
-      nginxTitle: "🌐 NGINX Gateway",
-      nginxText:
-        "Efficient reverse proxy, automatic SSL, load balancing across microservices.",
-      giteaTitle: "📁 Gitea Self-Hosted",
-      giteaText:
-        "Your code, your server, your control. Independent Git hosting.",
-      finalCtaTitle: "Ready for Your Digital Independence?",
-      finalCtaText:
-        "Start free with our Personal Manager and discover what it's like to have complete control of your technology.",
-      finalCtaButton: "Test Personal Manager Free",
-      finalCtaSubtext: "100% free • Open Source • Immediate browser access",
-      footerText: "© 2024 Sarkis.dev - Protecting your digital offspring",
-      footerSubtext: "Developed in Uruguay 🇺🇾 • Gaucho Heart 💙",
+
+      // === SOLUTION SECTION ===
       solutionTitle: "Our Solution: Collaborative Digital Independence",
       solutionSubtitle:
         "Choose your development model - private ownership or shared ecosystem",
@@ -115,14 +60,62 @@ export default function Home() {
       personalManagerText:
         "Complete life control: finances, tasks, studies, calendar. Free forever for personal use. The foundation that powers our business solutions.",
 
-      corporateExtensionTitle: "Extend Personal Manager",
-      corporateExtensionText:
-        "Add your business features to our proven foundation. Choose: pay development costs for private ownership, or pay only maintenance and share with the ecosystem.",
+      corporateTitle: "Custom Corporate Software",
+      corporateText:
+        "We develop exactly what your company needs. No unnecessary features, focus on what generates value.",
 
-      customSoftwareTitle: "Fully Custom Software",
-      customSoftwareText:
-        "Need something completely different? We build from scratch. 100% yours, exactly what your business needs.",
+      hostingTitle: "Efficient Hosting",
+      hostingText:
+        "Local deployment or economic providers (Hetzner, DigitalOcean). We choose the best option for your budget.",
 
+      openSourceTitle: "100% Open Source",
+      openSourceText:
+        "All code is yours. Complete access via self-hosted Gitea. Want to modify? Want to hire another developer? No problem.",
+
+      transparencyTitle: "Total Transparency",
+      transparencyText:
+        "Employees know exactly what data is collected and can deny access. Privacy always respected.",
+
+      performanceTitle: "Golang Performance",
+      performanceText:
+        "Go backend = lower resource usage, higher speed, lower server costs. Maximum efficiency.",
+
+      // === SERVICES SECTION ===
+      servicesTitle: "Ways to Work with Us",
+      servicesSubtitle:
+        "From personal solutions to enterprise software - choose what fits your needs",
+      servicesDesc:
+        "We offer flexible solutions for every stage of your digital journey. Start free with Personal Manager or get custom enterprise software.",
+      servicesButton: "Explore All Services",
+
+      servicesPersonalTitle: "Personal Use",
+      servicesPersonalDesc: "Free Personal Manager for life",
+      servicesPersonalFeatures: [
+        "Task management",
+        "Finance tracking",
+        "Calendar",
+        "100% free forever",
+      ],
+
+      servicesBusinessTitle: "Business Solutions",
+      servicesBusinessDesc: "Custom software for your company",
+      servicesBusinessFeatures: [
+        "Full code ownership",
+        "Custom development",
+        "Deployment consulting",
+        "Integration services",
+      ],
+
+      servicesExtensionTitle: "Extend Personal Manager",
+      servicesExtensionDesc: "Add business features to proven base",
+      servicesExtensionFeatures: [
+        "Team collaboration",
+        "E-commerce tools",
+        "Custom modules",
+        "Choose private or shared",
+      ],
+
+      // === DEVELOPMENT MODEL SECTION ===
       developmentModelTitle: "Two Development Paths for Your Business",
       developmentModelSubtitle:
         "You choose how to invest in your software development",
@@ -146,24 +139,129 @@ export default function Home() {
       collaborativeDevelopmentTitle: "🤝 Collaborative Development",
       collaborativeDevelopmentText:
         "Companies choose to share development costs and benefit from each other's investments, or keep features private. Your choice, your control.",
+
+      // === WHAT THIS MEANS SECTION ===
+      whatThisMeansTitle: "What This Means for You",
+      whatThisMeansSubtitle: "Simple explanations of our technical approach",
+
+      openSourceMeaning: "You own your code completely",
+      openSourceExplanation:
+        "No vendor lock-in. You can modify, extend, or hire any developer to work on your software. Complete ownership and freedom.",
+
+      customSoftwareMeaning: "Built exactly for your business needs",
+      customSoftwareExplanation:
+        "No paying for features you don't use. No workarounds. Software that fits your workflow like a glove.",
+
+      microservicesMeaning: "If one part breaks, everything else keeps working",
+      microservicesExplanation:
+        "Your business keeps running even if one component has issues. Updates happen without downtime. Maximum reliability.",
+
+      containersMeaning: "Runs the same everywhere",
+      containersExplanation:
+        "Works identically on your laptop, your server, or the cloud. Easy to move, backup, and scale up when you grow.",
+
+      keycloakMeaning: "Enterprise-level security you control",
+      keycloakExplanation:
+        "Bank-level authentication system. Your employees log in once and access everything. You control all security settings.",
+
+      golangMeaning: "Lower costs, higher performance",
+      golangExplanation:
+        "Uses less server resources than other technologies. Your software runs faster and costs less to operate long-term.",
+
+      // === VALUES SECTION ===
+      valuesTitle: "Our Values",
+
+      absoluteTransparencyTitle: "🎯 Absolute Transparency",
+      absoluteTransparencyText:
+        "You know exactly how your software works, how much it costs and where your data is. No fine print, no tricks.",
+
+      smartEconomyTitle: "💰 Smart Economy",
+      smartEconomyText:
+        "We analyze each case individually to find the most efficient solution. Conscious investment in technology.",
+
+      openSourceFirstTitle: "🌱 Open Source First",
+      openSourceFirstText:
+        "We believe in free software. We use open technologies and make our code available. Knowledge should be shared.",
+
+      digitalProtectionTitle: "🛡️ Digital Protection",
+      digitalProtectionText:
+        "Like the Southern Lapwing protects its offspring, we protect your data, your money and your technological independence.",
+      technicalMeritocracyTitle: "⚖️ Technical Meritocracy",
+      technicalMeritocracyText:
+        "Results over marketing promises. We measure success by efficiency and real outcomes, not contract size or feature quantity. Our solutions are built on proven competence, delivering exactly what your business needs without unnecessary complexity.",
+
+      continuousEducationTitle: "🎓 Continuous Education",
+      continuousEducationText:
+        "We teach as we build. Knowledge sharing is integral to our development process - through comprehensive documentation, mentoring, and clear explanations. An educated client is an independent and successful client.",
+
+      globalMindsetTitle: "🌍 Global Mindset",
+      globalMindsetText:
+        "International thinking with local execution. We bring world-class development standards to Latin America, understanding both global best practices and regional business realities. Solutions that work anywhere, built with local expertise.",
+
+      // === TECHNOLOGY STACK SECTION ===
+      techStackTitle: "Technology Stack",
+
+      golangTitle: "🚀 Golang Backend",
+      golangText:
+        "Maximum performance, low resource consumption, minimal server costs.",
+
+      keycloakTitle: "🔐 Keycloak SSO",
+      keycloakText:
+        "Enterprise authentication, self-hosted, no third-party dependencies.",
+
+      containersTitle: "🐳 Containers",
+      containersText:
+        "Docker/Podman for consistent deployment in any environment.",
+
+      reactTitle: "⚛️ React/Next.js",
+      reactText: "Modern frontend, TypeScript, responsive and fast interfaces.",
+
+      nginxTitle: "🌐 NGINX Gateway",
+      nginxText:
+        "Efficient reverse proxy, automatic SSL, load balancing across microservices.",
+
+      giteaTitle: "📁 Gitea Self-Hosted",
+      giteaText:
+        "Your code, your server, your control. Independent Git hosting.",
+
+      // === FINAL CTA SECTION ===
+      finalCtaTitle: "Ready for Your Digital Independence?",
+      finalCtaText:
+        "Start free with our Personal Manager and discover what it's like to have complete control of your technology.",
+      finalCtaButton: "Test Personal Manager Free",
+      finalCtaSubtext: "100% free • Open Source • Immediate browser access",
+
+      // === FOOTER ===
+      footerText: "© 2024 Sarkis.dev - Protecting your digital offspring",
+      footerSubtext: "Developed in Uruguay 🇺🇾 • Gaucho Heart 💙",
     },
     pt: {
+      // === HEADER SECTION ===
       birdEmoji: "🐦",
       title: "Sarkis.dev",
       tagline: "Como o quero-quero, protegemos suas crias digitais",
+
+      // === MAIN CTA BUTTONS ===
       ctaButton: "Acesse Personal Manager Grátis",
+
+      // === BENEFITS SECTION ===
       benefitsTitle: "Tecnologia Inteligente para sua Empresa",
       benefitsSubtitle:
         "Desenvolvemos soluções eficientes que crescem com seu negócio",
+
       economyTitle: "💰 Economia Inteligente",
       economyText:
         "Analisamos sua necessidade real e desenvolvemos soluções com o melhor custo-benefício. Cada real investido gera valor.",
+
       flexibilityTitle: "🔧 Flexibilidade Total",
       flexibilityText:
         "Software feito sob medida para seu negócio. Mudou de ideia? Quer nova funcionalidade? Adaptamos rapidamente.",
+
       controlTitle: "🎯 Controle Completo",
       controlText:
         "Você tem acesso total ao código e pode decidir como e onde hospedar. Sua empresa, suas regras, suas decisões.",
+
+      // === SOLUTION SECTION ===
       solutionTitle: "Nossa Solução: Independência Digital Colaborativa",
       solutionSubtitle:
         "Escolha seu modelo de desenvolvimento - propriedade privada ou ecossistema compartilhado",
@@ -172,14 +270,62 @@ export default function Home() {
       personalManagerText:
         "Controle total da vida: finanças, tarefas, estudos, calendário. Grátis para sempre para uso pessoal. A base que alimenta nossas soluções empresariais.",
 
-      corporateExtensionTitle: "Estenda o Personal Manager",
-      corporateExtensionText:
-        "Adicione funcionalidades empresariais à nossa base comprovada. Escolha: pague desenvolvimento para propriedade privada, ou pague só manutenção e compartilhe com o ecossistema.",
+      corporateTitle: "Software Corporativo Sob Medida",
+      corporateText:
+        "Desenvolvemos exatamente o que sua empresa precisa. Sem funcionalidades desnecessárias, foco no que gera valor.",
 
-      customSoftwareTitle: "Software Totalmente Customizado",
-      customSoftwareText:
-        "Precisa de algo completamente diferente? Construímos do zero. 100% seu, exatamente o que sua empresa precisa.",
+      hostingTitle: "Hospedagem Eficiente",
+      hostingText:
+        "Deploy local ou em provedores econômicos (Hetzner, DigitalOcean). Escolhemos a melhor opção para seu orçamento.",
 
+      openSourceTitle: "100% Open Source",
+      openSourceText:
+        "Todo código é seu. Acesso completo via Gitea self-hosted. Quer modificar? Quer contratar outro desenvolvedor? Sem problemas.",
+
+      transparencyTitle: "Transparência Total",
+      transparencyText:
+        "Funcionários sabem exatamente quais dados são coletados e podem negar acesso. Privacidade respeitada sempre.",
+
+      performanceTitle: "Performance Golang",
+      performanceText:
+        "Backend em Go = menor uso de recursos, maior velocidade, menores custos de servidor. Eficiência máxima.",
+
+      // === SERVICES SECTION ===
+      servicesTitle: "Formas de Trabalhar Conosco",
+      servicesSubtitle:
+        "De soluções pessoais a software empresarial - escolha o que se encaixa nas suas necessidades",
+      servicesDesc:
+        "Oferecemos soluções flexíveis para cada etapa da sua jornada digital. Comece grátis com o Personal Manager ou tenha software empresarial customizado.",
+      servicesButton: "Explorar Todos os Serviços",
+
+      servicesPersonalTitle: "Uso Pessoal",
+      servicesPersonalDesc: "Personal Manager gratuito para sempre",
+      servicesPersonalFeatures: [
+        "Gestão de tarefas",
+        "Controle financeiro",
+        "Calendário",
+        "100% gratuito para sempre",
+      ],
+
+      servicesBusinessTitle: "Soluções Empresariais",
+      servicesBusinessDesc: "Software customizado para sua empresa",
+      servicesBusinessFeatures: [
+        "Propriedade total do código",
+        "Desenvolvimento customizado",
+        "Consultoria de deployment",
+        "Serviços de integração",
+      ],
+
+      servicesExtensionTitle: "Estender Personal Manager",
+      servicesExtensionDesc: "Adicione recursos empresariais à base comprovada",
+      servicesExtensionFeatures: [
+        "Colaboração em equipe",
+        "Ferramentas e-commerce",
+        "Módulos customizados",
+        "Escolha privado ou compartilhado",
+      ],
+
+      // === DEVELOPMENT MODEL SECTION ===
       developmentModelTitle:
         "Dois Caminhos de Desenvolvimento para seu Negócio",
       developmentModelSubtitle:
@@ -193,7 +339,7 @@ export default function Home() {
       sharedEcosystemText:
         "Você paga apenas manutenção mensal. Desenvolvemos a funcionalidade e adicionamos ao ecossistema open source. Todos se beneficiam, custos são compartilhados.",
 
-      hostingModelTitle: "🖥️ Hosting & Infrastructure",
+      hostingModelTitle: "🖥️ Hosting & Infraestrutura",
       hostingModelText:
         "Personal Manager: Já deployado e mantido por nós. Software privado: Você escolhe sua hospedagem, oferecemos consultoria gratuita de deployment.",
 
@@ -204,80 +350,103 @@ export default function Home() {
       collaborativeDevelopmentTitle: "🤝 Desenvolvimento Colaborativo",
       collaborativeDevelopmentText:
         "Empresas escolhem compartilhar custos de desenvolvimento e se beneficiar dos investimentos umas das outras, ou manter funcionalidades privadas. Sua escolha, seu controle.",
-      corporateTitle: "Software Corporativo Sob Medida",
-      corporateText:
-        "Desenvolvemos exatamente o que sua empresa precisa. Sem funcionalidades desnecessárias, foco no que gera valor.",
-      hostingTitle: "Hospedagem Eficiente",
-      hostingText:
-        "Deploy local ou em provedores econômicos (Hetzner, DigitalOcean). Escolhemos a melhor opção para seu orçamento.",
-      openSourceTitle: "100% Open Source",
-      openSourceText:
-        "Todo código é seu. Acesso completo via Gitea self-hosted. Quer modificar? Quer contratar outro desenvolvedor? Sem problemas.",
-      transparencyTitle: "Transparência Total",
-      transparencyText:
-        "Funcionários sabem exatamente quais dados são coletados e podem negar acesso. Privacidade respeitada sempre.",
-      performanceTitle: "Performance Golang",
-      performanceText:
-        "Backend em Go = menor uso de recursos, maior velocidade, menores custos de servidor. Eficiência máxima.",
+
+      // === WHAT THIS MEANS SECTION ===
       whatThisMeansTitle: "O Que Isso Significa para Você",
       whatThisMeansSubtitle: "Explicações simples da nossa abordagem técnica",
+
       openSourceMeaning: "Você é dono do seu código completamente",
       openSourceExplanation:
         "Sem dependência de fornecedor. Você pode modificar, estender ou contratar qualquer desenvolvedor para trabalhar no seu software. Propriedade e liberdade completas.",
+
       customSoftwareMeaning:
         "Construído exatamente para as necessidades do seu negócio",
       customSoftwareExplanation:
         "Não paga por recursos que não usa. Sem gambiarras. Software que se encaixa no seu fluxo de trabalho como uma luva.",
+
       microservicesMeaning:
         "Se uma parte quebra, todo o resto continua funcionando",
       microservicesExplanation:
         "Seu negócio continua rodando mesmo se um componente tiver problemas. Atualizações acontecem sem parar o sistema. Máxima confiabilidade.",
+
       containersMeaning: "Roda igual em qualquer lugar",
       containersExplanation:
         "Funciona identicamente no seu notebook, no seu servidor ou na nuvem. Fácil de mover, fazer backup e escalar quando você crescer.",
+
       keycloakMeaning: "Segurança nível enterprise que você controla",
       keycloakExplanation:
         "Sistema de autenticação nível bancário. Seus funcionários fazem login uma vez e acessam tudo. Você controla todas as configurações de segurança.",
+
       golangMeaning: "Menores custos, maior performance",
       golangExplanation:
         "Usa menos recursos do servidor que outras tecnologias. Seu software roda mais rápido e custa menos para operar a longo prazo.",
+      technicalMeritocracyTitle: "⚖️ Meritocracia Técnica",
+      technicalMeritocracyText:
+        "Resultados acima de promessas de marketing. Medimos sucesso por eficiência e resultados reais, não por tamanho de contratos ou quantidade de funcionalidades. Nossas soluções são construídas com competência comprovada, entregando exatamente o que seu negócio precisa sem complexidade desnecessária.",
+
+      continuousEducationTitle: "🎓 Educação Contínua",
+      continuousEducationText:
+        "Ensinamos enquanto construímos. Compartilhamento de conhecimento é parte integral do nosso processo de desenvolvimento - através de documentação abrangente, mentoria e explicações claras. Um cliente educado é um cliente independente e bem-sucedido.",
+
+      globalMindsetTitle: "🌍 Mentalidade Global",
+      globalMindsetText:
+        "Pensamento internacional com execução local. Trazemos padrões de desenvolvimento mundial para a América Latina, entendendo tanto as melhores práticas globais quanto as realidades empresariais regionais. Soluções que funcionam em qualquer lugar, construídas com expertise local.",
+
+      // === VALUES SECTION ===
       valuesTitle: "Nossos Valores",
+
       absoluteTransparencyTitle: "🎯 Transparência Absoluta",
       absoluteTransparencyText:
         "Você sabe exatamente como seu software funciona, quanto custa e onde seus dados estão. Sem letras miúdas, sem pegadinhas.",
+
       smartEconomyTitle: "💰 Economia Inteligente",
       smartEconomyText:
         "Analisamos cada caso individualmente para encontrar a solução mais eficiente. Investimento consciente em tecnologia.",
+
       openSourceFirstTitle: "🌱 Open Source First",
       openSourceFirstText:
         "Acreditamos em software livre. Usamos tecnologias abertas e disponibilizamos nosso código. Conhecimento deve ser compartilhado.",
+
       digitalProtectionTitle: "🛡️ Proteção Digital",
       digitalProtectionText:
         "Como o quero-quero protege suas crias, protegemos seus dados, seu dinheiro e sua independência tecnológica.",
+
+      // === TECHNOLOGY STACK SECTION ===
       techStackTitle: "Stack Tecnológico",
+
       golangTitle: "🚀 Golang Backend",
       golangText:
         "Performance máxima, baixo consumo de recursos, custos mínimos de servidor.",
+
       keycloakTitle: "🔐 Keycloak SSO",
       keycloakText:
         "Autenticação enterprise, self-hosted, sem dependência de terceiros.",
+
       containersTitle: "🐳 Containers",
       containersText:
         "Docker/Podman para deploy consistente em qualquer ambiente.",
+
       reactTitle: "⚛️ React/Next.js",
       reactText:
         "Frontend moderno, TypeScript, interfaces responsivas e rápidas.",
+
       nginxTitle: "🌐 NGINX Gateway",
-      nginxText: "Proxy reverso eficiente, SSL automático, load balancing.",
+      nginxText:
+        "Proxy reverso eficiente, SSL automático, load balancing entre microserviços.",
+
       giteaTitle: "📁 Gitea Self-Hosted",
       giteaText:
         "Seu código, seu servidor, seu controle. Git hosting independente.",
+
+      // === FINAL CTA SECTION ===
       finalCtaTitle: "Pronto para sua Independência Digital?",
       finalCtaText:
         "Comece gratuitamente com nosso Personal Manager e descubra como é ter controle total da sua tecnologia.",
       finalCtaButton: "Teste Personal Manager Grátis",
       finalCtaSubtext:
         "100% gratuito • Open Source • Acesso imediato no navegador",
+
+      // === FOOTER ===
       footerText: "© 2024 Sarkis.dev - Protegendo suas crias digitais",
       footerSubtext: "Desenvolvido no Uruguai 🇺🇾 • Coração Gaúcho 💙",
     },
@@ -469,6 +638,20 @@ export default function Home() {
               <h3>{t.digitalProtectionTitle}</h3>
               <p>{t.digitalProtectionText}</p>
             </div>
+            <div className={styles.valueCard}>
+              <h3>{t.technicalMeritocracyTitle}</h3>
+              <p>{t.technicalMeritocracyText}</p>
+            </div>
+
+            <div className={styles.valueCard}>
+              <h3>{t.continuousEducationTitle}</h3>
+              <p>{t.continuousEducationText}</p>
+            </div>
+
+            <div className={styles.valueCard}>
+              <h3>{t.globalMindsetTitle}</h3>
+              <p>{t.globalMindsetText}</p>
+            </div>
           </div>
         </div>
       </section>
@@ -584,6 +767,76 @@ export default function Home() {
                 <p>{t.golangExplanation}</p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+      {/* Services Section */}
+      <section className={styles.servicesSection}>
+        <div className={styles.container}>
+          <h2 className={styles.sectionTitle}>{t.servicesTitle}</h2>
+          <p className={styles.sectionSubtitle}>{t.servicesSubtitle}</p>
+          <p className={styles.servicesDesc}>{t.servicesDesc}</p>
+
+          <div className={styles.servicesGrid}>
+            <div className={styles.serviceOption}>
+              <div className={styles.serviceIcon}>👤</div>
+              <h3>{t.servicesPersonalTitle}</h3>
+              <p>{t.servicesPersonalDesc}</p>
+              <ul className={styles.serviceFeatures}>
+                {t.servicesPersonalFeatures.map((feature, i) => (
+                  <li key={i}>{feature}</li>
+                ))}
+              </ul>
+              <button
+                onClick={handleGetStarted}
+                className={styles.serviceButton}
+              >
+                Try Free Now
+              </button>
+            </div>
+
+            <div className={styles.serviceOption}>
+              <div className={styles.serviceIcon}>🏢</div>
+              <h3>{t.servicesBusinessTitle}</h3>
+              <p>{t.servicesBusinessDesc}</p>
+              <ul className={styles.serviceFeatures}>
+                {t.servicesBusinessFeatures.map((feature, i) => (
+                  <li key={i}>{feature}</li>
+                ))}
+              </ul>
+              <button
+                onClick={handleViewServices}
+                className={styles.serviceButton}
+              >
+                Learn More
+              </button>
+            </div>
+
+            <div className={styles.serviceOption}>
+              <div className={styles.serviceIcon}>🔧</div>
+              <h3>{t.servicesExtensionTitle}</h3>
+              <p>{t.servicesExtensionDesc}</p>
+              <ul className={styles.serviceFeatures}>
+                {t.servicesExtensionFeatures.map((feature, i) => (
+                  <li key={i}>{feature}</li>
+                ))}
+              </ul>
+              <button
+                onClick={handleViewServices}
+                className={styles.serviceButton}
+              >
+                Explore Options
+              </button>
+            </div>
+          </div>
+
+          <div className={styles.servicesCtaCenter}>
+            <button
+              onClick={handleViewServices}
+              className={styles.allServicesButton}
+            >
+              {t.servicesButton}
+            </button>
           </div>
         </div>
       </section>

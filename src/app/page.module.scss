@@ -499,6 +499,150 @@ $element-margin: 20px;
   }
 }
 
+.servicesSection {
+  background: linear-gradient(135deg, lighten($logo-teal, 35%) 0%, lighten($logo-teal, 40%) 100%);
+  color: $dark-text;
+  padding: $section-padding 20px;
+
+  .sectionTitle {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: $element-margin;
+    color: $primary-green;
+  }
+
+  .sectionSubtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: darken($logo-teal, 20%);
+    margin-bottom: $element-margin;
+    font-weight: 600;
+  }
+
+  .servicesDesc {
+    text-align: center;
+    font-size: 1.1rem;
+    color: darken($logo-teal, 25%);
+    margin-bottom: $element-margin * 3;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+  }
+
+  .servicesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: $element-margin * 2;
+    margin-bottom: $element-margin * 3;
+  }
+
+  .serviceOption {
+    background: white;
+    padding: $card-padding;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(60, 188, 207, 0.15);
+    text-align: center;
+    transition: all 0.3s ease;
+    border-top: 4px solid $logo-teal;
+    position: relative;
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 30px rgba(60, 188, 207, 0.25);
+      border-top-color: $accent-green;
+    }
+
+    .serviceIcon {
+      font-size: 3rem;
+      margin-bottom: $element-margin;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      color: $primary-green;
+      margin-bottom: $element-margin;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: $element-margin;
+      line-height: 1.4;
+    }
+  }
+
+  .serviceFeatures {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 $element-margin * 1.5 0;
+    text-align: left;
+
+    li {
+      position: relative;
+      padding: 6px 0 6px 25px;
+      color: $dark-text;
+      font-size: 0.95rem;
+      line-height: 1.3;
+
+      &:before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: $logo-teal;
+        font-weight: bold;
+        font-size: 1.1rem;
+      }
+    }
+  }
+
+  .serviceButton {
+    background: $logo-teal;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+
+    &:hover {
+      background: darken($logo-teal, 10%);
+      transform: scale(1.02);
+    }
+  }
+
+  .servicesCtaCenter {
+    text-align: center;
+    margin-top: $element-margin * 2;
+  }
+
+  .allServicesButton {
+    background: linear-gradient(45deg, $primary-green, darken($primary-green, 10%));
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 15px 40px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(45deg, darken($primary-green, 5%), $primary-green);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
 .developmentModel {
   background: #f8f9fa;
   color: $dark-text;
