@@ -499,6 +499,144 @@ $element-margin: 20px;
   }
 }
 
+.developmentModel {
+  background: #f8f9fa;
+  color: $dark-text;
+  padding: $section-padding 20px;
+
+  .sectionTitle {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: $element-margin;
+    color: $primary-green;
+  }
+
+  .sectionSubtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    margin-bottom: $element-margin * 3;
+  }
+
+  .modelGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: $element-margin * 1.5;
+    margin-bottom: $element-margin * 3;
+  }
+
+  .modelCard {
+    background: white;
+    padding: $card-padding;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px $card-shadow;
+    text-align: center;
+    transition: all 0.3s ease;
+    border-top: 4px solid $logo-teal;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px $hover-shadow;
+    }
+
+    .modelIcon {
+      font-size: 3rem;
+      margin-bottom: $element-margin;
+    }
+
+    h3 {
+      color: $primary-green;
+      margin-bottom: $element-margin;
+      font-size: 1.4rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.5;
+      color: $dark-text;
+      margin-bottom: $element-margin;
+    }
+  }
+
+  .modelDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    
+    span {
+      padding: 6px 12px;
+      border-radius: 15px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      
+      &.cost {
+        background: lighten($logo-teal, 40%);
+        color: darken($logo-teal, 20%);
+      }
+      
+      &.ownership {
+        background: lighten($accent-green, 30%);
+        color: darken($accent-green, 30%);
+      }
+      
+      &.exclusivity {
+        background: lighten($primary-green, 50%);
+        color: $primary-green;
+      }
+    }
+  }
+
+  .exampleScenario {
+    background: white;
+    padding: $card-padding;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px $card-shadow;
+    border-left: 4px solid $logo-teal;
+
+    h4 {
+      color: $primary-green;
+      margin-bottom: $element-margin;
+      font-size: 1.3rem;
+    }
+
+    .scenarioOptions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: $element-margin;
+
+      .option {
+        padding: 15px;
+        border-radius: 8px;
+        background: #f8f9fa;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+
+        &:first-child {
+          border-color: rgba(231, 76, 60, 0.3);
+          
+          &:hover {
+            border-color: #e74c3c;
+            background: rgba(231, 76, 60, 0.05);
+          }
+        }
+
+        &:last-child {
+          border-color: rgba(46, 204, 113, 0.3);
+          
+          &:hover {
+            border-color: #2ecc71;
+            background: rgba(46, 204, 113, 0.05);
+          }
+        }
+
+        strong {
+          color: $logo-teal;
+        }
+      }
+    }
+  }
+}
+
 .footer {
   background: #34495e;
   color: white;
@@ -585,5 +723,14 @@ $element-margin: 20px;
 
   .whatThisMeans .explanationCard {
     min-width: auto;
+  }
+  .developmentModel {
+    .modelGrid {
+      grid-template-columns: 1fr;
+    }
+
+    .exampleScenario .scenarioOptions {
+      grid-template-columns: 1fr;
+    }
   }
 }

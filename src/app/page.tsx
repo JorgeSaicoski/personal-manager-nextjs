@@ -34,11 +34,6 @@ export default function Home() {
       controlTitle: "🎯 Complete Control",
       controlText:
         "You have full access to the code and can decide how and where to host. Your company, your rules, your decisions.",
-      solutionTitle: "Our Solution: Real Digital Independence",
-      solutionSubtitle: "Custom software, open source and with fair costs",
-      personalManagerTitle: "Personal Manager Free",
-      personalManagerText:
-        "Complete control of your life: finances, tasks, studies, calendar. Completely free for personal use.",
       corporateTitle: "Custom Corporate Software",
       corporateText:
         "We develop exactly what your company needs. No unnecessary features, focus on what generates value.",
@@ -112,6 +107,45 @@ export default function Home() {
       finalCtaSubtext: "100% free • Open Source • Immediate browser access",
       footerText: "© 2024 Sarkis.dev - Protecting your digital offspring",
       footerSubtext: "Developed in Uruguay 🇺🇾 • Gaucho Heart 💙",
+      solutionTitle: "Our Solution: Collaborative Digital Independence",
+      solutionSubtitle:
+        "Choose your development model - private ownership or shared ecosystem",
+
+      personalManagerTitle: "Free Personal Manager",
+      personalManagerText:
+        "Complete life control: finances, tasks, studies, calendar. Free forever for personal use. The foundation that powers our business solutions.",
+
+      corporateExtensionTitle: "Extend Personal Manager",
+      corporateExtensionText:
+        "Add your business features to our proven foundation. Choose: pay development costs for private ownership, or pay only maintenance and share with the ecosystem.",
+
+      customSoftwareTitle: "Fully Custom Software",
+      customSoftwareText:
+        "Need something completely different? We build from scratch. 100% yours, exactly what your business needs.",
+
+      developmentModelTitle: "Two Development Paths for Your Business",
+      developmentModelSubtitle:
+        "You choose how to invest in your software development",
+
+      privateOwnershipTitle: "🔒 Private Ownership",
+      privateOwnershipText:
+        "You pay full development costs. Code belongs 100% to your company. Feature stays exclusive to you. Perfect for competitive advantages.",
+
+      sharedEcosystemTitle: "🌱 Shared Ecosystem",
+      sharedEcosystemText:
+        "You pay only monthly maintenance. We develop the feature and add it to the open source ecosystem. Everyone benefits, costs are shared.",
+
+      hostingModelTitle: "🖥️ Hosting & Infrastructure",
+      hostingModelText:
+        "Personal Manager: Already deployed and maintained by us. Private software: You choose your hosting, we provide free deployment consultancy.",
+
+      transparentCostsTitle: "💰 Transparent Costs Always",
+      transparentCostsText:
+        "Whether private or shared, you know exactly what you're paying for: our costs + our profit. No hidden fees, no surprises.",
+
+      collaborativeDevelopmentTitle: "🤝 Collaborative Development",
+      collaborativeDevelopmentText:
+        "Companies choose to share development costs and benefit from each other's investments, or keep features private. Your choice, your control.",
     },
     pt: {
       birdEmoji: "🐦",
@@ -130,12 +164,46 @@ export default function Home() {
       controlTitle: "🎯 Controle Completo",
       controlText:
         "Você tem acesso total ao código e pode decidir como e onde hospedar. Sua empresa, suas regras, suas decisões.",
-      solutionTitle: "Nossa Solução: Independência Digital Real",
+      solutionTitle: "Nossa Solução: Independência Digital Colaborativa",
       solutionSubtitle:
-        "Software personalizado, open source e com custos justos",
+        "Escolha seu modelo de desenvolvimento - propriedade privada ou ecossistema compartilhado",
+
       personalManagerTitle: "Personal Manager Gratuito",
       personalManagerText:
-        "Controle total da sua vida: finanças, tarefas, estudos, calendário. Completamente grátis para uso pessoal.",
+        "Controle total da vida: finanças, tarefas, estudos, calendário. Grátis para sempre para uso pessoal. A base que alimenta nossas soluções empresariais.",
+
+      corporateExtensionTitle: "Estenda o Personal Manager",
+      corporateExtensionText:
+        "Adicione funcionalidades empresariais à nossa base comprovada. Escolha: pague desenvolvimento para propriedade privada, ou pague só manutenção e compartilhe com o ecossistema.",
+
+      customSoftwareTitle: "Software Totalmente Customizado",
+      customSoftwareText:
+        "Precisa de algo completamente diferente? Construímos do zero. 100% seu, exatamente o que sua empresa precisa.",
+
+      developmentModelTitle:
+        "Dois Caminhos de Desenvolvimento para seu Negócio",
+      developmentModelSubtitle:
+        "Você escolhe como investir no desenvolvimento do seu software",
+
+      privateOwnershipTitle: "🔒 Propriedade Privada",
+      privateOwnershipText:
+        "Você paga custos completos de desenvolvimento. Código pertence 100% à sua empresa. Funcionalidade fica exclusiva sua. Perfeito para vantagens competitivas.",
+
+      sharedEcosystemTitle: "🌱 Ecossistema Compartilhado",
+      sharedEcosystemText:
+        "Você paga apenas manutenção mensal. Desenvolvemos a funcionalidade e adicionamos ao ecossistema open source. Todos se beneficiam, custos são compartilhados.",
+
+      hostingModelTitle: "🖥️ Hosting & Infrastructure",
+      hostingModelText:
+        "Personal Manager: Já deployado e mantido por nós. Software privado: Você escolhe sua hospedagem, oferecemos consultoria gratuita de deployment.",
+
+      transparentCostsTitle: "💰 Custos Transparentes Sempre",
+      transparentCostsText:
+        "Seja privado ou compartilhado, você sabe exatamente pelo que está pagando: nossos custos + nosso lucro. Sem taxas ocultas, sem surpresas.",
+
+      collaborativeDevelopmentTitle: "🤝 Desenvolvimento Colaborativo",
+      collaborativeDevelopmentText:
+        "Empresas escolhem compartilhar custos de desenvolvimento e se beneficiar dos investimentos umas das outras, ou manter funcionalidades privadas. Sua escolha, seu controle.",
       corporateTitle: "Software Corporativo Sob Medida",
       corporateText:
         "Desenvolvemos exatamente o que sua empresa precisa. Sem funcionalidades desnecessárias, foco no que gera valor.",
@@ -302,6 +370,75 @@ export default function Home() {
               <div className={styles.featureIcon}>⚡</div>
               <h3>{t.performanceTitle}</h3>
               <p>{t.performanceText}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Development Model Section */}
+      <section className={styles.developmentModel}>
+        <div className={styles.container}>
+          <h2 className={styles.sectionTitle}>{t.developmentModelTitle}</h2>
+          <p className={styles.sectionSubtitle}>{t.developmentModelSubtitle}</p>
+
+          <div className={styles.modelGrid}>
+            <div className={styles.modelCard}>
+              <div className={styles.modelIcon}>🔒</div>
+              <h3>{t.privateOwnershipTitle}</h3>
+              <p>{t.privateOwnershipText}</p>
+              <div className={styles.modelDetails}>
+                <span className={styles.cost}>Full Development Cost</span>
+                <span className={styles.ownership}>100% Your Code</span>
+                <span className={styles.exclusivity}>Exclusive Feature</span>
+              </div>
+            </div>
+
+            <div className={styles.modelCard}>
+              <div className={styles.modelIcon}>🌱</div>
+              <h3>{t.sharedEcosystemTitle}</h3>
+              <p>{t.sharedEcosystemText}</p>
+              <div className={styles.modelDetails}>
+                <span className={styles.cost}>Maintenance Only</span>
+                <span className={styles.ownership}>Open Source</span>
+                <span className={styles.exclusivity}>Shared Benefit</span>
+              </div>
+            </div>
+
+            <div className={styles.modelCard}>
+              <div className={styles.modelIcon}>🖥️</div>
+              <h3>{t.hostingModelTitle}</h3>
+              <p>{t.hostingModelText}</p>
+              <div className={styles.modelDetails}>
+                <span className={styles.cost}>Personal: Hosted by Us</span>
+                <span className={styles.ownership}>Private: Your Choice</span>
+                <span className={styles.exclusivity}>Free Consultancy</span>
+              </div>
+            </div>
+
+            <div className={styles.modelCard}>
+              <div className={styles.modelIcon}>💰</div>
+              <h3>{t.transparentCostsTitle}</h3>
+              <p>{t.transparentCostsText}</p>
+              <div className={styles.modelDetails}>
+                <span className={styles.cost}>No Hidden Fees</span>
+                <span className={styles.ownership}>Clear Breakdown</span>
+                <span className={styles.exclusivity}>Your Decision</span>
+              </div>
+            </div>
+          </div>
+
+          <div className={styles.exampleScenario}>
+            <h4>Example: Company A wants employee time tracking</h4>
+            <div className={styles.scenarioOptions}>
+              <div className={styles.option}>
+                <strong>Private:</strong> Pay $5,000 development + hosting costs
+                → Feature belongs only to Company A, deployed on their
+                infrastructure
+              </div>
+              <div className={styles.option}>
+                <strong>Shared:</strong> Pay $200/month maintenance → We develop
+                it, everyone gets it, hosted on our infrastructure
+              </div>
             </div>
           </div>
         </div>
