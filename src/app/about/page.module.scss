@@ -1,0 +1,202 @@
+// Color Variables - Match your main site
+$primary-green: #05493b;
+$secondary-green: #183619;
+$accent-green: #9fbe5a;
+$light-green: #b5d772;
+$logo-teal: #3cbccf;
+
+$primary-text: #ffffff;
+$secondary-text: #e0e0e0;
+$dark-text: #333333;
+$card-shadow: rgba(0, 0, 0, 0.15);
+$hover-shadow: rgba(0, 0, 0, 0.25);
+
+$section-padding: 80px;
+$card-padding: 30px;
+$element-margin: 20px;
+
+.page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, $primary-green 0%, $secondary-green 100%);
+  color: $primary-text;
+  padding-top: 80px;
+  padding-bottom: 40px;
+}
+
+.languageToggle {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  background: rgba(60, 188, 207, 0.9);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+
+  &:hover {
+    background: rgba(60, 188, 207, 1);
+    transform: scale(1.05);
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.pageTitle {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  text-align: center;
+  margin-bottom: 60px;
+  color: $logo-teal;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.section {
+  margin-bottom: 60px;
+}
+
+.missionCard, .visionCard {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: $card-padding * 1.5;
+  box-shadow: 0 8px 25px $card-shadow;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px $hover-shadow;
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  h2 {
+    font-size: 2.2rem;
+    margin-bottom: $element-margin;
+    color: $logo-teal;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  }
+
+  p {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    color: $primary-text;
+    margin: 0;
+  }
+}
+
+.sectionTitle {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 40px;
+  color: $logo-teal;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: $element-margin * 1.5;
+}
+
+.valueCard {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: $card-padding;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px $card-shadow;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 4px solid $logo-teal;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px $hover-shadow;
+    background: rgba(255, 255, 255, 0.15);
+    border-left-color: $light-green;
+  }
+
+  h3 {
+    font-size: 1.4rem;
+    margin-bottom: $element-margin;
+    color: $accent-green;
+    font-weight: 600;
+  }
+
+  p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: $secondary-text;
+    margin: 0;
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .page {
+    padding-top: 60px;
+  }
+
+  .languageToggle {
+    top: 70px;
+    right: 15px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+
+  .container {
+    padding: 0 15px;
+  }
+
+  .pageTitle {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+  }
+
+  .section {
+    margin-bottom: 40px;
+  }
+
+  .missionCard, .visionCard {
+    padding: $card-padding;
+
+    h2 {
+      font-size: 1.8rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+    }
+  }
+
+  .sectionTitle {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+
+  .valuesGrid {
+    grid-template-columns: 1fr;
+    gap: $element-margin;
+  }
+
+  .valueCard {
+    padding: $card-padding * 0.8;
+
+    h3 {
+      font-size: 1.2rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+}
