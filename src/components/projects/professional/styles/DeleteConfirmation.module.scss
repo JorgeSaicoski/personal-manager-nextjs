@@ -1,0 +1,122 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.confirmationBox {
+  background: #faf8f4;
+  border-radius: 8px;
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+
+  h2 {
+    margin: 0 0 15px 0;
+    color: #2d3a0f;
+    text-align: center;
+  }
+
+  > p {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #5a6b2d;
+  }
+}
+
+.warningSection {
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 6px;
+  padding: 15px;
+  margin: 15px 0;
+}
+
+.warning {
+  font-weight: 600;
+  color: #856404;
+  margin-bottom: 10px;
+}
+
+.dataLoss {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  span {
+    color: #856404;
+    font-size: 0.9em;
+  }
+}
+
+.projectList {
+  max-height: 200px;
+  overflow-y: auto;
+  margin: 20px 0;
+  border: 1px solid #e0d7c4;
+  border-radius: 6px;
+}
+
+.projectItem {
+  padding: 12px;
+  border-bottom: 1px solid #e0d7c4;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.projectTitle {
+  font-weight: 600;
+  color: #2d3a0f;
+  margin-bottom: 4px;
+}
+
+.projectClient {
+  font-size: 0.9em;
+  color: #5a6b2d;
+  margin-bottom: 8px;
+}
+
+.projectStats {
+  display: flex;
+  gap: 12px;
+  font-size: 0.85em;
+
+  span {
+    background: rgba(107, 142, 35, 0.1);
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #4a5d23;
+  }
+
+  .status {
+    &.active {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    &.inactive {
+      background: #f8d7da;
+      color: #721c24;
+    }
+  }
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 25px;
+}
+

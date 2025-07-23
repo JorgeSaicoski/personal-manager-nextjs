@@ -1,0 +1,57 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #e0d7c4;
+
+  h1 {
+    margin: 0;
+    color: #2d3a0f;
+    font-size: 2em;
+  }
+}
+
+.controls {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.error {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 15px;
+  border-radius: 6px;
+  border: 1px solid #f1aeb5;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.loading {
+  text-align: center;
+  padding: 50px;
+  color: #5a6b2d;
+  font-size: 1.2em;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+
+  &.withSidebar {
+    grid-template-columns: 1fr 500px;
+  }
+}
+
+.projectsSection {
+  min-height: 400px;
+}

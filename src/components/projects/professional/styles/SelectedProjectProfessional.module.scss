@@ -1,0 +1,201 @@
+.slideOut {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 500px;
+  height: 100vh;
+  background: #faf8f4;
+  border-left: 3px solid #4a5d23;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: right 0.3s ease-in-out;
+  overflow-y: auto;
+
+  &.visible {
+    right: 0;
+  }
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background: #4a5d23;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1001;
+
+  h2 {
+    margin: 0;
+    font-size: 1.3em;
+    flex: 1;
+  }
+}
+
+.saveButton {
+  background: #6b8e23;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: all 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background: #7ba428;
+  }
+
+  &:disabled {
+    background: #999;
+    cursor: not-allowed;
+  }
+
+  &.saved {
+    background: #28a745;
+  }
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+  }
+}
+
+.modal {
+  padding: 20px;
+}
+
+.field {
+  margin-bottom: 20px;
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #2d3a0f;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #d0c7b8;
+    border-radius: 6px;
+    font-size: 16px;
+    background: white;
+    transition: border-color 0.2s ease;
+
+    &:focus {
+      outline: none;
+      border-color: #6b8e23;
+    }
+  }
+}
+
+.readOnlyField {
+  padding: 12px;
+  background: #f8f6f0;
+  border: 2px solid #e8e0d3;
+  border-radius: 6px;
+  margin: 0;
+  color: #5a6b2d;
+  font-style: italic;
+}
+
+.statsSection {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 2px solid #e0d7c4;
+
+  h3 {
+    margin: 0 0 15px 0;
+    color: #2d3a0f;
+  }
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.stat {
+  background: #f8f6f0;
+  padding: 12px;
+  border-radius: 6px;
+  border-left: 4px solid #6b8e23;
+}
+
+.statLabel {
+  display: block;
+  font-size: 0.9em;
+  color: #5a6b2d;
+  margin-bottom: 4px;
+}
+
+.statValue {
+  display: block;
+  font-weight: 600;
+  color: #2d3a0f;
+  font-size: 1.1em;
+}
+
+.freelanceSection {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 2px solid #e0d7c4;
+
+  h3 {
+    margin: 0 0 15px 0;
+    color: #2d3a0f;
+  }
+}
+
+.freelanceList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.freelanceItem {
+  background: #f0f8e8;
+  padding: 12px;
+  border-radius: 6px;
+  border-left: 4px solid #8fbc8f;
+}
+
+.freelanceRate {
+  font-weight: 600;
+  color: #2d5016;
+  margin-right: 10px;
+}
+
+.freelanceStatus {
+  font-size: 0.85em;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: #d4edda;
+  color: #155724;
+}
+
+.freelanceDesc {
+  margin: 8px 0 0 0;
+  font-size: 0.9em;
+  color: #5a6b2d;
+  font-style: italic;
+}
