@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // Color Variables - Matching your existing design
 $primary-green: #05493b;
 $secondary-green: #183619;
@@ -161,7 +163,7 @@ $hover-shadow: rgba(0, 0, 0, 0.25);
 }
 
 .cta {
-  background: linear-gradient(135deg, $logo-teal, darken($logo-teal, 15%));
+  background: linear-gradient(135deg, $logo-teal, color.adjust($logo-teal, $lightness: -15%, $space: hsl));
   border-radius: 20px;
   padding: 50px 30px;
   text-align: center;
@@ -198,7 +200,7 @@ $hover-shadow: rgba(0, 0, 0, 0.25);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 
     &:hover {
-      background: lighten($logo-teal, 45%);
+      background: color.adjust($logo-teal, $lightness: 45%, $space: hsl);
       transform: translateY(-3px);
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
     }

@@ -89,10 +89,6 @@ const ProjectsProfessionalList = ({
             detailText.push(`Client: ${project.clientName}`);
           }
           
-          if (project.salaryPerHour) {
-            detailText.push(`Rate: ${formatCurrency(project.salaryPerHour)}/hr`);
-          }
-          
           if (project.totalHours > 0) {
             detailText.push(`Hours: ${formatHours(project.totalHours)}`);
           }

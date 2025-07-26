@@ -10,13 +10,11 @@ interface SelectedProjectProfessionalProps {
 
 const SelectedProjectProfessional = ({ project, onUpdate, onClose }: SelectedProjectProfessionalProps) => {
   const [clientName, setClientName] = useState(project.clientName || "");
-  const [salaryPerHour, setSalaryPerHour] = useState(project.salaryPerHour?.toString() || "");
   const [isActive, setIsActive] = useState(project.isActive);
   const [saved, setSaved] = useState(true);
 
   useEffect(() => {
     setClientName(project.clientName || "");
-    setSalaryPerHour(project.salaryPerHour?.toString() || "");
     setIsActive(project.isActive);
     setSaved(true);
   }, [project]);
@@ -24,15 +22,6 @@ const SelectedProjectProfessional = ({ project, onUpdate, onClose }: SelectedPro
   const handleClientNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setClientName(e.target.value);
     setSaved(false);
-  };
-
-  const handleSalaryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    // Allow empty string or valid numbers
-    if (value === "" || /^\d*\.?\d*$/.test(value)) {
-      setSalaryPerHour(value);
-      setSaved(false);
-    }
   };
 
   const handleActiveChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -47,11 +36,10 @@ const SelectedProjectProfessional = ({ project, onUpdate, onClose }: SelectedPro
     try {
       const updateData: UpdateProfessionalProjectRequest = {
         clientName: clientName.trim() || undefined,
-        salaryPerHour: salaryPerHour ? parseFloat(salaryPerHour) : undefined,
         isActive,
       };
 
-      await onUpdate(project.id.toString(), updateData);
+      onUpdate(project.id.toString(), updateData);
       setSaved(true);
     } catch (error) {
       console.error("Failed to update project:", error);
@@ -108,18 +96,6 @@ const SelectedProjectProfessional = ({ project, onUpdate, onClose }: SelectedPro
             value={clientName}
             onChange={handleClientNameChange}
             placeholder="Enter client name (optional)"
-          />
-        </div>
-
-        {/* Salary per hour */}
-        <div className={styles.field}>
-          <label htmlFor="salaryPerHour">Hourly Rate ($):</label>
-          <input
-            id="salaryPerHour"
-            type="text"
-            value={salaryPerHour}
-            onChange={handleSalaryChange}
-            placeholder="0.00"
           />
         </div>
 

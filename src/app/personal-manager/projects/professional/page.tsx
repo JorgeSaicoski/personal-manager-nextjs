@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import ProjectsList from "@/components/projects/professional/ProjectProfessionalList";
 import SelectedProject from "@/components/projects/professional/SelectedProjectProfessional";
@@ -17,8 +17,19 @@ import {
   UpdateProfessionalProjectRequest,
 } from "@/services/projects/professional/projects";
 import styles from "./Projects.module.scss";
+import AuthRoutes from "@/components/protected-routes/AuthRoutes";
 
 export default function ProjectsPage() {
+  return (
+    <AuthRoutes>
+      <Suspense fallback={<p>Loading...</p>}>
+        <ProjectsPageContent />
+      </Suspense>
+    </AuthRoutes>
+  );
+}
+
+function ProjectsPageContent() {
   const searchParams = useSearchParams();
   const [projects, setProjects] = useState<ProfessionalProject[]>([]);
   const [selectedProject, setSelectedProject] = useState<ProfessionalProject | null>(null);

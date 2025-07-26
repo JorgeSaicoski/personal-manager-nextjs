@@ -20,20 +20,26 @@ const PersonalManagerSidebar = ({ children }: SidebarProps) => {
       key: "tasks",
       label: "Tasks",
       path: "/personal-manager/tasks",
-      icon: "📋"
+      icon: "📋",
     },
     {
       key: "calendar",
-      label: "Calendar", 
+      label: "Calendar",
       path: "/personal-manager/calendar",
-      icon: "📅"
+      icon: "📅",
     },
     {
       key: "finances",
       label: "Finances",
-      path: "/personal-manager/finances", 
-      icon: "💰"
-    }
+      path: "/personal-manager/finances",
+      icon: "💰",
+    },
+    {
+      key: "projects",
+      label: "Projects",
+      path: "/personal-manager/projects",
+      icon: "📂",
+    },
   ];
 
   // Check if mobile on mount and resize
@@ -46,8 +52,8 @@ const PersonalManagerSidebar = ({ children }: SidebarProps) => {
     };
 
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   // Listen for toggle event from navbar
@@ -58,8 +64,8 @@ const PersonalManagerSidebar = ({ children }: SidebarProps) => {
       }
     };
 
-    window.addEventListener('toggleSidebar', handleToggle);
-    return () => window.removeEventListener('toggleSidebar', handleToggle);
+    window.addEventListener("toggleSidebar", handleToggle);
+    return () => window.removeEventListener("toggleSidebar", handleToggle);
   }, [isMobile, isMobileOpen]);
 
   const handleNavigation = (path: string) => {
@@ -92,31 +98,32 @@ const PersonalManagerSidebar = ({ children }: SidebarProps) => {
     <div className={styles.container}>
       {/* Mobile overlay */}
       {isMobile && (
-        <div 
-          className={`${styles.overlay} ${isMobileOpen ? styles.visible : ''}`}
+        <div
+          className={`${styles.overlay} ${isMobileOpen ? styles.visible : ""}`}
           onClick={closeMobileMenu}
         />
       )}
-      
-      <aside className={`${styles.sidebar} ${
-        isCollapsed && !isMobile ? styles.collapsed : ''
-      } ${isMobile && isMobileOpen ? styles.open : ''}`}>
-        
+
+      <aside
+        className={`${styles.sidebar} ${
+          isCollapsed && !isMobile ? styles.collapsed : ""
+        } ${isMobile && isMobileOpen ? styles.open : ""}`}
+      >
         {/* Desktop toggle button */}
         {!isMobile && (
-          <button 
+          <button
             className={styles.toggleButton}
             onClick={toggleSidebar}
             aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
           >
-            {isCollapsed ? '→' : '←'}
+            {isCollapsed ? "→" : "←"}
           </button>
         )}
 
         <div className={styles.header}>
           <h2>Personal Manager</h2>
         </div>
-        
+
         <nav className={styles.navigation}>
           {navigationItems.map((item) => (
             <button
@@ -133,10 +140,8 @@ const PersonalManagerSidebar = ({ children }: SidebarProps) => {
           ))}
         </nav>
       </aside>
-      
-      <main className={styles.content}>
-        {children}
-      </main>
+
+      <main className={styles.content}>{children}</main>
     </div>
   );
 };

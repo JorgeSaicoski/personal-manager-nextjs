@@ -1,3 +1,5 @@
+@use "sass:color";
+
 $primary-green: #05493b;
 $secondary-green: #183619;
 $accent-green: #9fbe5a;
@@ -111,7 +113,7 @@ $element-margin: 20px;
     margin-top: $element-margin * 2;
 
     button {
-      background: linear-gradient(45deg, $logo-teal, darken($logo-teal, 10%));
+      background: linear-gradient(45deg, $logo-teal, color.adjust($logo-teal, $lightness: -10%, $space: hsl));
       color: white;
       border: none;
       border-radius: 30px;
@@ -125,7 +127,7 @@ $element-margin: 20px;
       &:hover {
         transform: translateY(-3px);
         box-shadow: 0 8px 25px $hover-shadow;
-        background: linear-gradient(45deg, darken($logo-teal, 5%), $logo-teal);
+        background: linear-gradient(45deg, color.adjust($logo-teal, $lightness: -5%, $space: hsl), $logo-teal);
       }
 
       &:active {
@@ -242,7 +244,7 @@ $element-margin: 20px;
     &:hover {
       transform: translateY(-5px);
       box-shadow: 0 8px 25px $hover-shadow;
-      border-top-color: darken($logo-teal, 10%);
+      border-top-color: color.adjust($logo-teal, $lightness: -10%, $space: hsl);
     }
 
     .featureIcon {
@@ -303,15 +305,15 @@ $element-margin: 20px;
     &:hover {
       transform: translateY(-3px);
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-      border-left-color: darken($logo-teal, 10%);
+      border-left-color: color.adjust($logo-teal, $lightness: -10%, $space: hsl);
     }
   }
 
   .technicalTerm {
     background: linear-gradient(
       135deg,
-      lighten($logo-teal, 45%) 0%,
-      lighten($logo-teal, 40%) 100%
+      color.adjust($logo-teal, $lightness: 45%, $space: hsl) 0%,
+      color.adjust($logo-teal, $lightness: 40%, $space: hsl) 100%
     );
     padding: 1.5rem;
     border-bottom: 2px solid rgba(60, 188, 207, 0.2);
@@ -386,8 +388,8 @@ $element-margin: 20px;
     transition: all 0.3s ease;
 
     &:hover {
-      border-left-color: darken($logo-teal, 10%);
-      background: lighten($logo-teal, 45%);
+      border-left-color: color.adjust($logo-teal, $lightness: -10%, $space: hsl);
+      background: color.adjust($logo-teal, $lightness: 45%, $space: hsl);
     }
 
     h3 {
@@ -451,7 +453,7 @@ $element-margin: 20px;
 }
 
 .finalCta {
-  background: linear-gradient(135deg, $logo-teal, darken($logo-teal, 15%));
+  background: linear-gradient(135deg, $logo-teal, color.adjust($logo-teal, $lightness: -15%, $space: hsl));
   color: white;
   padding: $section-padding 20px;
   text-align: center;
@@ -484,7 +486,7 @@ $element-margin: 20px;
     margin-bottom: $element-margin;
 
     &:hover {
-      background: lighten($logo-teal, 45%);
+      background: color.adjust($logo-teal, $lightness: 45%, $space: hsl);
       transform: translateY(-3px);
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
     }
@@ -498,7 +500,7 @@ $element-margin: 20px;
 }
 
 .servicesSection {
-  background: linear-gradient(135deg, lighten($logo-teal, 35%) 0%, lighten($logo-teal, 40%) 100%);
+  background: linear-gradient(135deg, color.adjust($logo-teal, $lightness: 35%, $space: hsl) 0%, color.adjust($logo-teal, $lightness: 40%, $space: hsl) 100%);
   color: $dark-text;
   padding: $section-padding 20px;
 
@@ -512,7 +514,7 @@ $element-margin: 20px;
   .sectionSubtitle {
     text-align: center;
     font-size: 1.2rem;
-    color: darken($logo-teal, 20%);
+    color: color.adjust($logo-teal, $lightness: -20%, $space: hsl);
     margin-bottom: $element-margin;
     font-weight: 600;
   }
@@ -520,7 +522,7 @@ $element-margin: 20px;
   .servicesDesc {
     text-align: center;
     font-size: 1.1rem;
-    color: darken($logo-teal, 25%);
+    color: color.adjust($logo-teal, $lightness: -25%, $space: hsl);
     margin-bottom: $element-margin * 3;
     max-width: 800px;
     margin-left: auto;
@@ -607,7 +609,7 @@ $element-margin: 20px;
     width: 100%;
 
     &:hover {
-      background: darken($logo-teal, 10%);
+      background: color.adjust($logo-teal, $lightness: -10%, $space: hsl);
       transform: scale(1.02);
     }
   }
@@ -618,7 +620,7 @@ $element-margin: 20px;
   }
 
   .allServicesButton {
-    background: linear-gradient(45deg, $primary-green, darken($primary-green, 10%));
+    background: linear-gradient(45deg, $primary-green, color.adjust($primary-green, $lightness: -10%, $space: hsl));
     color: white;
     border: none;
     border-radius: 30px;
@@ -632,7 +634,7 @@ $element-margin: 20px;
     &:hover {
       transform: translateY(-3px);
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-      background: linear-gradient(45deg, darken($primary-green, 5%), $primary-green);
+      background: linear-gradient(45deg, color.adjust($primary-green, $lightness: -5%, $space: hsl), $primary-green);
     }
 
     &:active {
@@ -712,17 +714,17 @@ $element-margin: 20px;
       font-weight: 600;
       
       &.cost {
-        background: lighten($logo-teal, 40%);
-        color: darken($logo-teal, 20%);
+        background: color.adjust($logo-teal, $lightness: 40%, $space: hsl);
+        color: color.adjust($logo-teal, $lightness: -20%, $space: hsl);
       }
       
       &.ownership {
-        background: lighten($accent-green, 30%);
-        color: darken($accent-green, 30%);
+        background: color.adjust($accent-green, $lightness: 30%, $space: hsl);
+        color: color.adjust($accent-green, $lightness: -30%, $space: hsl);
       }
       
       &.exclusivity {
-        background: lighten($primary-green, 50%);
+        background: color.adjust($primary-green, $lightness: 50%, $space: hsl);
         color: $primary-green;
       }
     }

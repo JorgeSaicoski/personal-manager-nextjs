@@ -11,7 +11,7 @@ services:
     environment:
       - NODE_ENV=development
       - NEXT_PUBLIC_TASK_SERVICE_URL=/api/tasks
-      - NEXT_PUBLIC_PROJECT_PROFESSIONAL_SERVICE_URL=/api/professional/
+      - NEXT_PUBLIC_PROJECT_PROFESSIONAL_SERVICE_URL=/api/professional
       - NEXT_PUBLIC_KEYCLOAK_URL=/keycloak 
       - NEXT_PUBLIC_KEYCLOAK_REALM=master
       - NEXT_PUBLIC_KEYCLOAK_CLIENT_ID=frontend-app

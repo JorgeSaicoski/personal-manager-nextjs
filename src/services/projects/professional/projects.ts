@@ -19,7 +19,6 @@ export interface ProfessionalProject {
   id: number;
   baseProjectId: string;
   clientName?: string;
-  salaryPerHour?: number;
   totalSalaryCost: number;
   totalHours: number;
   isActive: boolean;
@@ -40,14 +39,12 @@ export interface FreelanceProject {
 }
 
 export interface CreateProfessionalProjectRequest {
-  baseProjectId: string;
+  title: string;
   clientName?: string;
-  salaryPerHour?: number;
 }
 
 export interface UpdateProfessionalProjectRequest {
   clientName?: string;
-  salaryPerHour?: number;
   isActive?: boolean;
 }
 
