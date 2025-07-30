@@ -58,6 +58,10 @@ function ProjectsPageContent() {
       setProjects(response.projects);
       setTotalPages(response.totalPages);
       setCurrentPage(response.currentPage);
+      console.log("in page.tsx, response:")
+      console.log(response)
+      console.log("in page.tsx, projects:")
+      console.log(projects)
     } catch (err) {
       setError("Failed to load projects");
       console.error("Error loading projects:", err);

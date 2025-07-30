@@ -1,8 +1,8 @@
-
 import { getToken, isAuthenticated } from "@/services/auth/keycloak";
 
 const ENDPOINT =
-  process.env.NEXT_PUBLIC_PROJECT_PROFESSIONAL_SERVICE_URL || "http://localhost:8002";
+  process.env.NEXT_PUBLIC_PROJECT_PROFESSIONAL_SERVICE_URL ||
+  "http://localhost:8002";
 
 export interface BaseProject {
   id: string;
@@ -96,7 +96,10 @@ export const getProfessionalProjects = async (
       throw new Error(`Error fetching projects: ${response.status}`);
     }
 
-    return await response.json();
+    const json = await response.json();
+    console.log("return in service");
+    console.log(json.data);
+    return json.data;
   } catch (error) {
     console.error("Failed to fetch professional projects:", error);
     throw error;
@@ -119,8 +122,10 @@ export const getProfessionalProjectById = async (
       handleAuthError(response);
       throw new Error(`Error fetching project: ${response.status}`);
     }
-
-    return await response.json();
+    const json = await response.json();
+    console.log("return in service");
+    console.log(json.data);
+    return json.data;
   } catch (error) {
     console.error(`Failed to fetch project with ID ${id}:`, error);
     throw error;

@@ -1,6 +1,6 @@
 @use "sass:color";
 
-@use '../styles/colors' as c;
+@use './colors' as c;
 
 .page {
   min-height: 100vh;
@@ -95,7 +95,7 @@
     margin-top: c.$element-margin * 2;
 
     button {
-      background: linear-gradient(45deg, c.$logo-teal, color.adjust(c.$logo-teal, $logo-teal-light -10%, c.$space hsl));
+      background: linear-gradient(45deg, c.$logo-teal, c.$logo-teal-light -10%);
       color: white;
       border: none;
       border-radius: 30px;
@@ -109,7 +109,7 @@
       &:hover {
         transform: translateY(-3px);
         box-shadow: 0 8px 25px c.$hover-shadow;
-        background: linear-gradient(45deg, color.adjust(c.$logo-teal, $logo-teal-light -5%, c.$space hsl), c.$logo-teal);
+        background: linear-gradient(45deg, c.$logo-teal, c.$logo-teal);
       }
 
       &:active {
@@ -226,7 +226,7 @@
     &:hover {
       transform: translateY(-5px);
       box-shadow: 0 8px 25px c.$hover-shadow;
-      border-top-color: color.adjust(c.$logo-teal, $logo-teal-light -10%, c.$space hsl);
+      border-top-color: c.$logo-teal;
     }
 
     .featureIcon {
@@ -287,15 +287,15 @@
     &:hover {
       transform: translateY(-3px);
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-      border-left-color: color.adjust(c.$logo-teal, $logo-teal-light -10%, c.$space hsl);
+      border-left-color: c.$logo-teal;
     }
   }
 
   .technicalTerm {
     background: linear-gradient(
       135deg,
-      color.adjust(c.$logo-teal, $logo-teal-light 45%, c.$space hsl) 0%,
-      color.adjust(c.$logo-teal, $logo-teal-light 40%, c.$space hsl) 100%
+      c.$logo-teal 0%,
+      c.$logo-teal 100%
     );
     padding: 1.5rem;
     border-bottom: 2px solid rgba(60, 188, 207, 0.2);
@@ -370,8 +370,8 @@
     transition: all 0.3s ease;
 
     &:hover {
-      border-left-color: color.adjust(c.$logo-teal, $logo-teal-light -10%, c.$space hsl);
-      background: color.adjust(c.$logo-teal, $logo-teal-light 45%, c.$space hsl);
+      border-left-color: c.$logo-teal;
+      background: c.$logo-teal;
     }
 
     h3 {
@@ -435,7 +435,7 @@
 }
 
 .finalCta {
-  background: linear-gradient(135deg, c.$logo-teal, color.adjust(c.$logo-teal, $logo-teal-light -15%, c.$space hsl));
+  background: linear-gradient(135deg, c.$logo-teal, c.$logo-teal);
   color: white;
   padding: c.$section-padding 20px;
   text-align: center;
@@ -468,7 +468,7 @@
     margin-bottom: c.$element-margin;
 
     &:hover {
-      background: color.adjust(c.$logo-teal, $logo-teal-light 45%, c.$space hsl);
+      background: c.$logo-teal;
       transform: translateY(-3px);
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
     }
@@ -482,7 +482,7 @@
 }
 
 .servicesSection {
-  background: linear-gradient(135deg, color.adjust(c.$logo-teal, $logo-teal-light 35%, c.$space hsl) 0%, color.adjust(c.$logo-teal, $logo-teal-light 40%, c.$space hsl) 100%);
+  background: linear-gradient(135deg, c.$logo-teal 0%, c.$logo-teal 100%);
   color: c.$dark-text;
   padding: c.$section-padding 20px;
 
@@ -496,7 +496,7 @@
   .sectionSubtitle {
     text-align: center;
     font-size: 1.2rem;
-    color: color.adjust(c.$logo-teal, $logo-teal-light -20%, c.$space hsl);
+    color: c.$logo-teal;
     margin-bottom: c.$element-margin;
     font-weight: 600;
   }
@@ -504,7 +504,7 @@
   .servicesDesc {
     text-align: center;
     font-size: 1.1rem;
-    color: color.adjust(c.$logo-teal, $logo-teal-light -25%, c.$space hsl);
+    color: c.$logo-teal;
     margin-bottom: c.$element-margin * 3;
     max-width: 800px;
     margin-left: auto;
@@ -591,7 +591,7 @@
     width: 100%;
 
     &:hover {
-      background: color.adjust(c.$logo-teal, $logo-teal-light -10%, c.$space hsl);
+      background: c.$logo-teal;
       transform: scale(1.02);
     }
   }
@@ -602,7 +602,7 @@
   }
 
   .allServicesButton {
-    background: linear-gradient(45deg, c.$primary-green, color.adjust(c.$primary-green, $logo-teal-light -10%, c.$space hsl));
+    background: linear-gradient(45deg, c.$primary-green, c.$logo-teal);
     color: white;
     border: none;
     border-radius: 30px;
@@ -616,7 +616,7 @@
     &:hover {
       transform: translateY(-3px);
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-      background: linear-gradient(45deg, color.adjust(c.$primary-green, $logo-teal-light -5%, c.$space hsl), c.$primary-green);
+      background: linear-gradient(45deg, c.$logo-teal, c.$primary-green);
     }
 
     &:active {
@@ -696,17 +696,17 @@
       font-weight: 600;
       
       &.cost {
-        background: color.adjust(c.$logo-teal, $logo-teal-light 40%, c.$space hsl);
-        color: color.adjust(c.$logo-teal, $logo-teal-light -20%, c.$space hsl);
+        background: c.$logo-teal;
+        color: c.$logo-teal;
       }
       
       &.ownership {
-        background: color.adjust(c.$accent-green, $logo-teal-light 30%, c.$space hsl);
-        color: color.adjust(c.$accent-green, $logo-teal-light -30%, c.$space hsl);
+        background: c.$logo-teal;
+        color: c.$logo-teal;
       }
       
       &.exclusivity {
-        background: color.adjust(c.$primary-green, $logo-teal-light 50%, c.$space hsl);
+        background: c.$logo-teal;
         color: c.$primary-green;
       }
     }

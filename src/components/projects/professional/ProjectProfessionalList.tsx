@@ -51,6 +51,8 @@ const ProjectsProfessionalList = ({
 
   // Reset returning project ID when selected project changes
   useEffect(() => {
+    console.log("project list projects")
+    console.log(projects)
     if (selectedProject === null && returningProjectId) {
       setTimeout(() => {
         setReturningProjectId(null);
