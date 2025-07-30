@@ -1,29 +1,11 @@
 @use "sass:color";
 
-$primary-green: #05493b;
-$secondary-green: #183619;
-$accent-green: #9fbe5a;
-$light-green: #b5d772;
-$dark-green: #2f4f2f;
-$logo-teal: #3cbccf; 
-
-$primary-text: #ffffff;
-$secondary-text: #e0e0e0;
-$muted-text: #b0b0b0;
-$dark-text: #333333;
-
-$paper-color: #f8f8f8;
-$card-shadow: rgba(0, 0, 0, 0.15);
-$hover-shadow: rgba(0, 0, 0, 0.25);
-
-$section-padding: 80px;
-$card-padding: 30px;
-$element-margin: 20px;
+@use '../styles/colors' as c;
 
 .page {
   min-height: 100vh;
-  background: linear-gradient(135deg, $primary-green 0%, $secondary-green 100%);
-  color: $primary-text;
+  background: linear-gradient(135deg, c.$primary-green 0%, c.$secondary-green 100%);
+  color: c.$primary-text;
   overflow-x: hidden;
   position: relative;
 }
@@ -53,7 +35,7 @@ $element-margin: 20px;
 
 .hero {
   text-align: center;
-  padding: $section-padding 20px;
+  padding: c.$section-padding 20px;
   max-width: 1200px;
   margin: 0 auto;
   position: relative;
@@ -80,9 +62,9 @@ $element-margin: 20px;
 
   .title {
     font-size: clamp(2.5rem, 5vw, 4rem);
-    margin-bottom: $element-margin;
+    margin-bottom: c.$element-margin;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    color: $logo-teal; // Updated to match logo
+    color: c.$logo-teal; // Updated to match logo
     display: flex;
     align-items: center;
     justify-content: center;
@@ -101,8 +83,8 @@ $element-margin: 20px;
 
   .subtitle {
     font-size: clamp(1.2rem, 3vw, 1.8rem);
-    margin-bottom: $element-margin * 2;
-    color: $secondary-text;
+    margin-bottom: c.$element-margin * 2;
+    color: c.$secondary-text;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
@@ -110,10 +92,10 @@ $element-margin: 20px;
   }
 
   .cta {
-    margin-top: $element-margin * 2;
+    margin-top: c.$element-margin * 2;
 
     button {
-      background: linear-gradient(45deg, $logo-teal, color.adjust($logo-teal, $lightness: -10%, $space: hsl));
+      background: linear-gradient(45deg, c.$logo-teal, color.adjust(c.$logo-teal, $logo-teal-light -10%, c.$space hsl));
       color: white;
       border: none;
       border-radius: 30px;
@@ -122,12 +104,12 @@ $element-margin: 20px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 5px 15px $card-shadow;
+      box-shadow: 0 5px 15px c.$card-shadow;
 
       &:hover {
         transform: translateY(-3px);
-        box-shadow: 0 8px 25px $hover-shadow;
-        background: linear-gradient(45deg, color.adjust($logo-teal, $lightness: -5%, $space: hsl), $logo-teal);
+        box-shadow: 0 8px 25px c.$hover-shadow;
+        background: linear-gradient(45deg, color.adjust(c.$logo-teal, $logo-teal-light -5%, c.$space hsl), c.$logo-teal);
       }
 
       &:active {
@@ -155,141 +137,141 @@ $element-margin: 20px;
 
 .benefits {
   background: white;
-  color: $dark-text;
-  padding: $section-padding 20px;
+  color: c.$dark-text;
+  padding: c.$section-padding 20px;
 
   .sectionTitle {
     font-size: 2.5rem;
     text-align: center;
-    margin-bottom: $element-margin;
-    color: $primary-green;
+    margin-bottom: c.$element-margin;
+    color: c.$primary-green;
   }
 
   .sectionSubtitle {
     text-align: center;
     font-size: 1.2rem;
     color: #7f8c8d;
-    margin-bottom: $element-margin * 3;
+    margin-bottom: c.$element-margin * 3;
   }
 
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: $element-margin * 1.5;
-    margin-bottom: $element-margin * 2;
+    gap: c.$element-margin * 1.5;
+    margin-bottom: c.$element-margin * 2;
   }
 
   .benefitCard {
     background: white;
-    padding: $card-padding;
+    padding: c.$card-padding;
     border-radius: 10px;
-    box-shadow: 0 4px 15px $card-shadow;
+    box-shadow: 0 4px 15px c.$card-shadow;
     transition: all 0.3s ease;
-    border-left: 4px solid $logo-teal; // Updated accent color
+    border-left: 4px solid c.$logo-teal; // Updated accent color
 
     &:hover {
       transform: translateY(-5px);
-      box-shadow: 0 8px 25px $hover-shadow;
+      box-shadow: 0 8px 25px c.$hover-shadow;
     }
 
     h3 {
       font-size: 1.5rem;
-      margin-bottom: $element-margin;
-      color: $logo-teal; // Updated accent color
+      margin-bottom: c.$element-margin;
+      color: c.$logo-teal; // Updated accent color
     }
 
     p {
       font-size: 1.1rem;
       line-height: 1.5;
-      color: $dark-text;
+      color: c.$dark-text;
     }
   }
 }
 
 .solution {
   background: #ecf0f1;
-  color: $dark-text;
-  padding: $section-padding 20px;
+  color: c.$dark-text;
+  padding: c.$section-padding 20px;
 
   .sectionTitle {
     font-size: 2.5rem;
     text-align: center;
-    margin-bottom: $element-margin;
-    color: $primary-green;
+    margin-bottom: c.$element-margin;
+    color: c.$primary-green;
   }
 
   .sectionSubtitle {
     text-align: center;
     font-size: 1.2rem;
     color: #7f8c8d;
-    margin-bottom: $element-margin * 3;
+    margin-bottom: c.$element-margin * 3;
   }
 
   .featuresGrid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: $element-margin * 1.5;
-    margin-bottom: $element-margin * 2;
+    gap: c.$element-margin * 1.5;
+    margin-bottom: c.$element-margin * 2;
   }
 
   .featureCard {
     background: white;
-    padding: $card-padding;
+    padding: c.$card-padding;
     border-radius: 10px;
-    box-shadow: 0 4px 15px $card-shadow;
+    box-shadow: 0 4px 15px c.$card-shadow;
     text-align: center;
     transition: all 0.3s ease;
-    border-top: 3px solid $logo-teal; // Added logo color accent
+    border-top: 3px solid c.$logo-teal; // Added logo color accent
 
     &:hover {
       transform: translateY(-5px);
-      box-shadow: 0 8px 25px $hover-shadow;
-      border-top-color: color.adjust($logo-teal, $lightness: -10%, $space: hsl);
+      box-shadow: 0 8px 25px c.$hover-shadow;
+      border-top-color: color.adjust(c.$logo-teal, $logo-teal-light -10%, c.$space hsl);
     }
 
     .featureIcon {
       font-size: 3rem;
-      margin-bottom: $element-margin;
+      margin-bottom: c.$element-margin;
     }
 
     h3 {
-      color: $primary-green;
-      margin-bottom: $element-margin;
+      color: c.$primary-green;
+      margin-bottom: c.$element-margin;
       font-size: 1.4rem;
     }
 
     p {
       font-size: 1.1rem;
       line-height: 1.5;
-      color: $dark-text;
+      color: c.$dark-text;
     }
   }
 }
 .whatThisMeans {
   background: white;
-  color: $dark-text;
-  padding: $section-padding 20px;
-  border-top: 3px solid $logo-teal;
+  color: c.$dark-text;
+  padding: c.$section-padding 20px;
+  border-top: 3px solid c.$logo-teal;
 
   .sectionTitle {
     font-size: 2.5rem;
     text-align: center;
-    margin-bottom: $element-margin;
-    color: $primary-green;
+    margin-bottom: c.$element-margin;
+    color: c.$primary-green;
   }
 
   .sectionSubtitle {
     text-align: center;
     font-size: 1.2rem;
     color: #7f8c8d;
-    margin-bottom: $element-margin * 3;
+    margin-bottom: c.$element-margin * 3;
     font-style: italic;
   }
 
   .explanationsGrid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: $element-margin * 2;
+    gap: c.$element-margin * 2;
     max-width: 1200px;
     margin: 0 auto;
   }
@@ -300,20 +282,20 @@ $element-margin: 20px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
-    border-left: 4px solid $logo-teal;
+    border-left: 4px solid c.$logo-teal;
 
     &:hover {
       transform: translateY(-3px);
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-      border-left-color: color.adjust($logo-teal, $lightness: -10%, $space: hsl);
+      border-left-color: color.adjust(c.$logo-teal, $logo-teal-light -10%, c.$space hsl);
     }
   }
 
   .technicalTerm {
     background: linear-gradient(
       135deg,
-      color.adjust($logo-teal, $lightness: 45%, $space: hsl) 0%,
-      color.adjust($logo-teal, $lightness: 40%, $space: hsl) 100%
+      color.adjust(c.$logo-teal, $logo-teal-light 45%, c.$space hsl) 0%,
+      color.adjust(c.$logo-teal, $logo-teal-light 40%, c.$space hsl) 100%
     );
     padding: 1.5rem;
     border-bottom: 2px solid rgba(60, 188, 207, 0.2);
@@ -323,7 +305,7 @@ $element-margin: 20px;
 
     .termIcon {
       font-size: 2rem;
-      background: $logo-teal;
+      background: c.$logo-teal;
       color: white;
       width: 50px;
       height: 50px;
@@ -337,7 +319,7 @@ $element-margin: 20px;
 
     h4 {
       font-size: 1.3rem;
-      color: $primary-green;
+      color: c.$primary-green;
       margin: 0;
       font-weight: 600;
     }
@@ -348,7 +330,7 @@ $element-margin: 20px;
 
     h5 {
       font-size: 1.2rem;
-      color: $logo-teal;
+      color: c.$logo-teal;
       margin-bottom: 0.8rem;
       font-weight: 600;
       line-height: 1.3;
@@ -365,63 +347,63 @@ $element-margin: 20px;
 
 .values {
   background: white;
-  padding: $section-padding 20px;
+  padding: c.$section-padding 20px;
 
   .sectionTitle {
     font-size: 2.5rem;
     text-align: center;
-    margin-bottom: $element-margin * 3;
-    color: $primary-green;
+    margin-bottom: c.$element-margin * 3;
+    color: c.$primary-green;
   }
 
   .valuesGrid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: $element-margin * 1.5;
+    gap: c.$element-margin * 1.5;
   }
 
   .valueCard {
-    padding: $card-padding;
-    border-left: 4px solid $logo-teal; // Updated to logo color
+    padding: c.$card-padding;
+    border-left: 4px solid c.$logo-teal; // Updated to logo color
     background: #f8f9fa;
     border-radius: 5px;
     transition: all 0.3s ease;
 
     &:hover {
-      border-left-color: color.adjust($logo-teal, $lightness: -10%, $space: hsl);
-      background: color.adjust($logo-teal, $lightness: 45%, $space: hsl);
+      border-left-color: color.adjust(c.$logo-teal, $logo-teal-light -10%, c.$space hsl);
+      background: color.adjust(c.$logo-teal, $logo-teal-light 45%, c.$space hsl);
     }
 
     h3 {
-      color: $logo-teal; // Updated to logo color
-      margin-bottom: $element-margin;
+      color: c.$logo-teal; // Updated to logo color
+      margin-bottom: c.$element-margin;
       font-size: 1.4rem;
     }
 
     p {
       font-size: 1.1rem;
       line-height: 1.5;
-      color: $dark-text;
+      color: c.$dark-text;
     }
   }
 }
 
 .technology {
-  background: $primary-green;
+  background: c.$primary-green;
   color: white;
-  padding: $section-padding 20px;
+  padding: c.$section-padding 20px;
 
   .sectionTitle {
     font-size: 2.5rem;
     text-align: center;
-    margin-bottom: $element-margin * 3;
+    margin-bottom: c.$element-margin * 3;
     color: white;
   }
 
   .techGrid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: $element-margin * 1.5;
+    gap: c.$element-margin * 1.5;
   }
 
   .techCard {
@@ -435,12 +417,12 @@ $element-margin: 20px;
     &:hover {
       background: rgba(60, 188, 207, 0.2);
       transform: translateY(-5px);
-      border-color: $logo-teal;
+      border-color: c.$logo-teal;
     }
 
     h4 {
-      color: $logo-teal; // Updated to logo color
-      margin-bottom: $element-margin;
+      color: c.$logo-teal; // Updated to logo color
+      margin-bottom: c.$element-margin;
       font-size: 1.3rem;
     }
 
@@ -453,20 +435,20 @@ $element-margin: 20px;
 }
 
 .finalCta {
-  background: linear-gradient(135deg, $logo-teal, color.adjust($logo-teal, $lightness: -15%, $space: hsl));
+  background: linear-gradient(135deg, c.$logo-teal, color.adjust(c.$logo-teal, $logo-teal-light -15%, c.$space hsl));
   color: white;
-  padding: $section-padding 20px;
+  padding: c.$section-padding 20px;
   text-align: center;
 
   h2 {
     font-size: 2.5rem;
-    margin-bottom: $element-margin;
+    margin-bottom: c.$element-margin;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
   }
 
   p {
     font-size: 1.2rem;
-    margin-bottom: $element-margin * 2;
+    margin-bottom: c.$element-margin * 2;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
@@ -474,7 +456,7 @@ $element-margin: 20px;
 
   .ctaButton {
     background: white;
-    color: $logo-teal;
+    color: c.$logo-teal;
     border: none;
     border-radius: 30px;
     padding: 15px 40px;
@@ -483,10 +465,10 @@ $element-margin: 20px;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    margin-bottom: $element-margin;
+    margin-bottom: c.$element-margin;
 
     &:hover {
-      background: color.adjust($logo-teal, $lightness: 45%, $space: hsl);
+      background: color.adjust(c.$logo-teal, $logo-teal-light 45%, c.$space hsl);
       transform: translateY(-3px);
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
     }
@@ -500,30 +482,30 @@ $element-margin: 20px;
 }
 
 .servicesSection {
-  background: linear-gradient(135deg, color.adjust($logo-teal, $lightness: 35%, $space: hsl) 0%, color.adjust($logo-teal, $lightness: 40%, $space: hsl) 100%);
-  color: $dark-text;
-  padding: $section-padding 20px;
+  background: linear-gradient(135deg, color.adjust(c.$logo-teal, $logo-teal-light 35%, c.$space hsl) 0%, color.adjust(c.$logo-teal, $logo-teal-light 40%, c.$space hsl) 100%);
+  color: c.$dark-text;
+  padding: c.$section-padding 20px;
 
   .sectionTitle {
     font-size: 2.5rem;
     text-align: center;
-    margin-bottom: $element-margin;
-    color: $primary-green;
+    margin-bottom: c.$element-margin;
+    color: c.$primary-green;
   }
 
   .sectionSubtitle {
     text-align: center;
     font-size: 1.2rem;
-    color: color.adjust($logo-teal, $lightness: -20%, $space: hsl);
-    margin-bottom: $element-margin;
+    color: color.adjust(c.$logo-teal, $logo-teal-light -20%, c.$space hsl);
+    margin-bottom: c.$element-margin;
     font-weight: 600;
   }
 
   .servicesDesc {
     text-align: center;
     font-size: 1.1rem;
-    color: color.adjust($logo-teal, $lightness: -25%, $space: hsl);
-    margin-bottom: $element-margin * 3;
+    color: color.adjust(c.$logo-teal, $logo-teal-light -25%, c.$space hsl);
+    margin-bottom: c.$element-margin * 3;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
@@ -533,41 +515,41 @@ $element-margin: 20px;
   .servicesGrid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: $element-margin * 2;
-    margin-bottom: $element-margin * 3;
+    gap: c.$element-margin * 2;
+    margin-bottom: c.$element-margin * 3;
   }
 
   .serviceOption {
     background: white;
-    padding: $card-padding;
+    padding: c.$card-padding;
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(60, 188, 207, 0.15);
     text-align: center;
     transition: all 0.3s ease;
-    border-top: 4px solid $logo-teal;
+    border-top: 4px solid c.$logo-teal;
     position: relative;
 
     &:hover {
       transform: translateY(-8px);
       box-shadow: 0 10px 30px rgba(60, 188, 207, 0.25);
-      border-top-color: $accent-green;
+      border-top-color: c.$accent-green;
     }
 
     .serviceIcon {
       font-size: 3rem;
-      margin-bottom: $element-margin;
+      margin-bottom: c.$element-margin;
     }
 
     h3 {
       font-size: 1.5rem;
-      color: $primary-green;
-      margin-bottom: $element-margin;
+      color: c.$primary-green;
+      margin-bottom: c.$element-margin;
     }
 
     p {
       font-size: 1.1rem;
       color: #666;
-      margin-bottom: $element-margin;
+      margin-bottom: c.$element-margin;
       line-height: 1.4;
     }
   }
@@ -575,13 +557,13 @@ $element-margin: 20px;
   .serviceFeatures {
     list-style: none;
     padding: 0;
-    margin: 0 0 $element-margin * 1.5 0;
+    margin: 0 0 c.$element-margin * 1.5 0;
     text-align: left;
 
     li {
       position: relative;
       padding: 6px 0 6px 25px;
-      color: $dark-text;
+      color: c.$dark-text;
       font-size: 0.95rem;
       line-height: 1.3;
 
@@ -589,7 +571,7 @@ $element-margin: 20px;
         content: "✓";
         position: absolute;
         left: 0;
-        color: $logo-teal;
+        color: c.$logo-teal;
         font-weight: bold;
         font-size: 1.1rem;
       }
@@ -597,7 +579,7 @@ $element-margin: 20px;
   }
 
   .serviceButton {
-    background: $logo-teal;
+    background: c.$logo-teal;
     color: white;
     border: none;
     border-radius: 25px;
@@ -609,18 +591,18 @@ $element-margin: 20px;
     width: 100%;
 
     &:hover {
-      background: color.adjust($logo-teal, $lightness: -10%, $space: hsl);
+      background: color.adjust(c.$logo-teal, $logo-teal-light -10%, c.$space hsl);
       transform: scale(1.02);
     }
   }
 
   .servicesCtaCenter {
     text-align: center;
-    margin-top: $element-margin * 2;
+    margin-top: c.$element-margin * 2;
   }
 
   .allServicesButton {
-    background: linear-gradient(45deg, $primary-green, color.adjust($primary-green, $lightness: -10%, $space: hsl));
+    background: linear-gradient(45deg, c.$primary-green, color.adjust(c.$primary-green, $logo-teal-light -10%, c.$space hsl));
     color: white;
     border: none;
     border-radius: 30px;
@@ -634,7 +616,7 @@ $element-margin: 20px;
     &:hover {
       transform: translateY(-3px);
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-      background: linear-gradient(45deg, color.adjust($primary-green, $lightness: -5%, $space: hsl), $primary-green);
+      background: linear-gradient(45deg, color.adjust(c.$primary-green, $logo-teal-light -5%, c.$space hsl), c.$primary-green);
     }
 
     &:active {
@@ -645,60 +627,60 @@ $element-margin: 20px;
 
 .developmentModel {
   background: #f8f9fa;
-  color: $dark-text;
-  padding: $section-padding 20px;
+  color: c.$dark-text;
+  padding: c.$section-padding 20px;
 
   .sectionTitle {
     font-size: 2.5rem;
     text-align: center;
-    margin-bottom: $element-margin;
-    color: $primary-green;
+    margin-bottom: c.$element-margin;
+    color: c.$primary-green;
   }
 
   .sectionSubtitle {
     text-align: center;
     font-size: 1.2rem;
     color: #7f8c8d;
-    margin-bottom: $element-margin * 3;
+    margin-bottom: c.$element-margin * 3;
   }
 
   .modelGrid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: $element-margin * 1.5;
-    margin-bottom: $element-margin * 3;
+    gap: c.$element-margin * 1.5;
+    margin-bottom: c.$element-margin * 3;
   }
 
   .modelCard {
     background: white;
-    padding: $card-padding;
+    padding: c.$card-padding;
     border-radius: 12px;
-    box-shadow: 0 4px 15px $card-shadow;
+    box-shadow: 0 4px 15px c.$card-shadow;
     text-align: center;
     transition: all 0.3s ease;
-    border-top: 4px solid $logo-teal;
+    border-top: 4px solid c.$logo-teal;
 
     &:hover {
       transform: translateY(-5px);
-      box-shadow: 0 8px 25px $hover-shadow;
+      box-shadow: 0 8px 25px c.$hover-shadow;
     }
 
     .modelIcon {
       font-size: 3rem;
-      margin-bottom: $element-margin;
+      margin-bottom: c.$element-margin;
     }
 
     h3 {
-      color: $primary-green;
-      margin-bottom: $element-margin;
+      color: c.$primary-green;
+      margin-bottom: c.$element-margin;
       font-size: 1.4rem;
     }
 
     p {
       font-size: 1.1rem;
       line-height: 1.5;
-      color: $dark-text;
-      margin-bottom: $element-margin;
+      color: c.$dark-text;
+      margin-bottom: c.$element-margin;
     }
   }
 
@@ -714,39 +696,39 @@ $element-margin: 20px;
       font-weight: 600;
       
       &.cost {
-        background: color.adjust($logo-teal, $lightness: 40%, $space: hsl);
-        color: color.adjust($logo-teal, $lightness: -20%, $space: hsl);
+        background: color.adjust(c.$logo-teal, $logo-teal-light 40%, c.$space hsl);
+        color: color.adjust(c.$logo-teal, $logo-teal-light -20%, c.$space hsl);
       }
       
       &.ownership {
-        background: color.adjust($accent-green, $lightness: 30%, $space: hsl);
-        color: color.adjust($accent-green, $lightness: -30%, $space: hsl);
+        background: color.adjust(c.$accent-green, $logo-teal-light 30%, c.$space hsl);
+        color: color.adjust(c.$accent-green, $logo-teal-light -30%, c.$space hsl);
       }
       
       &.exclusivity {
-        background: color.adjust($primary-green, $lightness: 50%, $space: hsl);
-        color: $primary-green;
+        background: color.adjust(c.$primary-green, $logo-teal-light 50%, c.$space hsl);
+        color: c.$primary-green;
       }
     }
   }
 
   .exampleScenario {
     background: white;
-    padding: $card-padding;
+    padding: c.$card-padding;
     border-radius: 12px;
-    box-shadow: 0 4px 15px $card-shadow;
-    border-left: 4px solid $logo-teal;
+    box-shadow: 0 4px 15px c.$card-shadow;
+    border-left: 4px solid c.$logo-teal;
 
     h4 {
-      color: $primary-green;
-      margin-bottom: $element-margin;
+      color: c.$primary-green;
+      margin-bottom: c.$element-margin;
       font-size: 1.3rem;
     }
 
     .scenarioOptions {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: $element-margin;
+      gap: c.$element-margin;
 
       .option {
         padding: 15px;
@@ -774,7 +756,7 @@ $element-margin: 20px;
         }
 
         strong {
-          color: $logo-teal;
+          color: c.$logo-teal;
         }
       }
     }
@@ -789,7 +771,7 @@ $element-margin: 20px;
 
   .footerText {
     font-size: 1.1rem;
-    color: $muted-text;
+    color: c.$muted-text;
     margin-bottom: 0.5rem;
   }
 
@@ -862,7 +844,7 @@ $element-margin: 20px;
 
   .whatThisMeans .explanationsGrid {
     grid-template-columns: 1fr;
-    gap: $element-margin * 1.5;
+    gap: c.$element-margin * 1.5;
   }
 
   .whatThisMeans .explanationCard {

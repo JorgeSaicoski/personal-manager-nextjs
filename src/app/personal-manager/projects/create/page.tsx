@@ -8,7 +8,7 @@ import {
   createProfessionalProject,
   CreateProfessionalProjectRequest,
 } from "@/services/projects/professional/projects";
-import styles from "./CreateProject.module.scss";
+import styles from "./page.module.scss";
 
 export default function CreateProjectPage() {
   return (
@@ -49,7 +49,7 @@ function CreateProjectForm() {
       await createProfessionalProject(formData); // uses the existing POST helper :contentReference[oaicite:0]{index=0}
       setSuccess(true);
       // brief pause so the user sees the success state
-      setTimeout(() => router.push("/projects/professional"), 800);
+      setTimeout(() => router.push("/personal-manager/projects/professional"), 800);
     } catch (err: any) {
       setError(err?.message || "Something went wrong");
     } finally {

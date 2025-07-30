@@ -1,12 +1,5 @@
-import Link from 'next/link'
-import styles from './page.module.scss'
-
-const categories = [
-  { title: 'Professional Projects', slug: 'professional' },
-  { title: 'Financial Projects',    slug: 'financial'    },
-  { title: 'Education Projects',    slug: 'education'    },
-  { title: 'Other Projects',        slug: 'other'        },
-]
+import Link from 'next/link';
+import styles from './page.module.scss';
 
 export default function ProjectsPage() {
   return (
@@ -14,23 +7,25 @@ export default function ProjectsPage() {
       <h1 className={styles.title}>📂 Projects</h1>
 
       <div className={styles.grid}>
-        {categories.map(({ title, slug }) => (
+        {['Professional', 'Financial', 'Education', 'Other'].map(cat => (
           <Link
-            key={slug}
-            href={`/personal-manager/projects/${slug}`}
+            key={cat}
+            href={`/personal-manager/projects/${cat.toLowerCase()}`}
             className={styles.card}
           >
-            <h2>{title} &rarr;</h2>
+            <h3>{cat} Projects</h3>
+            <p>
+              View and manage all your {cat.toLowerCase()} projects here.
+            </p>
           </Link>
         ))}
       </div>
 
-      {/* Placeholder for “create new” button or list */}
       <div className={styles.footer}>
         <Link href="/personal-manager/projects/create" className={styles.createBtn}>
           + New Project
         </Link>
       </div>
     </div>
-  )
+  );
 }

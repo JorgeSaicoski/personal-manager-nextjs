@@ -16,7 +16,7 @@ import {
   ProfessionalProject,
   UpdateProfessionalProjectRequest,
 } from "@/services/projects/professional/projects";
-import styles from "./Projects.module.scss";
+import styles from "./page.module.scss";
 import AuthRoutes from "@/components/protected-routes/AuthRoutes";
 
 export default function ProjectsPage() {
