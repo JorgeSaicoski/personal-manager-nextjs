@@ -23,19 +23,19 @@ export interface PaginatedTasksResponse {
 
 const getHeaders = (): Record<string, string> => {
   const headers: Record<string, string> = {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   };
 
   // Add authorization if available
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     try {
-      const { getToken } = require('@/services/auth/keycloak');
+      const { getToken } = require("@/services/auth/keycloak");
       const token = getToken();
       if (token) {
-        headers['Authorization'] = `Bearer ${token}`;
+        headers["Authorization"] = `Bearer ${token}`;
       }
     } catch (error) {
-      console.error('Error getting auth token:', error);
+      console.error("Error getting auth token:", error);
     }
   }
 
@@ -45,14 +45,14 @@ const getHeaders = (): Record<string, string> => {
 // Helper function to handle auth errors
 const handleAuthError = (response: Response) => {
   if (response.status === 401 || response.status === 403) {
-    console.error('Authentication error, redirecting to login...');
-    if (typeof window !== 'undefined') {
+    console.error("Authentication error, redirecting to login...");
+    if (typeof window !== "undefined") {
       try {
-        const { login } = require('@/services/auth/keycloak');
+        const { login } = require("@/services/auth/keycloak");
         login();
       } catch (error) {
-        console.error('Error redirecting to login:', error);
-        window.location.href = '/';
+        console.error("Error redirecting to login:", error);
+        window.location.href = "/";
       }
     }
   }
@@ -79,7 +79,8 @@ export const getAllTasks = async (
       throw new Error(`Error fetching tasks: ${response.status}`);
     }
 
-    return await response.json();
+    const json = await response.json();
+    return json.data;
   } catch (error) {
     console.error("Failed to fetch tasks:", error);
     throw error;
@@ -107,7 +108,8 @@ export const getCompletedTasks = async (
       throw new Error(`Error fetching tasks: ${response.status}`);
     }
 
-    return await response.json();
+    const json = await response.json();
+    return json.data;
   } catch (error) {
     console.error("Failed to fetch tasks:", error);
     throw error;
@@ -135,7 +137,8 @@ export const getNonCompletedTasks = async (
       throw new Error(`Error fetching tasks: ${response.status}`);
     }
 
-    return await response.json();
+    const json = await response.json();
+    return json.data;
   } catch (error) {
     console.error("Failed to fetch tasks:", error);
     throw error;
@@ -157,7 +160,8 @@ export const getTaskById = async (id: string): Promise<Task> => {
       throw new Error(`Error fetching task: ${response.status}`);
     }
 
-    return await response.json();
+    const json = await response.json();
+    return json.data;
   } catch (error) {
     console.error(`Failed to fetch task with ID ${id}:`, error);
     throw error;

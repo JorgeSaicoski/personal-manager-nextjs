@@ -89,11 +89,9 @@ export default function CreateTaskPage() {
             </select>
           </div>
 
-          <Button
-            text={isSubmitting ? "Creating..." : "Create Task"}
-            onClick={() => {}}
-            disabled={isSubmitting}
-          />
+          <button onClick={handleSubmit} disabled={isSubmitting}>
+            {isSubmitting ? "Creating..." : "Create Task"}
+          </button>
           <button
             type="button"
             onClick={() => router.push("/personal-manager/tasks")}

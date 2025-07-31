@@ -1,6 +1,5 @@
-
 import { ProfessionalProject } from "@/services/projects/professional/projects";
-import styles from "./styles/ProjectsProfessionalList.module.scss";
+import styles from "./styles/ProjectProfessionalList.module.scss";
 import Button from "@/components/Button";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -23,8 +22,12 @@ const ProjectsProfessionalList = ({
   onProjectSelectForDelete,
 }: ProjectsProfessionalListProps) => {
   const router = useRouter();
-  const [animatingProjectId, setAnimatingProjectId] = useState<string | null>(null);
-  const [returningProjectId, setReturningProjectId] = useState<string | null>(null);
+  const [animatingProjectId, setAnimatingProjectId] = useState<string | null>(
+    null
+  );
+  const [returningProjectId, setReturningProjectId] = useState<string | null>(
+    null
+  );
 
   const handleClick = () => {
     router.push("/personal-manager/projects/create");
@@ -43,88 +46,66 @@ const ProjectsProfessionalList = ({
       if (selectedProject?.id) {
         setReturningProjectId(selectedProject.id.toString());
       }
-
       onProjectClick(projectId);
       setAnimatingProjectId(null);
     }, 500);
   };
 
-  // Reset returning project ID when selected project changes
   useEffect(() => {
-    console.log("project list projects")
-    console.log(projects)
     if (selectedProject === null && returningProjectId) {
-      setTimeout(() => {
-        setReturningProjectId(null);
-      }, 1000);
+      setTimeout(() => setReturningProjectId(null), 1000);
     }
   }, [selectedProject, returningProjectId]);
 
-  // Check if a project is selected for deletion
-  const isProjectSelectedForDelete = (project: ProfessionalProject) => {
-    return selectedProjectsForDelete.some((p) => p.id === project.id);
-  };
+  const isProjectSelectedForDelete = (project: ProfessionalProject) =>
+    selectedProjectsForDelete.some((p) => p.id === project.id);
 
-  // Format currency
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD'
+  const formatCurrency = (amount: number) =>
+    new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
     }).format(amount);
-  };
 
-  // Format hours
-  const formatHours = (hours: number) => {
-    return `${hours.toFixed(1)}h`;
-  };
+  const formatHours = (hours: number) => `${hours.toFixed(1)}h`;
 
   return (
-    <fieldset>
+    <div className={styles.projectListWrapper}>
       {projects.length === 0 ? (
         <p>No professional projects yet</p>
       ) : (
         projects.map((project) => {
-          const projectId = project.id?.toString() || `project-${Math.random()}`;
+          const projectId =
+            project.id?.toString() || `project-${Math.random()}`;
           const detailText = [];
-          
-          if (project.clientName) {
-            detailText.push(`Client: ${project.clientName}`);
-          }
-          
-          if (project.totalHours > 0) {
-            detailText.push(`Hours: ${formatHours(project.totalHours)}`);
-          }
-          
-          if (project.totalSalaryCost > 0) {
-            detailText.push(`Total: ${formatCurrency(project.totalSalaryCost)}`);
-          }
 
-          // Determine project classes
+          if (project.clientName)
+            detailText.push(`Client: ${project.clientName}`);
+          if (project.totalHours > 0)
+            detailText.push(`Hours: ${formatHours(project.totalHours)}`);
+          if (project.totalSalaryCost > 0)
+            detailText.push(
+              `Total: ${formatCurrency(project.totalSalaryCost)}`
+            );
+
           const isSelected =
             selectedProject && projectId === selectedProject.id?.toString();
-          const isAnimating = animatingProjectId === projectId;
           const isReturning = returningProjectId === projectId;
           const isSelectedForDelete = isProjectSelectedForDelete(project);
 
-          // Skip rendering if selected and not returning
-          if (isSelected && !isReturning && !isDeleteMode) {
-            return null;
-          }
+          //if (isSelected && !isReturning && !isDeleteMode) return null;
 
           return (
             <div
-              onClick={() => {
-                handleProjectClick(project);
-              }}
+              onClick={() => handleProjectClick(project)}
               key={projectId}
               className={`
-                ${styles.project} 
+                ${styles.project}
                 ${
                   project.isActive
                     ? styles["project-active"]
                     : styles["project-inactive"]
                 }
-                ${isAnimating ? styles["project-selected"] : ""}
+                ${isSelected ? styles.projectSelected : ""}
                 ${isReturning ? styles["project-returning"] : ""}
                 ${
                   isDeleteMode && isSelectedForDelete
@@ -133,24 +114,18 @@ const ProjectsProfessionalList = ({
                 }
               `}
             >
-              {/* Title area */}
               <p>
-                <span
-                  className={styles.formFieldTitle}
-                  suppressContentEditableWarning={true}
-                >
+                <span className={styles.formFieldTitle}>
                   {project.baseProject?.title || `Project ${project.id}`}
                 </span>
               </p>
 
-              {/* Main content area */}
               <p>
                 <span className={styles.formField}>
                   {project.baseProject?.description || "No description"}
                 </span>
               </p>
 
-              {/* Project details at the bottom */}
               {detailText.length > 0 && (
                 <p className={styles.details}>
                   {detailText.map((detail, index) => (
@@ -161,20 +136,22 @@ const ProjectsProfessionalList = ({
                 </p>
               )}
 
-              {/* Status indicator */}
               <div className={styles.statusIndicator}>
-                <span className={`${styles.status} ${project.isActive ? styles.active : styles.inactive}`}>
+                <span
+                  className={`${styles.status} ${
+                    project.isActive ? styles.active : styles.inactive
+                  }`}
+                >
                   {project.isActive ? "Active" : "Inactive"}
                 </span>
               </div>
 
-              {/* Checkbox for delete mode */}
               {isDeleteMode && (
                 <span className={styles.checkbox}>
                   <input
                     type="checkbox"
                     checked={isSelectedForDelete}
-                    onChange={() => {}} 
+                    onChange={() => {}}
                     onClick={(e) => e.stopPropagation()}
                   />
                 </span>
@@ -183,8 +160,13 @@ const ProjectsProfessionalList = ({
           );
         })
       )}
-      {!isDeleteMode && <Button text="Create new Project" onClick={handleClick} />}
-    </fieldset>
+
+      {!isDeleteMode && (
+        <button onClick={handleClick} className={styles.createButton}>
+          Create new Project
+        </button>
+      )}
+    </div>
   );
 };
 

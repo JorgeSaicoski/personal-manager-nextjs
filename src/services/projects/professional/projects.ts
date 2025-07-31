@@ -58,23 +58,26 @@ export interface PaginatedProjectsResponse {
 /**
  * Get authentication headers for API requests
  */
-const getHeaders = () => {
-  const token = getToken();
-  return {
+const getHeaders = (): Record<string, string> => {
+  const headers: Record<string, string> = {
     "Content-Type": "application/json",
-    Authorization: token ? `Bearer ${token}` : "",
   };
-};
 
-/**
- * Handle authentication errors
- */
-const handleAuthError = (response: Response) => {
-  if (response.status === 401 && isAuthenticated()) {
-    window.location.href = "/login";
+  // Add authorization if available
+  if (typeof window !== "undefined") {
+    try {
+      const { getToken } = require("@/services/auth/keycloak");
+      const token = getToken();
+      if (token) {
+        headers["Authorization"] = `Bearer ${token}`;
+      }
+    } catch (error) {
+      console.error("Error getting auth token:", error);
+    }
   }
-};
 
+  return headers;
+};
 /**
  * Get all professional projects for the current user
  */
@@ -92,13 +95,10 @@ export const getProfessionalProjects = async (
     );
 
     if (!response.ok) {
-      handleAuthError(response);
       throw new Error(`Error fetching projects: ${response.status}`);
     }
 
     const json = await response.json();
-    console.log("return in service");
-    console.log(json.data);
     return json.data;
   } catch (error) {
     console.error("Failed to fetch professional projects:", error);
@@ -119,7 +119,6 @@ export const getProfessionalProjectById = async (
     });
 
     if (!response.ok) {
-      handleAuthError(response);
       throw new Error(`Error fetching project: ${response.status}`);
     }
     const json = await response.json();
@@ -146,7 +145,6 @@ export const createProfessionalProject = async (
     });
 
     if (!response.ok) {
-      handleAuthError(response);
       const errorData = await response.json().catch(() => ({}));
       throw new Error(
         errorData.error || `Error creating project: ${response.status}`
@@ -175,7 +173,6 @@ export const updateProfessionalProject = async (
     });
 
     if (!response.ok) {
-      handleAuthError(response);
       throw new Error(`Error updating project: ${response.status}`);
     }
 
@@ -197,7 +194,6 @@ export const deleteProfessionalProject = async (id: string): Promise<void> => {
     });
 
     if (!response.ok) {
-      handleAuthError(response);
       throw new Error(`Error deleting project: ${response.status}`);
     }
   } catch (error) {
@@ -220,7 +216,6 @@ export const deleteSelectedProjects = async (
     });
 
     if (!response.ok) {
-      handleAuthError(response);
       throw new Error(`Error deleting projects: ${response.status}`);
     }
   } catch (error) {

@@ -18,6 +18,8 @@ import {
 } from "@/services/projects/professional/projects";
 import styles from "./page.module.scss";
 import AuthRoutes from "@/components/protected-routes/AuthRoutes";
+import ProjectsProfessionalList from "@/components/projects/professional/ProjectProfessionalList";
+import SelectedProjectProfessional from "@/components/projects/professional/SelectedProjectProfessional";
 
 export default function ProjectsPage() {
   return (
@@ -32,13 +34,16 @@ export default function ProjectsPage() {
 function ProjectsPageContent() {
   const searchParams = useSearchParams();
   const [projects, setProjects] = useState<ProfessionalProject[]>([]);
-  const [selectedProject, setSelectedProject] = useState<ProfessionalProject | null>(null);
+  const [selectedProject, setSelectedProject] =
+    useState<ProfessionalProject | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [isDeleteMode, setIsDeleteMode] = useState(false);
-  const [selectedProjectsForDelete, setSelectedProjectsForDelete] = useState<ProfessionalProject[]>([]);
+  const [selectedProjectsForDelete, setSelectedProjectsForDelete] = useState<
+    ProfessionalProject[]
+  >([]);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
   // Load projects on page load and when search params change
@@ -49,19 +54,19 @@ function ProjectsPageContent() {
   const loadProjects = async () => {
     setLoading(true);
     setError(null);
-    
+
     try {
       const page = parseInt(searchParams.get("page") || "1", 10);
       const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
-      
+
       const response = await getProfessionalProjects(page, pageSize);
       setProjects(response.projects);
       setTotalPages(response.totalPages);
       setCurrentPage(response.currentPage);
-      console.log("in page.tsx, response:")
-      console.log(response)
-      console.log("in page.tsx, projects:")
-      console.log(projects)
+      console.log("in page.tsx, response:");
+      console.log(response);
+      console.log("in page.tsx, projects:");
+      console.log(projects);
     } catch (err) {
       setError("Failed to load projects");
       console.error("Error loading projects:", err);
@@ -86,14 +91,14 @@ function ProjectsPageContent() {
   ) => {
     try {
       const updatedProject = await updateProfessionalProject(id, updateData);
-      
+
       // Update the project in the list
-      setProjects(prev =>
-        prev.map(project =>
+      setProjects((prev) =>
+        prev.map((project) =>
           project.id.toString() === id ? updatedProject : project
         )
       );
-      
+
       // Update selected project if it's the one being updated
       if (selectedProject && selectedProject.id.toString() === id) {
         setSelectedProject(updatedProject);
@@ -116,10 +121,10 @@ function ProjectsPageContent() {
   };
 
   const handleProjectSelectForDelete = (project: ProfessionalProject) => {
-    setSelectedProjectsForDelete(prev => {
-      const isSelected = prev.some(p => p.id === project.id);
+    setSelectedProjectsForDelete((prev) => {
+      const isSelected = prev.some((p) => p.id === project.id);
       if (isSelected) {
-        return prev.filter(p => p.id !== project.id);
+        return prev.filter((p) => p.id !== project.id);
       } else {
         return [...prev, project];
       }
@@ -134,17 +139,17 @@ function ProjectsPageContent() {
 
   const confirmDelete = async () => {
     try {
-      const projectIds = selectedProjectsForDelete.map(p => p.id.toString());
-      
+      const projectIds = selectedProjectsForDelete.map((p) => p.id.toString());
+
       if (projectIds.length === 1) {
         await deleteProfessionalProject(projectIds[0]);
       } else {
         await deleteSelectedProjects(projectIds);
       }
-      
+
       // Reload projects after deletion
       await loadProjects();
-      
+
       // Reset delete mode
       setIsDeleteMode(false);
       setSelectedProjectsForDelete([]);
@@ -176,13 +181,13 @@ function ProjectsPageContent() {
     <div className={styles.container}>
       <div className={styles.header}>
         <h1>Professional Projects</h1>
-        
+
         <div className={styles.controls}>
           <Button
             text={isDeleteMode ? "Cancel" : "Delete Projects"}
             onClick={handleDeleteMode}
           />
-          
+
           {isDeleteMode && (
             <>
               <Button
@@ -205,9 +210,9 @@ function ProjectsPageContent() {
 
       {error && <div className={styles.error}>{error}</div>}
 
-      <div className={styles.content}>
-        <div className={`${styles.projectsSection} ${selectedProject ? styles.withSidebar : ""}`}>
-          <ProjectsList
+      <div className={styles.projectPage}>
+        <div className={styles.projectListArea}>
+          <ProjectsProfessionalList
             projects={projects}
             selectedProject={selectedProject}
             onProjectClick={handleProjectClick}
@@ -215,7 +220,7 @@ function ProjectsPageContent() {
             selectedProjectsForDelete={selectedProjectsForDelete}
             onProjectSelectForDelete={handleProjectSelectForDelete}
           />
-          
+
           <PaginationControls
             totalPages={totalPages}
             currentPage={currentPage}
@@ -223,11 +228,13 @@ function ProjectsPageContent() {
         </div>
 
         {selectedProject && (
-          <SelectedProject
-            project={selectedProject}
-            onUpdate={handleProjectUpdate}
-            onClose={handleProjectClose}
-          />
+          <div className={styles.projectPanel}>
+            <SelectedProjectProfessional
+              project={selectedProject}
+              onUpdate={handleProjectUpdate}
+              onClose={handleProjectClose}
+            />
+          </div>
         )}
       </div>
 
