@@ -17,6 +17,7 @@ export interface BaseProject {
 
 export interface ProfessionalProject {
   id: number;
+  title: string;
   baseProjectId: string;
   clientName?: string;
   totalSalaryCost: number;
@@ -99,6 +100,8 @@ export const getProfessionalProjects = async (
     }
 
     const json = await response.json();
+    console.log("service")
+    console.log(json.data)
     return json.data;
   } catch (error) {
     console.error("Failed to fetch professional projects:", error);

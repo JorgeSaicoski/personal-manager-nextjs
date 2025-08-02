@@ -1,33 +1,27 @@
-# Use Node.js LTS version as the base image
-FROM node:20-alpine
-
-# Set working directory
+# 1) deps
+FROM node:20-alpine AS deps
 WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci --include=optional
 
-# Create a non-root user to own the files and run the application
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
-
-# Change ownership of the app directory
-RUN chown -R appuser:appgroup /app
-
-# Switch to non-root user before installing dependencies
-USER appuser
-
-# Copy package.json and package-lock.json with correct ownership
-COPY --chown=appuser:appgroup package*.json ./
-
-# Install dependencies as the non-root user
-CMD ["ls", "-l", "/app"]
-RUN npm install
-
-# Copy the rest of the application with correct ownership
-COPY --chown=appuser:appgroup . .
-
-# Build the Next.js application
+# 2) build
+FROM node:20-alpine AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
-# Expose the port the app will run on
+# 3) run (standalone output recommended)
+FROM node:20-alpine AS runner
+WORKDIR /app
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+RUN addgroup -g 1001 -S nodejs && adduser -S nextjs -u 1001
+COPY --from=builder /app/next.config.* ./
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+USER nextjs
 EXPOSE 3000
-
-# Command to start the application
-CMD ["npm", "start"]
+CMD ["node", "server.js"]

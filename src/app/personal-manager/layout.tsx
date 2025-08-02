@@ -10,10 +10,19 @@ export default function PersonalManagerLayout({
   children: React.ReactNode;
 }) {
   return (
-    <AuthProvider>
-      <Navbar />
+    <main
+      style={{
+        paddingTop: "calc(var(--nav-h) + 24px)",
+        minHeight: "100vh",
+        maxWidth: "100%",
+        overflowX: "hidden",
+      }}
+    >
+      <AuthProvider>
+        <Navbar />
 
-      <PersonalManagerSidebar>{children}</PersonalManagerSidebar>
-    </AuthProvider>
+        <PersonalManagerSidebar>{children}</PersonalManagerSidebar>
+      </AuthProvider>
+    </main>
   );
 }
