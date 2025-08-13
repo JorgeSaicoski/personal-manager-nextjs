@@ -12,7 +12,7 @@ export default function PersonalManagerLayout({
   return (
     <main
       style={{
-        paddingTop: "calc(var(--nav-h) + 24px)",
+        paddingTop: "var(--nav-h)",
         minHeight: "100vh",
         maxWidth: "100%",
         overflowX: "hidden",

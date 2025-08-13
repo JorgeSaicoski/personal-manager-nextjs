@@ -28,7 +28,7 @@ export interface ProfessionalProject {
   baseProject?: BaseProject;
 }
 
-export interface FreelanceProject {
+export interface ProjectAssignment {
   id: number;
   professionalProjectId: number;
   workerUserId: string;

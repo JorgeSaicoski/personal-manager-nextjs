@@ -40,6 +40,12 @@ const PersonalManagerSidebar = ({ children }: SidebarProps) => {
       path: "/personal-manager/projects",
       icon: "📂",
     },
+    {
+      key: "my-work",
+      label: "My Work",
+      path: "/personal-manager/my-work",
+      icon: "⏱️",
+    },
   ];
 
   // Check if mobile on mount and resize
