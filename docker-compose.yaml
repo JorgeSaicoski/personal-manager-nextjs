@@ -1,15 +1,12 @@
 version: "3.8"
-
 services:
   frontend:
     user: root
     build:
       context: .
-      target: deps
-    command: npm run dev
+      target: dev
     volumes:
       - .:/app:z
-      - /app/node_modules
     environment:
       - NODE_ENV=development
       - NEXT_PUBLIC_TASK_SERVICE_URL=/api/tasks
@@ -19,7 +16,6 @@ services:
       - NEXT_PUBLIC_KEYCLOAK_CLIENT_ID=frontend-app
     networks:
       - app-network
-
 networks:
   app-network:
     external: true
