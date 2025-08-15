@@ -2,7 +2,7 @@ import { getToken, isAuthenticated } from "@/services/auth/keycloak";
 
 const ENDPOINT =
   process.env.NEXT_PUBLIC_PROJECT_PROFESSIONAL_SERVICE_URL ||
-  "http://localhost:8002";
+  "http://localhost:8002/projects";
 
 export interface BaseProject {
   id: string;
@@ -64,21 +64,21 @@ const getHeaders = (): Record<string, string> => {
     "Content-Type": "application/json",
   };
 
-  // Add authorization if available
   if (typeof window !== "undefined") {
-    try {
-      const { getToken } = require("@/services/auth/keycloak");
-      const token = getToken();
-      if (token) {
-        headers["Authorization"] = `Bearer ${token}`;
-      }
-    } catch (error) {
-      console.error("Error getting auth token:", error);
-    }
+    const token = getToken();
+    if (token) headers["Authorization"] = `Bearer ${token}`;
   }
 
   return headers;
 };
+
+// Abort/timeout helper to avoid hanging requests (optional but useful)
+const withTimeout = (ms: number) => {
+  const ctrl = new AbortController();
+  const id = setTimeout(() => ctrl.abort(), ms);
+  return { signal: ctrl.signal, clear: () => clearTimeout(id) };
+};
+
 /**
  * Get all professional projects for the current user
  */
@@ -87,22 +87,23 @@ export const getProfessionalProjects = async (
   pageSize: number = 10
 ): Promise<PaginatedProjectsResponse> => {
   try {
-    const response = await fetch(
-      `${ENDPOINT}/projects?page=${page}&pageSize=${pageSize}`,
-      {
-        method: "GET",
-        headers: getHeaders(),
-      }
-    );
+    const t = withTimeout(15000);
+    const url = `${ENDPOINT}?page=${page}&pageSize=${pageSize}`;
+    const response = await fetch(url, {
+      method: "GET",
+      headers: getHeaders(),
+      signal: t.signal,
+    });
+    t.clear();
 
     if (!response.ok) {
+      if (response.status === 401) throw new Error("Unauthorized");
       throw new Error(`Error fetching projects: ${response.status}`);
     }
 
     const json = await response.json();
-    console.log("service")
-    console.log(json.data)
-    return json.data;
+    // Normalize: backend uses { data: { projects, totalPages, ... } } or { data: ... }
+    return json.data ?? json;
   } catch (error) {
     console.error("Failed to fetch professional projects:", error);
     throw error;
@@ -116,18 +117,20 @@ export const getProfessionalProjectById = async (
   id: string
 ): Promise<ProfessionalProject> => {
   try {
-    const response = await fetch(`${ENDPOINT}/projects/${id}`, {
+    const t = withTimeout(15000);
+    const response = await fetch(`${ENDPOINT}/id/${id}`, {
       method: "GET",
       headers: getHeaders(),
+      signal: t.signal,
     });
+    t.clear();
 
     if (!response.ok) {
+      if (response.status === 401) throw new Error("Unauthorized");
       throw new Error(`Error fetching project: ${response.status}`);
     }
     const json = await response.json();
-    console.log("return in service");
-    console.log(json.data);
-    return json.data;
+    return json.data ?? json;
   } catch (error) {
     console.error(`Failed to fetch project with ID ${id}:`, error);
     throw error;
@@ -141,11 +144,14 @@ export const createProfessionalProject = async (
   project: CreateProfessionalProjectRequest
 ): Promise<ProfessionalProject> => {
   try {
-    const response = await fetch(`${ENDPOINT}/projects`, {
+    const t = withTimeout(15000);
+    const response = await fetch(`${ENDPOINT}`, {
       method: "POST",
       headers: getHeaders(),
       body: JSON.stringify(project),
+      signal: t.signal,
     });
+    t.clear();
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
@@ -154,7 +160,8 @@ export const createProfessionalProject = async (
       );
     }
 
-    return await response.json();
+    const json = await response.json();
+    return json.data ?? json;
   } catch (error) {
     console.error("Failed to create professional project:", error);
     throw error;
@@ -169,17 +176,22 @@ export const updateProfessionalProject = async (
   project: UpdateProfessionalProjectRequest
 ): Promise<ProfessionalProject> => {
   try {
-    const response = await fetch(`${ENDPOINT}/projects/${id}`, {
+    const t = withTimeout(15000);
+    const response = await fetch(`${ENDPOINT}/id/${id}`, {
       method: "PUT",
       headers: getHeaders(),
       body: JSON.stringify(project),
+      signal: t.signal,
     });
+    t.clear();
 
     if (!response.ok) {
+      if (response.status === 401) throw new Error("Unauthorized");
       throw new Error(`Error updating project: ${response.status}`);
     }
 
-    return await response.json();
+    const json = await response.json();
+    return json.data ?? json;
   } catch (error) {
     console.error(`Failed to update project with ID ${id}:`, error);
     throw error;
@@ -191,12 +203,16 @@ export const updateProfessionalProject = async (
  */
 export const deleteProfessionalProject = async (id: string): Promise<void> => {
   try {
-    const response = await fetch(`${ENDPOINT}/projects/${id}`, {
+    const t = withTimeout(15000);
+    const response = await fetch(`${ENDPOINT}/id/${id}`, {
       method: "DELETE",
       headers: getHeaders(),
+      signal: t.signal,
     });
+    t.clear();
 
     if (!response.ok) {
+      if (response.status === 401) throw new Error("Unauthorized");
       throw new Error(`Error deleting project: ${response.status}`);
     }
   } catch (error) {
@@ -211,18 +227,64 @@ export const deleteProfessionalProject = async (id: string): Promise<void> => {
 export const deleteSelectedProjects = async (
   projectIds: string[]
 ): Promise<void> => {
+  
   try {
-    const response = await fetch(`${ENDPOINT}/projects/delete-selected`, {
+    const t = withTimeout(15000);
+    const response = await fetch(`${ENDPOINT}/delete-selected`, {
       method: "POST",
       headers: getHeaders(),
       body: JSON.stringify(projectIds),
+      signal: t.signal,
     });
 
     if (!response.ok) {
+      if (response.status === 401) throw new Error("Unauthorized");
       throw new Error(`Error deleting projects: ${response.status}`);
     }
   } catch (error) {
     console.error("Failed to delete selected projects:", error);
+    throw error;
+  }
+};
+
+/**
+ * Get current user's project assignments (assignments-only)
+ * Backend route: GET /projects/mine
+ * Server returns: [{ id, parentProjectId, workerUserId, role, hoursDedicated, costPerHour, isActive, ...timestamps }]
+ * We map parentProjectId -> professionalProjectId to match the existing interface.
+ */
+export const getMyAssignments = async (): Promise<ProjectAssignment[]> => {
+  try {
+    const t = withTimeout(15000);
+    const response = await fetch(`${ENDPOINT}/mine`, {
+      method: "GET",
+      headers: getHeaders(),
+      signal: t.signal,
+    });
+    t.clear();
+
+    if (!response.ok) {
+      if (response.status === 401) throw new Error("Unauthorized");
+      throw new Error(`Error fetching assignments: ${response.status}`);
+    }
+
+    const data = await response.json(); // expects an array
+    const list = (Array.isArray(data) ? data : data.data) as any[];
+    if (!Array.isArray(list)) return [];
+
+    // Map server field -> client interface
+    return list.map((a) => ({
+      id: a.id,
+      professionalProjectId: a.parentProjectId, // mapping here
+      workerUserId: a.workerUserId,
+      costPerHour: a.costPerHour,
+      description: a.description,
+      isActive: a.isActive,
+      createdAt: a.createdAt,
+      updatedAt: a.updatedAt,
+    })) as ProjectAssignment[];
+  } catch (error) {
+    console.error("Failed to fetch my assignments:", error);
     throw error;
   }
 };
