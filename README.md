@@ -258,6 +258,8 @@ podman run -p 80:80 personal-manager-frontend
 
 ## 🤝 Contributing
 
+For detailed setup steps and contribution guidelines, see [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ### Development Workflow
 1. Clone the repository with submodules
 2. Create a feature branch from `main`

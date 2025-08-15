@@ -5,8 +5,7 @@ services:
     user: root
     build:
       context: .
-      dockerfile: Dockerfile
-      target: dev
+      target: deps
     command: npm run dev
     volumes:
       - .:/app:z

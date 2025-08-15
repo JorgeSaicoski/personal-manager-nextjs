@@ -1,0 +1,12 @@
+# Exclude node_modules and build output to speed up docker build
+node_modules
+.next
+
+# Exclude git metadata and local files
+.git
+.gitignore
+
+# Exclude logs and editor settings
+*.log
+.env.local
+
