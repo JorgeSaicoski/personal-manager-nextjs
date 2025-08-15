@@ -1,27 +1,16 @@
-# 1) deps
 FROM node:20-alpine AS deps
 WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm ci --include=optional
+COPY package*.json ./
+RUN npm ci
 
-# 2) build
-FROM node:20-alpine AS builder
+FROM node:20-alpine AS dev
 WORKDIR /app
+ENV NODE_ENV=development
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-ENV NEXT_TELEMETRY_DISABLED=1
-RUN npm run build
-
-# 3) run (standalone output recommended)
-FROM node:20-alpine AS runner
-WORKDIR /app
-ENV NODE_ENV=production
-ENV NEXT_TELEMETRY_DISABLED=1
-RUN addgroup -g 1001 -S nodejs && adduser -S nextjs -u 1001
-COPY --from=builder /app/next.config.* ./
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
-USER nextjs
+RUN apk add --no-cache bash
+COPY docker/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 EXPOSE 3000
-CMD ["node", "server.js"]
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["npm","run","dev"]
