@@ -3,7 +3,9 @@ version: "3.8"
 services:
   frontend:
     user: root
-    build: .
+    build:
+      context: .
+      target: deps
     command: npm run dev
     volumes:
       - .:/app:z
