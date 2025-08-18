@@ -1,8 +1,10 @@
 import { getToken, isAuthenticated } from "@/services/auth/keycloak";
 
-const ENDPOINT =
+const BASE_URL =
   process.env.NEXT_PUBLIC_PROJECT_PROFESSIONAL_SERVICE_URL ||
   "http://localhost:8002/projects";
+
+const ENDPOINT= `${BASE_URL}/projects`;
 
 export interface BaseProject {
   id: string;
@@ -86,6 +88,7 @@ export const getProfessionalProjects = async (
   page: number = 1,
   pageSize: number = 10
 ): Promise<PaginatedProjectsResponse> => {
+  console.log(`${ENDPOINT}?page=${page}&pageSize=${pageSize}`)
   try {
     const t = withTimeout(15000);
     const url = `${ENDPOINT}?page=${page}&pageSize=${pageSize}`;
@@ -224,26 +227,21 @@ export const deleteProfessionalProject = async (id: string): Promise<void> => {
 /**
  * Delete multiple professional projects
  */
-export const deleteSelectedProjects = async (
-  projectIds: string[]
-): Promise<void> => {
-  
+export const deleteSelectedProjects = async (projectIds: string[]): Promise<void> => {
+  const t = withTimeout(15000);
   try {
-    const t = withTimeout(15000);
     const response = await fetch(`${ENDPOINT}/delete-selected`, {
       method: "POST",
       headers: getHeaders(),
       body: JSON.stringify(projectIds),
       signal: t.signal,
     });
-
     if (!response.ok) {
       if (response.status === 401) throw new Error("Unauthorized");
       throw new Error(`Error deleting projects: ${response.status}`);
     }
-  } catch (error) {
-    console.error("Failed to delete selected projects:", error);
-    throw error;
+  } finally {
+    t.clear();
   }
 };
 
