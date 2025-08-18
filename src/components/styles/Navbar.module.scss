@@ -1,3 +1,5 @@
+@use "../../app/_colors.scss" as c;
+
 .navbar {
   position: fixed;
   top: 0;
@@ -6,13 +8,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
-  background-color: rgba(25, 50, 40, 0.9);
+  padding: 0.5rem 2rem;
+  background: linear-gradient(90deg, c.$primary-green, c.$logo-teal-dark);
   backdrop-filter: blur(10px);
-  color: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  color: c.$primary-text;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   z-index: 1000;
-  height: var(--nav-h); 
+  height: var(--nav-h);
 }
 
 .leftSection {
@@ -36,7 +38,7 @@
     display: block;
     height: 2px;
     width: 100%;
-    background-color: #9FBE5A;
+    background-color: c.$accent-green;
     transition: all 0.3s ease;
   }
   
@@ -46,8 +48,9 @@
 }
 
 .title {
-  font-size: 28px;
-  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: c.$accent-green;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
@@ -69,46 +72,50 @@
 }
 
 .username {
-  font-size: 22px;
+  font-size: 1.2rem;
   font-weight: 600;
-  color: #9FBE5A;
+  color: c.$accent-green;
 }
 
 .authButton {
-  background-color: #9FBE5A;
-  color: #1a2e29;
+  background-color: c.$accent-green;
+  color: c.$dark-green;
   border: none;
-  border-radius: 20px;
-  padding: 8px 16px;
-  font-size: 22px;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 1rem;
   cursor: pointer;
-  transition: all 0.3s ease;
-  
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    box-shadow 0.2s ease;
+
   &:hover {
-    background-color: #b5d772;
-    transform: scale(1.05);
+    background-color: c.$light-green;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   }
 }
 
 .accountButton {
-  background-color: #4a6f82;
-  color: white;
+  background-color: c.$logo-teal;
+  color: c.$primary-text;
   border: none;
-  border-radius: 20px;
-  padding: 8px 16px;
-  font-size: 16px;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 1rem;
   cursor: pointer;
-  transition: all 0.3s ease;
-  
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    box-shadow 0.2s ease;
+
   &:hover {
-    background-color: #5a7a8f;
-    transform: scale(1.05);
+    background-color: c.$logo-teal-light;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   }
 }
 
 .loading {
   font-size: 16px;
-  color: #9FBE5A;
+  color: c.$accent-green;
   animation: pulse 1.5s infinite;
 }
 
@@ -136,12 +143,12 @@
   .username {
     font-size: 20px;
     font-weight: 60;
-    color: #9FBE5A;
+    color: c.$accent-green;
   }
   
   .menuIcon {
     font-size: 12px;
-    color: #9FBE5A;
+    color: c.$accent-green;
     transition: transform 0.3s ease;
   }
 }

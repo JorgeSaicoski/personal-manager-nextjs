@@ -1,3 +1,5 @@
+@use './_colors.scss' as c;
+
 :root {
   --nav-h: 35px; /* your navbar height */
 }
@@ -11,6 +13,8 @@ body {
     sans-serif;
   margin: 0;
   padding: 0;
+  background: linear-gradient(135deg, c.$primary-green 0%, c.$secondary-green 100%);
+  color: c.$primary-text;
 }
 
 *,
@@ -30,5 +34,31 @@ h2,
 .handwritten {
   /* Shadows for decorative bits */
   font-family: var(--font-shadows), var(--font-patrick), system-ui, sans-serif;
+}
+
+/* Global button styling */
+button {
+  background-color: c.$accent-green;
+  color: c.$dark-green;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background-color: c.$light-green;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  &:disabled {
+    background-color: c.$muted-text;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+  }
 }
 
