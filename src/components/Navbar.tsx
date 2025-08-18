@@ -16,7 +16,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
+      setIsMobile(window.innerWidth <= 1024);
     };
 
     checkMobile();
@@ -57,7 +57,7 @@ const Navbar = () => {
             <span></span>
           </button>
         )}
-        <div className={styles.title}>Sarkis.dev</div>
+        <div className={`${styles.title} brand-title`}>Sarkis.dev</div>
       </div>
 
       <div className={styles.authSection}>

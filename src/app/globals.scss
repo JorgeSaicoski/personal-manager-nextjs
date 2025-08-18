@@ -1,7 +1,14 @@
 @use './_colors.scss' as c;
 
+
 :root {
-  --nav-h: 35px; /* your navbar height */
+  --nav-h: 60px; /* default navbar height for mobile */
+}
+
+@media (min-width: 768px) {
+  :root {
+    --nav-h: 90px; /* taller navbar on larger screens */
+  }
 }
 
 html,
@@ -13,7 +20,11 @@ body {
     sans-serif;
   margin: 0;
   padding: 0;
-  background: linear-gradient(135deg, c.$primary-green 0%, c.$secondary-green 100%);
+  background: linear-gradient(
+    135deg,
+    c.$secondary-green 0%,
+    c.$darkest-green 100%
+  );
   color: c.$primary-text;
 }
 

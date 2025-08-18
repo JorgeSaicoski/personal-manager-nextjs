@@ -51,3 +51,25 @@
         }
     }
 }
+
+@media (max-width: 768px) {
+  .sideBar {
+    max-width: none;
+    width: 100%;
+    margin: 0;
+    padding-top: 20px;
+
+    div {
+      flex-direction: row;
+      justify-content: space-around;
+      border-radius: 0;
+      transform: none;
+
+      button {
+        margin: 0;
+        font: 20px "Shadows Into Light", cursive;
+        padding: 10px;
+      }
+    }
+  }
+}

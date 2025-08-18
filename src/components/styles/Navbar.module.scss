@@ -8,13 +8,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 2rem;
-  background: linear-gradient(90deg, c.$primary-green, c.$logo-teal-dark);
+  padding: 0 2rem;
+  background: linear-gradient(90deg, c.$secondary-green, c.$dark-green);
   backdrop-filter: blur(10px);
   color: c.$primary-text;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   z-index: 1000;
   height: var(--nav-h);
+  font-family: var(--font-patrick), system-ui, -apple-system, Segoe UI, Roboto,
+    sans-serif;
 }
 
 .leftSection {
@@ -54,6 +56,12 @@
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
+@media (min-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+}
+
 .authSection {
   display: flex;
   align-items: center;
@@ -87,6 +95,9 @@
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease,
     box-shadow 0.2s ease;
+  height: calc(var(--nav-h) - 20px);
+  display: flex;
+  align-items: center;
 
   &:hover {
     background-color: c.$light-green;
@@ -105,6 +116,9 @@
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease,
     box-shadow 0.2s ease;
+  height: calc(var(--nav-h) - 20px);
+  display: flex;
+  align-items: center;
 
   &:hover {
     background-color: c.$logo-teal-light;
