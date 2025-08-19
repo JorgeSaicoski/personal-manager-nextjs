@@ -122,6 +122,7 @@ export const getActiveSession = async (): Promise<ActiveSessionResponse> => {
     method: "GET",
     headers: await getHeaders(),
   });
+  console.log(res)
   return handle<ActiveSessionResponse>(res);
 };
 

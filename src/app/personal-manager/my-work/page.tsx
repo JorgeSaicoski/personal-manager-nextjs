@@ -60,8 +60,13 @@ export default function MyWorkPage() {
   const refresh = useCallback(async () => {
     setLoading(true);
     setErrorMsg(null);
+    console.log("assing")
+    console.log(await getMyAssignments());
+        console.log("assing")
+
     try {
       const [a, s] = await Promise.all([getMyAssignments(), getActiveSession()]);
+      console.log(a, s)
       setAssignments(Array.isArray(a) ? a : []);
       setActive(s ?? null);
     } catch (err: any) {

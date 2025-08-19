@@ -51,6 +51,12 @@ export interface UpdateProfessionalProjectRequest {
   isActive?: boolean;
 }
 
+export interface CreateProjectAssignmentRequest {
+  projectId: number;           
+  costPerHour: number;
+  description?: string;
+}
+
 export interface PaginatedProjectsResponse {
   projects: ProfessionalProject[];
   totalPages: number;
@@ -259,6 +265,7 @@ export const getMyAssignments = async (): Promise<ProjectAssignment[]> => {
       headers: getHeaders(),
       signal: t.signal,
     });
+    console.log(response)
     t.clear();
 
     if (!response.ok) {
@@ -284,5 +291,39 @@ export const getMyAssignments = async (): Promise<ProjectAssignment[]> => {
   } catch (error) {
     console.error("Failed to fetch my assignments:", error);
     throw error;
+  }
+};
+
+
+export const createProjectAssignment = async (
+  req: CreateProjectAssignmentRequest
+): Promise<ProjectAssignment> => {
+  const { projectId, costPerHour, description } = req;
+
+  const t = withTimeout(15000);
+  try {
+    const res = await fetch(`${ENDPOINT}/id/${projectId}/freelance`, {
+      method: "POST",
+      headers: getHeaders(),
+      body: JSON.stringify({ costPerHour, description }),
+      signal: t.signal,
+    });
+
+    if (!res.ok) {
+      if (res.status === 401) throw new Error("Unauthorized");
+      // backend may or may not return JSON on error; guard it
+      let msg = `Error creating assignment: ${res.status}`;
+      try {
+        const j = await res.json();
+        if (j?.error) msg = j.error;
+      } catch {}
+      throw new Error(msg);
+    }
+
+    const json = await res.json();
+    // Accept either {data: {...}} or direct object
+    return (json?.data ?? json) as ProjectAssignment;
+  } finally {
+    t.clear();
   }
 };

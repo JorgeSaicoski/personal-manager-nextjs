@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import {
   ProfessionalProject,
   UpdateProfessionalProjectRequest,
+  createProjectAssignment,
 } from "@/services/projects/professional/projects";
 import styles from "./styles/SelectedProjectProfessional.module.scss";
 
@@ -72,7 +73,7 @@ const SelectedProjectProfessional = ({
     if (isNaN(costPerHour)) return alert("Invalid number");
     setIsAssigning(true);
     try {
-      //await createProjectAssignment({ projectId: project.id, costPerHour });
+      await createProjectAssignment({ projectId: project.id, costPerHour });
       alert("You have been assigned to this project.");
     } catch (err) {
       console.error(err);
