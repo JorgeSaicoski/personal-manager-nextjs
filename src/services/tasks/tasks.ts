@@ -21,7 +21,7 @@ export interface PaginatedTasksResponse {
   total: number;
 }
 
-const getHeaders = (): Record<string, string> => {
+const getHeaders = async (): Promise<Record<string, string>> => {
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
   };
@@ -29,7 +29,10 @@ const getHeaders = (): Record<string, string> => {
   // Add authorization if available
   if (typeof window !== "undefined") {
     try {
-      const { getToken } = require("@/services/auth/keycloak");
+      const { getToken, updateToken } = require("@/services/auth/keycloak");
+      if (updateToken) {
+        await updateToken(5);
+      }
       const token = getToken();
       if (token) {
         headers["Authorization"] = `Bearer ${token}`;
@@ -70,7 +73,7 @@ export const getAllTasks = async (
       `${ENDPOINT}/tasks?page=${page}&pageSize=${pageSize}`,
       {
         method: "GET",
-        headers: getHeaders(),
+        headers: await getHeaders(),
       }
     );
 
@@ -99,7 +102,7 @@ export const getCompletedTasks = async (
       `${ENDPOINT}/tasks/completed?page=${page}&pageSize=${pageSize}`,
       {
         method: "GET",
-        headers: getHeaders(),
+        headers: await getHeaders(),
       }
     );
 
@@ -128,7 +131,7 @@ export const getNonCompletedTasks = async (
       `${ENDPOINT}/tasks/active?page=${page}&pageSize=${pageSize}`,
       {
         method: "GET",
-        headers: getHeaders(),
+        headers: await getHeaders(),
       }
     );
 
@@ -152,7 +155,7 @@ export const getTaskById = async (id: string): Promise<Task> => {
   try {
     const response = await fetch(`${ENDPOINT}/tasks/${id}`, {
       method: "GET",
-      headers: getHeaders(),
+      headers: await getHeaders(),
     });
 
     if (!response.ok) {
@@ -175,7 +178,7 @@ export const createTask = async (task: Task): Promise<Task> => {
   try {
     const response = await fetch(`${ENDPOINT}/tasks`, {
       method: "POST",
-      headers: getHeaders(),
+      headers: await getHeaders(),
       body: JSON.stringify(task),
     });
 
@@ -204,7 +207,7 @@ export const updateTask = async (
   try {
     const response = await fetch(`${ENDPOINT}/tasks/update/${id}`, {
       method: "PATCH",
-      headers: getHeaders(),
+      headers: await getHeaders(),
       body: JSON.stringify(task),
     });
 
@@ -227,7 +230,7 @@ export const deleteSelectedTasks = async (taskIds: string[]): Promise<void> => {
   try {
     const response = await fetch(`${ENDPOINT}/tasks/delete-selected`, {
       method: "POST",
-      headers: getHeaders(),
+      headers: await getHeaders(),
       body: JSON.stringify(taskIds),
     });
 
@@ -248,7 +251,7 @@ export const deleteAllCompletedTasks = async (): Promise<void> => {
   try {
     const response = await fetch(`${ENDPOINT}/tasks/delete-completed`, {
       method: "DELETE",
-      headers: getHeaders(),
+      headers: await getHeaders(),
     });
 
     if (!response.ok) {
@@ -268,7 +271,7 @@ export const deleteAllNonCompletedTasks = async (): Promise<void> => {
   try {
     const response = await fetch(`${ENDPOINT}/tasks/delete-non-completed`, {
       method: "DELETE",
-      headers: getHeaders(),
+      headers: await getHeaders(),
     });
 
     if (!response.ok) {
