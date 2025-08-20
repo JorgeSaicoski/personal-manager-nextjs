@@ -1,4 +1,4 @@
-import { getToken, isAuthenticated } from "@/services/auth/keycloak";
+import { getToken, updateToken } from "@/services/auth/keycloak";
 
 const BASE_URL =
   process.env.NEXT_PUBLIC_PROJECT_PROFESSIONAL_SERVICE_URL ||
@@ -67,14 +67,19 @@ export interface PaginatedProjectsResponse {
 /**
  * Get authentication headers for API requests
  */
-const getHeaders = (): Record<string, string> => {
+const getHeaders = async (): Promise<Record<string, string>> => {
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
   };
 
   if (typeof window !== "undefined") {
-    const token = getToken();
-    if (token) headers["Authorization"] = `Bearer ${token}`;
+    try {
+      await updateToken(5);
+      const token = getToken();
+      if (token) headers["Authorization"] = `Bearer ${token}`;
+    } catch (error) {
+      console.error("Error getting auth token:", error);
+    }
   }
 
   return headers;
@@ -100,7 +105,7 @@ export const getProfessionalProjects = async (
     const url = `${ENDPOINT}?page=${page}&pageSize=${pageSize}`;
     const response = await fetch(url, {
       method: "GET",
-      headers: getHeaders(),
+      headers: await getHeaders(),
       signal: t.signal,
     });
     t.clear();
@@ -129,7 +134,7 @@ export const getProfessionalProjectById = async (
     const t = withTimeout(15000);
     const response = await fetch(`${ENDPOINT}/id/${id}`, {
       method: "GET",
-      headers: getHeaders(),
+      headers: await getHeaders(),
       signal: t.signal,
     });
     t.clear();
@@ -156,7 +161,7 @@ export const createProfessionalProject = async (
     const t = withTimeout(15000);
     const response = await fetch(`${ENDPOINT}`, {
       method: "POST",
-      headers: getHeaders(),
+      headers: await getHeaders(),
       body: JSON.stringify(project),
       signal: t.signal,
     });
@@ -188,7 +193,7 @@ export const updateProfessionalProject = async (
     const t = withTimeout(15000);
     const response = await fetch(`${ENDPOINT}/id/${id}`, {
       method: "PUT",
-      headers: getHeaders(),
+      headers: await getHeaders(),
       body: JSON.stringify(project),
       signal: t.signal,
     });
@@ -215,7 +220,7 @@ export const deleteProfessionalProject = async (id: string): Promise<void> => {
     const t = withTimeout(15000);
     const response = await fetch(`${ENDPOINT}/id/${id}`, {
       method: "DELETE",
-      headers: getHeaders(),
+      headers: await getHeaders(),
       signal: t.signal,
     });
     t.clear();
@@ -238,7 +243,7 @@ export const deleteSelectedProjects = async (projectIds: string[]): Promise<void
   try {
     const response = await fetch(`${ENDPOINT}/delete-selected`, {
       method: "POST",
-      headers: getHeaders(),
+      headers: await getHeaders(),
       body: JSON.stringify(projectIds),
       signal: t.signal,
     });
@@ -262,7 +267,7 @@ export const getMyAssignments = async (): Promise<ProjectAssignment[]> => {
     const t = withTimeout(15000);
     const response = await fetch(`${ENDPOINT}/mine`, {
       method: "GET",
-      headers: getHeaders(),
+      headers: await getHeaders(),
       signal: t.signal,
     });
     console.log(response)
@@ -304,7 +309,7 @@ export const createProjectAssignment = async (
   try {
     const res = await fetch(`${ENDPOINT}/id/${projectId}/freelance`, {
       method: "POST",
-      headers: getHeaders(),
+      headers: await getHeaders(),
       body: JSON.stringify({ costPerHour, description }),
       signal: t.signal,
     });

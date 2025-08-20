@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Button from "@/components/Button";
-import AuthRoutes from "@/components/protected-routes/AuthRoutes";
 import {
   createProfessionalProject,
   CreateProfessionalProjectRequest,
@@ -11,11 +10,7 @@ import {
 import styles from "./page.module.scss";
 
 export default function CreateProjectPage() {
-  return (
-    <AuthRoutes>
-      <CreateProjectForm />
-    </AuthRoutes>
-  );
+  return <CreateProjectForm />;
 }
 
 function CreateProjectForm() {

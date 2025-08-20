@@ -3,6 +3,7 @@
 import Navbar from "@/components/Navbar";
 import PersonalManagerSidebar from "@/components/personal-manager/Sidebar";
 import { AuthProvider } from "@/context/AuthContext";
+import AuthRoutes from "@/components/protected-routes/AuthRoutes";
 
 export default function PersonalManagerLayout({
   children,
@@ -19,9 +20,11 @@ export default function PersonalManagerLayout({
       }}
     >
       <AuthProvider>
-        <Navbar />
+        <AuthRoutes>
+          <Navbar />
 
-        <PersonalManagerSidebar>{children}</PersonalManagerSidebar>
+          <PersonalManagerSidebar>{children}</PersonalManagerSidebar>
+        </AuthRoutes>
       </AuthProvider>
     </main>
   );

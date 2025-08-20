@@ -2,8 +2,6 @@
 
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import ProjectsList from "@/components/projects/professional/ProjectProfessionalList";
-import SelectedProject from "@/components/projects/professional/SelectedProjectProfessional";
 import DeleteConfirmation from "@/components/projects/professional/DeleteConfirmation";
 import PaginationControls from "@/components/projects/professional/PaginationControlsProfessional";
 import Button from "@/components/Button";
@@ -17,17 +15,14 @@ import {
   UpdateProfessionalProjectRequest,
 } from "@/services/projects/professional/projects";
 import styles from "./page.module.scss";
-import AuthRoutes from "@/components/protected-routes/AuthRoutes";
 import ProjectsProfessionalList from "@/components/projects/professional/ProjectProfessionalList";
 import SelectedProjectProfessional from "@/components/projects/professional/SelectedProjectProfessional";
 
 export default function ProjectsPage() {
   return (
-    <AuthRoutes>
-      <Suspense fallback={<p>Loading...</p>}>
-        <ProjectsPageContent />
-      </Suspense>
-    </AuthRoutes>
+    <Suspense fallback={<p>Loading...</p>}>
+      <ProjectsPageContent />
+    </Suspense>
   );
 }
 

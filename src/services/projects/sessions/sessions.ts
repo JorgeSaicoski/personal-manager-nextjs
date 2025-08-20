@@ -1,4 +1,4 @@
-import { getToken, isAuthenticated } from "@/services/auth/keycloak";
+import { getToken, isAuthenticated, updateToken } from "@/services/auth/keycloak";
 
 const ENDPOINT =
   process.env.NEXT_PUBLIC_PROJECT_PROFESSIONAL_SERVICE_URL ||
@@ -66,9 +66,10 @@ const getHeaders = async (): Promise<HeadersInit> => {
     "Content-Type": "application/json",
   };
 
-  if (isAuthenticated() && getToken) {
+  if (isAuthenticated()) {
     try {
-      const token = await getToken();
+      await updateToken(5);
+      const token = getToken();
       if (token) headers["Authorization"] = `Bearer ${token}`;
     } catch (err) {
       console.error("sessions.ts:getHeaders -> token error:", err);
